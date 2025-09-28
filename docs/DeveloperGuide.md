@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# EduBase Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
