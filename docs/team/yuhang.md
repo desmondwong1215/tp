@@ -1,9 +1,9 @@
 ---
-  layout: default.md
-  title: "John Doe's Project Portfolio Page"
+layout: default.md
+title: "Yu Hang's Project Portfolio Page"
 ---
 
-### Project: EduBase 
+### Project: EduBase
 
-Edubase 
+Edubase
 Given below are my contributions to the project.
