@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "John Doe's Project Portfolio Page"
+  title: "Jin Yu's Project Portfolio Page"
 ---
 
 ### Project: EduBase
