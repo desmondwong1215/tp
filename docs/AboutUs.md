@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Desmond Wong Hui Sheng
 
-<img src="images/desmondwong.jpg" width="200px">
+<img src="images/desmondwong.png" width="200px">
 
 [[github](http://github.com/desmondwong1215)] [[portfolio](team/desmondwong.md)]
 
