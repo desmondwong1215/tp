@@ -22,10 +22,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Tan Yu Hang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gnahuy123.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://yuhangblog.streamlit.app/)]
+[[github](http://github.com/gnahuy123)]
+[[portfolio](team/yuhang.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
