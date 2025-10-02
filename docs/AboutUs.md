@@ -33,9 +33,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Desmond Wong Hui Sheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/desmondwong1215.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/desmondwong1215)] [[portfolio](team/desmondwong.md)]
 
 * Role: Developer
 * Responsibilities: Data
