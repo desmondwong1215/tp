@@ -52,10 +52,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Yeo Wen Han, Marcus
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/siuuuuuuuuuuuuuuuuuu.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/siuuuuuuuuuuuuuuuuuu)]
+[[portfolio](team/marcus.md)]
 
 * Role: Developer
 * Responsibilities: UI
