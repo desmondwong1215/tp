@@ -274,71 +274,322 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Target users are **CLI Power Users** (Teachers) who:
+* **Are Proficient Typists**: The application MUST prioritize keyboard speed and command-line efficiency.
+* **Prefer CLI**: Usage must minimize or eliminate the need for mouse interaction, focusing on keyboard navigation and muscle memory.
+* **Handle High Volume**: Require rapid tools for tasks like bulk student management and attendance logging.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+* **EduBase** maximizes administrative workflow speed for expert users by providing a **Typing-Optimized CLI**.
+* **Typing-Optimized Efficiency**: Enables faster task completion (e.g., marking attendance) compared to navigating complex GUI forms.
+* **Keyboard-Driven Workflow**: Full system functionality is achieved solely through commands, eliminating GUI dependency.
+* **Direct Access**: Provides immediate access to all critical educational administration functions.
 
 
-### User stories
+### User Stories
+
+The following user stories are derived from the project's feature list, grouped by their level of operation (School Level being foundational, Course Level being management actions within a class).
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+### School Level Stories
+| Priority | As a …​ | I want to …​                                      | So that I can…​                                |
+|----------|---------|---------------------------------------------------|------------------------------------------------|
+| `* * *`  | teacher | create a new course                               | manage a new subject or class offering.        |
+| `* * *`  | user    | view a list of all existing courses               | see the school's full course catalog.          |
+| `* * *`  | teacher | delete an existing course                         | remove outdated or cancelled offerings         |
+| `* * *`  | teacher | register a new student with their name and gender | add them to the school's central address book. |
+| `* * *`  | teacher | deregister an student                             | delete them from the school's address book.    |
+| `* * *`  | teacher | enter a specifc course                            | perform course-level management commands.      |
 
-*{More to be added}*
+### Course Level Stories
+| Priority | As a …​ | I want to …​                                                                    | So that I can…​                                                   |
+|----------|---------|---------------------------------------------------------------------------------|-------------------------------------------------------------------|
+| `* * *`  | teacher | add an already-created student to a specified course                            | enroll them in my class roster.                                   |
+| `* * *`  | teacher | remove a student from a specific course                                         | update my class roster.                                           |
+| `* * *`  | teacher | create a session for a given date                                               | establish a new attendance record for all students in the course. |
+| `* * *`  | teacher | mark or unmark a student's attendance for a session.                            | accurately record their presence or absence.                      |
+| `* * *`  | teacher | view a student's attendance record or the full class attendance on a given date | check historical records.                                         |
+| `* * *`  | teacher | exit the current course                                                         | return to school-level commands.                                  |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the EduBase (EB) and the **Actor** is the Teacher, unless specified otherwise)
 
-**Use case: Delete a person**
+### School Level Features
 
-**MSS**
+**Use case: UC01 - Create Course**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**MSS:**
+
+1.  Teacher commands to create a new course with a course name.
+2.  EB validates the course name.
+3.  EB assigns a unique COURSE_ID and creates the course.
+4.  EB indicates success.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. EB detects invalid data (e.g., name containing digits or missing required parameter) and shows error message.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC02 - View All Courses**
 
-    * 3a1. AddressBook shows an error message.
+**MSS:**
 
-      Use case resumes at step 2.
+1.  Teacher commands to view all existing courses.
+2.  EB retrieves the list of all created courses.
+3.  EB displays a formatted list showing each course's ID and name.
 
-*{More to be added}*
+    Use case ends.
+
+**Extensions**
+
+* 2a. EB detects that no courses have been created yet.
+
+    * 2a1. EB Shows empty list and prompts Teacher to create new course
+      Use case ends.
+
+      Use case ends.
+
+**Use case: UC03 - Delete Course**
+
+**MSS:**
+
+1.  Teacher chooses to delete a course.
+2.  EB requests for the COURSE_ID to be deleted.
+3.  Teacher enters the valid COURSE_ID.
+4.  EB checks if the course has any enrolled students.
+5.  EB deletes the course and indicates success.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. EB detects that the COURSE_ID is not found or is in an invalid format and then shows error.
+
+  Use case ends.
+
+* 4a. EB detects that the course has enrolled students.
+
+    * 4a1. EB prompts Teacher to remove all existing students from the course before deleting the course.
+
+      Use case ends.
+
+**Use case: UC04 - Register New Student**
+
+**MSS:**
+
+1.  Teacher commands to register a new student with all the student details.
+2.  EB validates the student details.
+3.  EB assigns a unique STUDENT_ID and adds the student to the address book and indicates success.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. EB detects the name containing digits or special symbols and shows an error on invalid name.
+
+  Use case ends.
+
+**Use case: UC05 - Deregister Student**
+
+**MSS:**
+
+1.  Teacher commands to deregister a student from the address book with a valid student ID.
+2.  EB checks if the student is currently enrolled in any courses.
+3.  EB removes the student from the address book database.
+4.  EB displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. EB detects an invalid format for STUDENT_ID or an ID that does not exist and shows error.
+
+  Use case ends.
+
+* 2a.  EB detects that the student is still enrolled in one or more courses and shows error.
+
+  Use case ends.
+
+**Use case: UC06 - Enter Course**
+
+**MSS:**
+
+1.  Teacher commands to enter a specific course with a course id.
+2.  EB checks if the course id is valid.
+3.  EB sets the system context to the specified course and indicates success.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a.  EB detects an invalid format for course ID or an ID that does not exist and shows error.
+
+  Use case ends.
+
+### Course Level Features
+
+(Requires Teacher to be inside a course context)
+
+**Use case: UC07 - Add Student To Course**
+
+**Precondition**: Teacher is currently inside a course.
+
+**MSS:**
+
+1.  Teacher commands to add a student to the current course with a valid student ID.
+2.  EB checks if the student is already in the course.
+3.  EB adds the student to the course roster.
+4.  EB displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. EB detects an invalid format for STUDENT_ID or an ID that does not exist in the address book and shows an error message.
+
+  Use case ends.
+
+* 3a. EB detects that the student is already enrolled in the course shows an error stating that the student is in the course
+
+  Use case resumes at step 2.
+
+**Use case: UC08 -  Remove Student From Course**
+
+**Precondition**: Teacher is currently inside a course.
+
+**MSS:**
+
+1.  Teacher commands to remove student from course command with a student id.
+2.  EB checks the validity of the student ID.
+3.  EB checks if the student is currently enrolled in the course.
+4.  EB removes the student from the course roster.
+5.  EB displays a success message confirming the removal.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. EB detects the invalid format of student id and displays the appropriate error message.
+
+  Use case ends.
+
+* 3a. EB detects the student is not enrolled in the course and displays an error message.
+
+    Use case ends.
+
+**Use case: UC09 - Create Session**
+
+**Precondition**: Teacher is currently inside a course .
+
+**MSS:**
+
+1.  Teacher commands to create a new session for the current course with session details.
+2.  EB validates the session details.
+3.  EB creates the new session and assigns a unique Session ID.
+4.  EB displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. EB detects an error in the entered session details and displays the appropriate error message.
+
+  Use case ends.
+
+* 3a. EB detects that the proposed session time conflicts with an existing session in this course and displays an error message about the time conflict.
+
+  Use case ends.
+
+**Use case: UC10 - Mark/Unmark Attendance**
+
+**Precondition**: Teacher is currently inside a course and sessions exist.
+
+**MSS:**
+
+1.  Teacher commands to mark or unmark students attendance with a valid Session ID and Student ID.
+2.  EB validates the Session ID and the Student ID.
+3.  EB updates the attendance status for the specified Student ID in the specified session.
+4.  EB displays a success message confirming the update.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. EB detects invalid or non-existent Session ID or Student ID and shows an error message on invalid ID.
+
+  Use case ends.
+
+**Use case: UC11 - View Attendance**
+
+**Precondition**: Teacher is currently inside a course.
+
+**MSS:**
+
+1.  Teacher commands to view attendance records.
+2.  Teacher specifies which sessions to view attendance from.
+3.  EB checks for Session ID.
+4.  EB retrieves the requested attendance data.
+5.  EB displays the formatted attendance data.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. EB detects that Teacher specifies a non-existent session or student ID, or uses an invalid format.
+
+    * 3a1. EB indicates that the data cannot be found or the input format is invalid.
+      
+        Use case ends.
+* 4a. EB detects that attendance records are not found for the specified scope and shows error.
+
+    Use case ends.
+
+
+**Use case: UC12 - Exit Course**
+
+**Precondition**: Teacher is currently inside a course.
+
+**MSS:**
+
+1.  Teacher commands to exit the current course.
+2.  EB changes the system context back to the School Level.
+3.  EB displays a message confirming the exit.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1.  All commands should execute and return results within 1 second on a standard system with at least 8GB RAM and a 2.0 GHz processor.
+2.  The system should support viewing attendance records for up to **100 students in a course** without exceeding **2 seconds** of response time.
+3.  The system should be fully operable **using only keyboard input**, with no requirement for mouse or GUI interaction.
+4.  The system should provide **clear and specific error messages** for invalid inputs. 
+5.  The system shall persist all data updates (courses, students, sessions, attendance) to storage immediately, ensuring **no data loss** if the application closes unexpectedly. 
+6.  Data must persist across sessions (saved to storage on each update). 
+7.  The system shall support up to **50 concurrent courses** and **1000 registered students** without measurable degradation in performance. 
+8.  The system shall run on **Windows, macOS, and Linux command-line environments** without requiring OS-specific changes to commands. 
+9.  The system shall ensure that no two entities (courses, students, sessions) share the same ID by enforcing **unique identifier generation**.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **EB**: shortform for EduBase. 
+* **CLI**: A text-based system for interacting with a computer, where users type commands to execute programs or perform tasks. 
+* **Teacher**: Target user for EduBase. Responsible for creating courses and sessions, and managing students. 
+* **Student**: Contains details such as student_ID, name, gender and parents contact number. 
+* **Course ID**: Unique identifier automatically generated for each course (e.g., `C0001`). 
+* **Student ID**: Unique identifier automatically generated for each student (e.g., `S00001`). 
+* **Session**: An attendance record created for a course on a given date. 
+* **Session ID**: Unique identifier assigned to each session within a course (e.g., `1`). 
+* **Attendance Record**: The record of whether a student is present or absent in a given session. 
+* **Register Student**: The action of adding a new student to the school database. 
+* **Deregister Student**: The action of permanently removing a student from the school database. 
+* **Add Student to Course**: The action of enrolling a student (who is already registered) into a specific course. 
+* **Remove Student from Course**: The action of unenrolling a student from a specific course.
 
 --------------------------------------------------------------------------------------------------------------------
 
