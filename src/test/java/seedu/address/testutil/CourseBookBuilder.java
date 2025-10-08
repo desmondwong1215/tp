@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 import seedu.address.model.CourseBook;
 import seedu.address.model.course.Course;
-import seedu.address.model.person.Person;
 
 /**
  * A utility class to help with building CourseBook objects.

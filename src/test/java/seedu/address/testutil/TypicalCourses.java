@@ -9,13 +9,6 @@ import seedu.address.model.course.Course;
 
 /**
  * A utility class containing a list of {@code Course} objects to be used in tests.
- *
- * NOTE: The Course, CourseBook, and CourseBuilder classes below are simplified
- * mocks for illustrative context, assuming they exist in the actual project's domain model.
- */
-
-/**
- * A utility class containing a list of {@code Course} objects to be used in tests.
  */
 public class TypicalCourses {
 
