@@ -12,8 +12,6 @@ import java.util.Objects;
  */
 public class CourseId {
 
-    private static int nextCourseId = 0;
-
     public static final String MESSAGE_CONSTRAINTS = "CourseId must start with C followed by 4 digits";
 
     /*
@@ -22,7 +20,10 @@ public class CourseId {
      */
     public static final String VALIDATION_REGEX = "^C\\d{4}$";
 
+    private static int nextCourseId = 0;
+
     public final String value;
+
 
     /**
      * Creates new courseId, automatically generated. No params needed.
@@ -32,10 +33,13 @@ public class CourseId {
         nextCourseId++;
     }
 
-    public CourseId(String coureId) {
-        requireNonNull(coureId);
-        checkArgument(isValidCourseId(coureId), MESSAGE_CONSTRAINTS);
-        value = coureId;
+    /**
+     * Creates new courseId with an id string. No params needed.
+     */
+    public CourseId(String courseId) {
+        requireNonNull(courseId);
+        checkArgument(isValidCourseId(courseId), MESSAGE_CONSTRAINTS);
+        value = courseId;
     }
 
     /**

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -70,7 +69,8 @@ class JsonAdaptedCourse {
         final Name modelName = new Name(name);
 
         if (courseId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, CourseId.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    CourseId.class.getSimpleName()));
         }
         if (!CourseId.isValidCourseId(courseId)) {
             throw new IllegalValueException(CourseId.MESSAGE_CONSTRAINTS);
