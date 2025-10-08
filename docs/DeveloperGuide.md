@@ -241,13 +241,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -481,7 +481,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. EB detects the student is not enrolled in the course and displays an error message.
 
-    Use case ends.
+  Use case ends.
 
 **Use case: UC09 - Create Session**
 
@@ -544,11 +544,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. EB detects that Teacher specifies a non-existent session or student ID, or uses an invalid format.
 
     * 3a1. EB indicates that the data cannot be found or the input format is invalid.
-      
-        Use case ends.
+
+      Use case ends.
 * 4a. EB detects that attendance records are not found for the specified scope and shows error.
 
-    Use case ends.
+  Use case ends.
 
 
 **Use case: UC12 - Exit Course**
@@ -568,27 +568,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  All commands should execute and return results within 1 second on a standard system with at least 8GB RAM and a 2.0 GHz processor.
 2.  The system should support viewing attendance records for up to **100 students in a course** without exceeding **2 seconds** of response time.
 3.  The system should be fully operable **using only keyboard input**, with no requirement for mouse or GUI interaction.
-4.  The system should provide **clear and specific error messages** for invalid inputs. 
-5.  The system shall persist all data updates (courses, students, sessions, attendance) to storage immediately, ensuring **no data loss** if the application closes unexpectedly. 
-6.  Data must persist across sessions (saved to storage on each update). 
-7.  The system shall support up to **50 concurrent courses** and **1000 registered students** without measurable degradation in performance. 
-8.  The system shall run on **Windows, macOS, and Linux command-line environments** without requiring OS-specific changes to commands. 
+4.  The system should provide **clear and specific error messages** for invalid inputs.
+5.  The system shall persist all data updates (courses, students, sessions, attendance) to storage immediately, ensuring **no data loss** if the application closes unexpectedly.
+6.  Data must persist across sessions (saved to storage on each update).
+7.  The system shall support up to **50 concurrent courses** and **1000 registered students** without measurable degradation in performance.
+8.  The system shall run on **Windows, macOS, and Linux command-line environments** without requiring OS-specific changes to commands.
 9.  The system shall ensure that no two entities (courses, students, sessions) share the same ID by enforcing **unique identifier generation**.
 
 ### Glossary
 
-* **EB**: shortform for EduBase. 
-* **CLI**: A text-based system for interacting with a computer, where users type commands to execute programs or perform tasks. 
-* **Teacher**: Target user for EduBase. Responsible for creating courses and sessions, and managing students. 
-* **Student**: Contains details such as student_ID, name, gender and parents contact number. 
-* **Course ID**: Unique identifier automatically generated for each course (e.g., `C0001`). 
-* **Student ID**: Unique identifier automatically generated for each student (e.g., `S00001`). 
-* **Session**: An attendance record created for a course on a given date. 
-* **Session ID**: Unique identifier assigned to each session within a course (e.g., `1`). 
-* **Attendance Record**: The record of whether a student is present or absent in a given session. 
-* **Register Student**: The action of adding a new student to the school database. 
-* **Deregister Student**: The action of permanently removing a student from the school database. 
-* **Add Student to Course**: The action of enrolling a student (who is already registered) into a specific course. 
+* **EB**: shortform for EduBase.
+* **CLI**: A text-based system for interacting with a computer, where users type commands to execute programs or perform tasks.
+* **Teacher**: Target user for EduBase. Responsible for creating courses and sessions, and managing students.
+* **Student**: Contains details such as student_ID, name, gender and parents contact number.
+* **Course ID**: Unique identifier automatically generated for each course (e.g., `C0001`).
+* **Student ID**: Unique identifier automatically generated for each student (e.g., `S00001`).
+* **Session**: An attendance record created for a course on a given date.
+* **Session ID**: Unique identifier assigned to each session within a course (e.g., `1`).
+* **Attendance Record**: The record of whether a student is present or absent in a given session.
+* **Register Student**: The action of adding a new student to the school database.
+* **Deregister Student**: The action of permanently removing a student from the school database.
+* **Add Student to Course**: The action of enrolling a student (who is already registered) into a specific course.
 * **Remove Student from Course**: The action of unenrolling a student from a specific course.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -608,15 +608,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -625,16 +625,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -642,6 +642,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
