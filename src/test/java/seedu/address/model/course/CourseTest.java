@@ -56,21 +56,6 @@ public class CourseTest {
     }
 
     @Test
-    public void isSameCourse() {
-        Course course1 = new Course(VALID_NAME, VALID_TAGS);
-        Course course2 = new Course(new Name("Physics"), VALID_TAGS);
-
-        // same object -> returns true
-        assertTrue(course1.isSameCourse(course1));
-
-        // null -> returns false
-        assertFalse(course1.isSameCourse(null));
-
-        // different course -> returns false (different course IDs)
-        assertFalse(course1.isSameCourse(course2));
-    }
-
-    @Test
     public void equals() {
         Course course1 = new Course(VALID_NAME, VALID_TAGS);
         Course course2 = new Course(new Name("Physics"), VALID_TAGS);

@@ -48,19 +48,6 @@ public class Course {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
-     */
-    public boolean isSameCourse(Course otherCourse) {
-        if (otherCourse == this) {
-            return true;
-        }
-
-        return otherCourse != null
-                && otherCourse.getCourseId().equals(getCourseId());
-    }
-
-    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

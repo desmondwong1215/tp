@@ -15,14 +15,10 @@ import seedu.address.model.course.exceptions.CourseNotFoundException;
 
 /**
  * A list of courses that enforces uniqueness between its elements and does not allow nulls.
- * A course is considered unique by comparing using {@code Course#isSameCourse(Course)}. As such, adding of
- * courses uses Course#isSameCourse(Course) for equality so as to ensure that the course being added is
- * unique. However, the removal of a course uses Course#equals(Object) so
- * as to ensure that the Course with exactly the same fields will be removed.
- *
+ * A course is considered unique by comparing using {@code Course#equals(Course)}.
  * Supports a minimal set of list operations.
  *
- * @see Course#isSameCourse(Course)
+ *
  */
 public class CourseList implements Iterable<Course> {
 
@@ -35,7 +31,7 @@ public class CourseList implements Iterable<Course> {
      */
     public boolean contains(Course toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameCourse);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
@@ -104,7 +100,7 @@ public class CourseList implements Iterable<Course> {
     private boolean personsAreUnique(List<Course> courses) {
         for (int i = 0; i < courses.size() - 1; i++) {
             for (int j = i + 1; j < courses.size(); j++) {
-                if (courses.get(i).isSameCourse(courses.get(j))) {
+                if (courses.get(i).equals(courses.get(j))) {
                     return false;
                 }
             }
