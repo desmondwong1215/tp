@@ -16,14 +16,18 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.CourseBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCourseBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CourseBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonCourseBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -58,7 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CourseBookStorage courseBookStorage = new JsonCourseBookStorage(userPrefs.getCourseBookFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, courseBookStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -68,7 +73,8 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+     * Returns a {@code ModelManager} with the data from {@code storage}'s address book, course book and {@code
+     * userPrefs}. <br>
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
@@ -76,21 +82,37 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyAddressBook initialAddressBook;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            initialAddressBook = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        logger.info("Using data file : " + storage.getCourseBookFilePath());
+
+        Optional<ReadOnlyCourseBook> courseBookOptional;
+        ReadOnlyCourseBook initialCourseBook;
+        try {
+            courseBookOptional = storage.readCourseBook();
+            if (!courseBookOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getCourseBookFilePath() + " adding new sample data.");
+            }
+            initialCourseBook = courseBookOptional.orElseGet(SampleDataUtil::getSampleCourseBook);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getCourseBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty CourseBook.");
+            initialCourseBook = new CourseBook();
+        }
+
+        return new ModelManager(initialAddressBook, initialCourseBook, userPrefs);
     }
 
     private void initLogging(Config config) {

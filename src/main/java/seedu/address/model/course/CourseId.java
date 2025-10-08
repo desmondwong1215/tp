@@ -1,5 +1,8 @@
 package seedu.address.model.course;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.Objects;
 
 /**
@@ -11,19 +14,40 @@ public class CourseId {
 
     private static int nextCourseId = 0;
 
-    public final int courseId;
+    public static final String MESSAGE_CONSTRAINTS = "CourseId must start with C followed by 4 digits";
+
+    /*
+     * The first character of the address must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "^C\\d{4}$";
+
+    public final String value;
 
     /**
      * Creates new courseId, automatically generated. No params needed.
      */
     public CourseId() {
-        courseId = nextCourseId;
+        value = "C" + String.format("%04d", nextCourseId);
         nextCourseId++;
+    }
+
+    public CourseId(String coureId) {
+        requireNonNull(coureId);
+        checkArgument(isValidCourseId(coureId), MESSAGE_CONSTRAINTS);
+        value = coureId;
+    }
+
+    /**
+     * Returns true if a given string is a valid courseId.
+     */
+    public static boolean isValidCourseId(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return "C" + String.format("%04d", courseId);
+        return value;
     }
 
     @Override
@@ -33,16 +57,15 @@ public class CourseId {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CourseId)) {
+        if (!(other instanceof CourseId otherId)) {
             return false;
         }
 
-        CourseId otherId = (CourseId) other;
-        return courseId == (otherId.courseId);
+        return Objects.equals(value, otherId.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(courseId);
+        return Objects.hash(value);
     }
 }

@@ -1,6 +1,7 @@
 package seedu.address.model.course;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.course.exceptions.CourseNotFoundException;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 
 /**
@@ -53,6 +55,24 @@ public class CourseList implements Iterable<Course> {
         }
     }
 
+    public void setCourses(CourseList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setCourses(List<Course> course) {
+        requireAllNonNull(course);
+        if (!personsAreUnique(course)) {
+            throw new DuplicatePersonException();
+        }
+
+        internalList.setAll(course);
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
@@ -72,11 +92,10 @@ public class CourseList implements Iterable<Course> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CourseList)) {
+        if (!(other instanceof CourseList otherUniquePersonList)) {
             return false;
         }
 
-        CourseList otherUniquePersonList = (CourseList) other;
         return internalList.equals(otherUniquePersonList.internalList);
     }
 
