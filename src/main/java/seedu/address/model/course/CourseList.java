@@ -10,14 +10,10 @@ import javafx.collections.ObservableList;
 import seedu.address.model.course.exceptions.CourseNotFoundException;
 
 
-
-
-
 /**
  * A list of courses that enforces uniqueness between its elements and does not allow nulls.
  * A course is considered unique by comparing using {@code Course#equals(Course)}.
  * Supports a minimal set of list operations.
- *
  *
  */
 public class CourseList implements Iterable<Course> {
@@ -95,7 +91,7 @@ public class CourseList implements Iterable<Course> {
     }
 
     /**
-     * Returns true if {@code courses} contains only unique persons.
+     * Returns true if {@code courses} contains only unique courses.
      */
     private boolean personsAreUnique(List<Course> courses) {
         for (int i = 0; i < courses.size() - 1; i++) {

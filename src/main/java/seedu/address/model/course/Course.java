@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Course in the EduBase.
- * Guarantees: details are present and not null, field values are validated, immutable and is can be
+ * Guarantees: details are present and not null, field values are validated, immutable and can be
  * uniquely identified by {@code courseId}.
  */
 public class Course {
@@ -48,8 +48,7 @@ public class Course {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both courses have the same {@code courseId}
      */
     @Override
     public boolean equals(Object other) {

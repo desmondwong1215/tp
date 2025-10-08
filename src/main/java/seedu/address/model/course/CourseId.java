@@ -4,8 +4,8 @@ import java.util.Objects;
 
 /**
  * Unique identifier for Course
- * courseId is a integer but prints out with prefix C with courseId padded to a total of 5 digits.
- * Current design can only accomodate up to 10^4 different courses
+ * courseId is an integer but prints out with prefix C with courseId padded to a total of 5 digits.
+ * Current design can only accommodate up to 10^4 different courses
  */
 public class CourseId {
 
@@ -14,7 +14,7 @@ public class CourseId {
     public final int courseId;
 
     /**
-     * Created new courseId, automatically generated. No params needed.
+     * Creates new courseId, automatically generated. No params needed.
      */
     public CourseId() {
         courseId = nextCourseId;
