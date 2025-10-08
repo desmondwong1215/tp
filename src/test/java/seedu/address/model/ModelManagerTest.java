@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalCourses.CS1010;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.CourseBookBuilder;
 
 public class ModelManagerTest {
 
@@ -94,14 +96,48 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setCourseBookFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setCourseBookFilePath(null));
+    }
+
+    @Test
+    public void setCourseBookFilePath_validPath_setsAddressBookFilePath() {
+        Path path = Paths.get("course/book/file/path");
+        modelManager.setCourseBookFilePath(path);
+        assertEquals(path, modelManager.getCourseBookFilePath());
+    }
+
+    @Test
+    public void hasCourse_nullCourse_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasCourse(null));
+    }
+
+    @Test
+    public void hasCourse_courseNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasCourse(CS1010));
+    }
+
+    @Test
+    public void hasCourse_courseInAddressBook_returnsTrue() {
+        modelManager.addCourse(CS1010);
+        assertTrue(modelManager.hasCourse(CS1010));
+    }
+
+    @Test
+    public void getFilteredCourseList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredCourseList().remove(0));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        CourseBook courseBook = new CourseBookBuilder().build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(addressBook, courseBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, courseBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -114,12 +150,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, courseBook, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, courseBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -127,6 +163,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, courseBook, differentUserPrefs)));
     }
 }

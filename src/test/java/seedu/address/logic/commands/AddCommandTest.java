@@ -21,7 +21,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCourseBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -129,8 +131,28 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getCourseBookFilePath() {
+            return null;
+        }
+
+        @Override
+        public void setCourseBookFilePath(Path courseBookFilePath) {
+
+        }
+
+        @Override
+        public void setCourseBook(ReadOnlyCourseBook courseBook) {
+
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyCourseBook getCourseBook() {
+            return null;
         }
 
         @Override
@@ -155,6 +177,36 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasCourse(Course course) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteCourse(Course target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCourse(Course course) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCourse(Course target, Course editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Course> getFilteredCourseList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredCourseList(Predicate<Course> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -5,7 +5,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.CourseBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCourseBook;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseId;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -40,6 +44,12 @@ public class SampleDataUtil {
         };
     }
 
+    public static Course[] getSampleCourse() {
+        return new Course[] {
+            new Course(new seedu.address.model.course.Name("Mathematics"), new CourseId("C1231"), getTagSet())
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
@@ -48,6 +58,13 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
+    public static ReadOnlyCourseBook getSampleCourseBook() {
+        CourseBook sampleCb = new CourseBook();
+        for (Course sampleCourse : getSampleCourse()) {
+            sampleCb.addCourse(sampleCourse);
+        }
+        return sampleCb;
+    }
     /**
      * Returns a tag set containing the list of strings given.
      */

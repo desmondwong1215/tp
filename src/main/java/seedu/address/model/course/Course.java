@@ -32,6 +32,16 @@ public class Course {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Course(Name name, CourseId courseId, Set<Tag> tags) {
+        requireAllNonNull(name, tags);
+        this.name = name;
+        this.courseId = courseId;
+        this.tags.addAll(tags);
+    }
+
     public Name getName() {
         return name;
     }

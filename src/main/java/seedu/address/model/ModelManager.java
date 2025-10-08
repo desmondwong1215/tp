@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,24 +21,29 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final CourseBook courseBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Course> filteredCourse;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyCourseBook courseBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBook, courseBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: "
+                + addressBook + "\n course book: " + courseBook + "\n user prefs: " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.courseBook = new CourseBook(courseBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredCourse = new FilteredList<>(this.courseBook.getCourseList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new CourseBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -80,6 +86,17 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+    }
+
+    @Override
+    public Path getCourseBookFilePath() {
+        return userPrefs.getCourseBookFilePath();
+    }
+
+    @Override
+    public void setCourseBookFilePath(Path courseBookFilePath) {
+        requireNonNull(courseBookFilePath);
+        userPrefs.setCourseBookFilePath(courseBookFilePath);
     }
 
     @Override
@@ -128,6 +145,59 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== CourseBook ================================================================================
+
+    @Override
+    public void setCourseBook(ReadOnlyCourseBook courseBook) {
+        this.courseBook.resetData(ModelManager.this.courseBook);
+    }
+
+    @Override
+    public ReadOnlyCourseBook getCourseBook() {
+        return courseBook;
+    }
+
+    @Override
+    public boolean hasCourse(Course course) {
+        requireNonNull(course);
+        return courseBook.hasCourse(course);
+    }
+
+    @Override
+    public void deleteCourse(Course target) {
+        courseBook.removeCourse(target);
+    }
+
+    @Override
+    public void addCourse(Course course) {
+        courseBook.addCourse(course);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void setCourse(Course target, Course editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        courseBook.setCourse(target, editedPerson);
+    }
+
+    //=========== Filtered Course List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Course} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Course> getFilteredCourseList() {
+        return filteredCourse;
+    }
+
+    @Override
+    public void updateFilteredCourseList(Predicate<Course> predicate) {
+        requireNonNull(predicate);
+        filteredCourse.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -140,9 +210,11 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return courseBook.equals(otherModelManager.courseBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && addressBook.equals(otherModelManager.addressBook)
+                && filteredCourse.equals(otherModelManager.filteredCourse);
     }
 
 }
