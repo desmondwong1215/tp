@@ -22,7 +22,7 @@ public class DeregisterCommand extends Command {
             + "Parameters: STUDENT_ID (e.g. S00001)\n"
             + "Example: " + COMMAND_WORD + " S00001";
 
-    public static final String MESSAGE_DEREGISTER_SUCCESS = "Deregistered student: %1$s";
+    public static final String MESSAGE_DEREGISTER_SUCCESS = "Student '%1$s' (%2$s) deregistered successfully.";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "No student found with ID: %1$s";
 
     private final StudentId targetId;
@@ -47,7 +47,8 @@ public class DeregisterCommand extends Command {
         }
 
         model.deletePerson(toDelete);
-        return new CommandResult(String.format(MESSAGE_DEREGISTER_SUCCESS, toDelete));
+        return new CommandResult(String.format(MESSAGE_DEREGISTER_SUCCESS,
+                toDelete.getName(), toDelete.getStudentId()));
     }
 
     @Override

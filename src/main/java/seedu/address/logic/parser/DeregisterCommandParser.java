@@ -23,7 +23,7 @@ public class DeregisterCommandParser implements Parser<DeregisterCommand> {
         }
 
         if (!trimmedArgs.matches("S\\d{5}")) {
-            throw new ParseException("Invalid Student ID format. Must be like S00001");
+            throw new ParseException("Invalid Student ID format. Must be like S00001.");
         }
 
         StudentId studentId = new StudentId(trimmedArgs);
