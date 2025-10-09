@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
-
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -20,11 +19,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
 
     private int nextStudentId = 1;
-
-    public StudentId generateStudentId() {
-        String idString = String.format("S%05d", nextStudentId++);
-        return new StudentId(idString);
-    }
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -45,6 +39,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
+    }
+
+    /**
+     * Generates a unique student ID in the format SXXXXX where XXXXX is a 5-digit number.
+     * The ID sequence starts from S00001 and increments with each call.
+     *
+     * @return a new unique StudentId object
+     */
+    public StudentId generateStudentId() {
+        String idString = String.format("S%05d", nextStudentId++);
+        return new StudentId(idString);
     }
 
     //// list overwrite operations

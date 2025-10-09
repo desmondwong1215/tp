@@ -27,6 +27,12 @@ public class DeregisterCommand extends Command {
 
     private final StudentId targetId;
 
+    /**
+     * Constructs a {@code DeregisterCommand} to deregister the student with the specified student ID.
+     *
+     * @param targetId the student ID of the student to be deregistered
+     * @throws NullPointerException if the targetId is null
+     */
     public DeregisterCommand(StudentId targetId) {
         requireNonNull(targetId);
         this.targetId = targetId;

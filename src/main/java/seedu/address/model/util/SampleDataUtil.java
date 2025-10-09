@@ -23,18 +23,18 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-                new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Gender("M"), new StudentId("S00001")),
-                new Person(new Name("Bernice Yu"), new Phone("99272758"), new Gender("F"), new StudentId("S00002")),
-                new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Gender("F"), new StudentId("S00003")),
-                new Person(new Name("David Li"), new Phone("91031282"), new Gender("M"), new StudentId("S00004")),
-                new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Gender("M"), new StudentId("S00005")),
-                new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Gender("M"), new StudentId("S00006"))
+            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Gender("M"), new StudentId("S00001")),
+            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Gender("F"), new StudentId("S00002")),
+            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Gender("F"), new StudentId("S00003")),
+            new Person(new Name("David Li"), new Phone("91031282"), new Gender("M"), new StudentId("S00004")),
+            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Gender("M"), new StudentId("S00005")),
+            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Gender("M"), new StudentId("S00006"))
         };
     }
 
     public static Course[] getSampleCourse() {
         return new Course[] {
-                new Course(new seedu.address.model.course.Name("Mathematics"), new CourseId("C1231"), getTagSet())
+            new Course(new seedu.address.model.course.Name("Mathematics"), new CourseId("C1231"), getTagSet())
         };
     }
 
