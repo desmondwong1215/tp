@@ -14,7 +14,7 @@ public class CourseId {
 
     public static final String MESSAGE_CONSTRAINTS = "CourseId must start with C followed by 4 digits";
 
-    /*
+    /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
@@ -34,7 +34,7 @@ public class CourseId {
     }
 
     /**
-     * Creates new courseId with an id string. No params needed.
+     * Creates new courseId with an id string.
      */
     public CourseId(String courseId) {
         requireNonNull(courseId);
@@ -48,6 +48,11 @@ public class CourseId {
     public static boolean isValidCourseId(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    /**
+     * Checks if duplicate
+     * @return
+     */
 
     @Override
     public String toString() {
