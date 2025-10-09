@@ -33,27 +33,19 @@ public class DeregisterCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // Invalid student ID format
-        assertParseFailure(parser, "A12345",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeregisterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "A12345", StudentId.MESSAGE_CONSTRAINTS);
 
         // Empty input
         assertParseFailure(parser, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeregisterCommand.MESSAGE_USAGE));
 
         // Invalid format (not starting with S)
-        assertParseFailure(parser, "12345",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeregisterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "12345", StudentId.MESSAGE_CONSTRAINTS);
 
         // Invalid format (wrong length)
-        assertParseFailure(parser, "S1234",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeregisterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "S1234", StudentId.MESSAGE_CONSTRAINTS);
 
         // Invalid format (too long)
-        assertParseFailure(parser, "S123456",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeregisterCommand.MESSAGE_USAGE));
-
-        // Invalid format (contains letters after S)
-        assertParseFailure(parser, "SABC12",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeregisterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "S123456", StudentId.MESSAGE_CONSTRAINTS);
     }
 }

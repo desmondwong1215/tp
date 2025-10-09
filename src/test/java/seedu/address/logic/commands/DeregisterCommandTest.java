@@ -54,11 +54,14 @@ public class DeregisterCommandTest {
 
     @Test
     public void execute_validStudentIdFilteredList_success() {
-        // Show only first person in filtered list
-        model.updateFilteredPersonList(person -> person.equals(ALICE));
-
-        Person personToDelete = ALICE;
+        Person personToDelete = model.getAddressBook().getPersonList().get(0);
         StudentId targetId = personToDelete.getStudentId();
+
+        model.updateFilteredPersonList(person -> person.equals(personToDelete));
+
+        assertEquals(1, model.getFilteredPersonList().size());
+        assertTrue(model.getFilteredPersonList().contains(personToDelete));
+
         DeregisterCommand deregisterCommand = new DeregisterCommand(targetId);
 
         String expectedMessage = String.format(DeregisterCommand.MESSAGE_DEREGISTER_SUCCESS,
@@ -66,7 +69,7 @@ public class DeregisterCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getCourseBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredPersonList(person -> person.equals(personToDelete));
 
         assertCommandSuccess(deregisterCommand, model, expectedMessage, expectedModel);
     }

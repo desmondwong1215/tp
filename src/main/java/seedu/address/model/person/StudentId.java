@@ -4,7 +4,8 @@ package seedu.address.model.person;
  * Represents a student's auto-generated ID.
  */
 public class StudentId {
-    public static final String MESSAGE_CONSTRAINTS = "Student ID must be in the format S followed by exactly 5 digits (e.g., S00001)";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Student ID must be in the format S followed by exactly 5 digits (e.g., S00001)";
     public static final String VALIDATION_REGEX = "S\\d{5}";
 
     public final String value;
@@ -14,9 +15,13 @@ public class StudentId {
      * The value must be in the format S followed by exactly 5 digits (e.g., S00001).
      *
      * @param value the student ID string
+     * @throws NullPointerException if the value is null
      * @throws IllegalArgumentException if the value does not match the required format
      */
     public StudentId(String value) {
+        if (value == null) {
+            throw new NullPointerException("Student ID cannot be null");
+        }
         if (!isValidStudentId(value)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }

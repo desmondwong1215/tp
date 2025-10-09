@@ -22,7 +22,7 @@ public class StudentIdTest {
     @Test
     public void isValidStudentId() {
         // null student ID
-        assertThrows(NullPointerException.class, () -> StudentId.isValidStudentId(null));
+        assertFalse(StudentId.isValidStudentId(null));
 
         // blank student ID
         assertFalse(StudentId.isValidStudentId("")); // empty string
@@ -44,7 +44,6 @@ public class StudentIdTest {
         assertFalse(StudentId.isValidStudentId(" S12345")); // leading space
         assertFalse(StudentId.isValidStudentId("S12345 ")); // trailing space
         assertFalse(StudentId.isValidStudentId("SS12345")); // double 'S'
-        assertFalse(StudentId.isValidStudentId("S00000")); // all zeros (if not allowed)
         assertFalse(StudentId.isValidStudentId("S1234")); // only 4 digits after S
         assertFalse(StudentId.isValidStudentId("S1234567")); // 7 digits after S
 
@@ -52,7 +51,7 @@ public class StudentIdTest {
         assertTrue(StudentId.isValidStudentId("S00001")); // minimum valid
         assertTrue(StudentId.isValidStudentId("S12345")); // typical case
         assertTrue(StudentId.isValidStudentId("S99999")); // maximum typical
-        assertTrue(StudentId.isValidStudentId("S00000")); // if zeros are allowed
+        assertTrue(StudentId.isValidStudentId("S00000")); // zeros are allowed
         assertTrue(StudentId.isValidStudentId("S10000")); // mixed digits
         assertTrue(StudentId.isValidStudentId("S54321")); // another typical case
     }

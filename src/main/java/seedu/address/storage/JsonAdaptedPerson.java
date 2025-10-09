@@ -71,13 +71,28 @@ class JsonAdaptedPerson {
         if (gender == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
         }
-        final Gender modelGender = new Gender(gender);
+        if (!Gender.isValidGender(gender)) {
+            throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        final Gender modelGender;
+        try {
+            modelGender = new Gender(gender);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
+        }
 
         if (studentId == null) {
-            throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName()));
         }
-        final StudentId modelStudentId = new StudentId(studentId);
+        if (!StudentId.isValidStudentId(studentId)) {
+            throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        final StudentId modelStudentId;
+        try {
+            modelStudentId = new StudentId(studentId);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
+        }
 
         return new Person(modelName, modelPhone, modelGender, modelStudentId);
     }
