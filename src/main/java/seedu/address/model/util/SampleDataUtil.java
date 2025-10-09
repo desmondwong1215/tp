@@ -10,6 +10,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCourseBook;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseId;
+import seedu.address.model.course.CourseName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -46,7 +47,7 @@ public class SampleDataUtil {
 
     public static Course[] getSampleCourse() {
         return new Course[] {
-            new Course(new seedu.address.model.course.Name("Mathematics"), new CourseId("C1231"), getTagSet())
+            new Course(new CourseName("Mathematics"), new CourseId("C1231"), getTagSet())
         };
     }
 

@@ -25,8 +25,8 @@ public class CourseListTest {
     public void setUp() {
         courseList = new CourseList();
         emptyTags = new HashSet<>();
-        mathematics = new Course(new Name("Mathematics"), emptyTags);
-        physics = new Course(new Name("Physics"), emptyTags);
+        mathematics = new Course(new CourseName("Mathematics"), emptyTags);
+        physics = new Course(new CourseName("Physics"), emptyTags);
     }
 
     @Test

@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
 
 public class CourseTest {
 
-    private static final Name VALID_NAME = new Name("Mathematics");
+    private static final CourseName VALID_NAME = new CourseName("Mathematics");
     private static final Set<Tag> VALID_TAGS = new HashSet<>();
 
     @Test
@@ -58,7 +58,7 @@ public class CourseTest {
     @Test
     public void equals() {
         Course course1 = new Course(VALID_NAME, VALID_TAGS);
-        Course course2 = new Course(new Name("Physics"), VALID_TAGS);
+        Course course2 = new Course(new CourseName("Physics"), VALID_TAGS);
 
         // same object -> returns true
         assertTrue(course1.equals(course1));
@@ -90,7 +90,7 @@ public class CourseTest {
     @Test
     public void hashCode_differentCourses_differentHashCodes() {
         Course course1 = new Course(VALID_NAME, VALID_TAGS);
-        Course course2 = new Course(new Name("Physics"), VALID_TAGS);
+        Course course2 = new Course(new CourseName("Physics"), VALID_TAGS);
         assertNotEquals(course1.hashCode(), course2.hashCode());
     }
 
