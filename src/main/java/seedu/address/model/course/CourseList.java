@@ -122,4 +122,17 @@ public class CourseList implements Iterable<Course> {
         }
         return true;
     }
+
+    /**
+     * Returns the course with the given CourseId, or null if not found.
+     */
+    public Course getByCourseId(CourseId courseId) {
+        requireNonNull(courseId);
+        for (Course course : internalList) {
+            if (course.getCourseId().equals(courseId)) {
+                return course;
+            }
+        }
+        return null;
+    }
 }

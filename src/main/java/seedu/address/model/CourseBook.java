@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseId;
 import seedu.address.model.course.CourseList;
 
 /**
@@ -92,6 +93,13 @@ public class CourseBook implements ReadOnlyCourseBook {
      */
     public void removeCourse(Course key) {
         courses.remove(key);
+    }
+
+    /**
+     * Returns the course with the given CourseId, or null if not found.
+     */
+    public Course getCourseById(CourseId courseId) {
+        return courses.getByCourseId(courseId);
     }
 
     //// util methods
