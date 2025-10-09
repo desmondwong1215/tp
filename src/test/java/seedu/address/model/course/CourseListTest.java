@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.course.exceptions.CourseNotFoundException;
+import seedu.address.model.course.exceptions.DuplicateCourseIdException;
 import seedu.address.model.tag.Tag;
 
 public class CourseListTest {
@@ -59,7 +60,7 @@ public class CourseListTest {
     @Test
     public void add_duplicateCourse_throwsAssertionError() {
         courseList.add(mathematics);
-        assertThrows(AssertionError.class, () -> courseList.add(mathematics));
+        assertThrows(DuplicateCourseIdException.class, () -> courseList.add(mathematics));
     }
 
     @Test
