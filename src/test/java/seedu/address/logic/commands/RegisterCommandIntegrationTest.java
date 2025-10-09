@@ -34,7 +34,12 @@ public class RegisterCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getCourseBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
-        assertCommandSuccess(new RegisterCommand(validPerson.getName(), validPerson.getPhone(), validPerson.getGender()),
+        assertCommandSuccess(
+                new RegisterCommand(
+                    validPerson.getName(),
+                    validPerson.getPhone(),
+                    validPerson.getGender()
+                ),
                 model,
                 String.format(RegisterCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 expectedModel);
@@ -43,7 +48,12 @@ public class RegisterCommandIntegrationTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new RegisterCommand(personInList.getName(), personInList.getPhone(), personInList.getGender()),
+        assertCommandFailure(
+                new RegisterCommand(
+                    personInList.getName(),
+                    personInList.getPhone(),
+                    personInList.getGender()
+                ),
                 model,
                 RegisterCommand.MESSAGE_DUPLICATE_PERSON);
     }
