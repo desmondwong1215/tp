@@ -14,6 +14,10 @@ public class CourseId {
 
     public static final String MESSAGE_CONSTRAINTS = "CourseId must start with C followed by 4 digits";
 
+    /**
+     * The first character of the address must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
     public static final String VALIDATION_REGEX = "^C\\d{4}$";
 
     private static int nextCourseId = 0;
