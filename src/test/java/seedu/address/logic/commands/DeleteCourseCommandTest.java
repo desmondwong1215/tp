@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseId;
-import seedu.address.model.course.Name;
+import seedu.address.model.course.CourseName;
 
 public class DeleteCourseCommandTest {
     private Model model;
@@ -25,7 +25,7 @@ public class DeleteCourseCommandTest {
     public void setUp() {
         model = new ModelManager();
         validCourseId = new CourseId("C0001");
-        validCourse = new Course(new Name("English 101"), validCourseId, Collections.emptySet());
+        validCourse = new Course(new CourseName("English 101"), validCourseId, Collections.emptySet());
         model.addCourse(validCourse);
     }
 

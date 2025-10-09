@@ -33,7 +33,7 @@ public class CreateCourseCommandParser implements Parser<CreateCourseCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateCourseCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ID);
         CourseName courseName = ParserUtil.parseCourseName(argMultimap.getValue(PREFIX_NAME).get());
         CourseId courseId = ParserUtil.parseCourseId(argMultimap.getValue(PREFIX_ID).get());
         return new CreateCourseCommand(new Course(courseName, courseId, new HashSet<>()));
