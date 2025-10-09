@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCourseBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseId;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -207,6 +208,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredCourseList(Predicate<Course> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Course getCourseById(CourseId courseId) {
             throw new AssertionError("This method should not be called.");
         }
     }
