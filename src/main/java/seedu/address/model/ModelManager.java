@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseId;
 import seedu.address.model.person.Person;
 
 /**
@@ -196,6 +197,11 @@ public class ModelManager implements Model {
     public void updateFilteredCourseList(Predicate<Course> predicate) {
         requireNonNull(predicate);
         filteredCourse.setPredicate(predicate);
+    }
+
+    @Override
+    public Course getCourseById(CourseId courseId) {
+        return courseBook.getCourseById(courseId);
     }
 
     @Override

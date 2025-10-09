@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseId;
 import seedu.address.model.person.Person;
 
 /**
@@ -136,4 +137,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCourseList(Predicate<Course> predicate);
+
+    /**
+     * Returns the course with the given CourseId, or null if not found.
+     */
+    Course getCourseById(CourseId courseId);
 }
