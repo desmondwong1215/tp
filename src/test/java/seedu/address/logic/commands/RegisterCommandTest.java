@@ -5,11 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -25,66 +23,107 @@ import seedu.address.model.ReadOnlyCourseBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseId;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class RegisterCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullName_throwsNullPointerException() {
+        Phone phone = new Phone("12345678");
+        Gender gender = new Gender("Male");
+        assertThrows(NullPointerException.class, () -> new RegisterCommand(null, phone, gender));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void constructor_nullPhone_throwsNullPointerException() {
+        Name name = new Name("John Doe");
+        Gender gender = new Gender("Male");
+        assertThrows(NullPointerException.class, () -> new RegisterCommand(name, null, gender));
+    }
+
+    @Test
+    public void constructor_nullGender_throwsNullPointerException() {
+        Name name = new Name("John Doe");
+        Phone phone = new Phone("12345678");
+        assertThrows(NullPointerException.class, () -> new RegisterCommand(name, phone, null));
+    }
+
+    @Test
+    public void execute_personAcceptedByModel_registerSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        Name name = new Name("John Doe");
+        Phone phone = new Phone("12345678");
+        Gender gender = new Gender("Male");
+        RegisterCommand registerCommand = new RegisterCommand(name, phone, gender);
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = registerCommand.execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(1, modelStub.personsAdded.size());
+        Person addedPerson = modelStub.personsAdded.get(0);
+        assertEquals(name, addedPerson.getName());
+        assertEquals(phone, addedPerson.getPhone());
+        assertEquals(gender, addedPerson.getGender());
+        assertEquals(String.format(RegisterCommand.MESSAGE_SUCCESS, Messages.format(addedPerson)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        Name name = new Name("John Doe");
+        Phone phone = new Phone("12345678");
+        Gender gender = new Gender("Male");
+        RegisterCommand registerCommand = new RegisterCommand(name, phone, gender);
+        ModelStub modelStub = new ModelStubWithPerson(new PersonBuilder().withName("John Doe")
+                .withPhone("12345678").withGender("Male").build());
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, RegisterCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                registerCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Name name = new Name("John Doe");
+        Phone phone = new Phone("12345678");
+        Gender gender = new Gender("Male");
+        RegisterCommand registerCommand = new RegisterCommand(name, phone, gender);
+
+        RegisterCommand sameValuesCommand = new RegisterCommand(name, phone, gender);
+
+        Name differentName = new Name("Jane Doe");
+        Phone differentPhone = new Phone("87654321");
+        Gender differentGender = new Gender("Female");
+        RegisterCommand differentCommand = new RegisterCommand(differentName, differentPhone, differentGender);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(registerCommand.equals(registerCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertTrue(registerCommand.equals(sameValuesCommand));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(registerCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(registerCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(registerCommand.equals(differentCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        Name name = new Name("John Doe");
+        Phone phone = new Phone("12345678");
+        Gender gender = new Gender("Male");
+        RegisterCommand registerCommand = new RegisterCommand(name, phone, gender);
+        String expected = RegisterCommand.class.getCanonicalName() + "{name=" + name + ", phone=" + phone
+                + ", gender=" + gender + "}";
+        assertEquals(expected, registerCommand.toString());
     }
 
     /**
@@ -138,12 +177,12 @@ public class AddCommandTest {
 
         @Override
         public void setCourseBookFilePath(Path courseBookFilePath) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setCourseBook(ReadOnlyCourseBook courseBook) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -233,13 +272,19 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the person being added and generates student IDs.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        private int nextStudentId = 1;
 
         @Override
         public boolean hasPerson(Person person) {
@@ -255,8 +300,20 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            AddressBook addressBook = new AddressBook();
+            // Override generateStudentId to provide predictable IDs for testing
+            return new AddressBook() {
+                @Override
+                public StudentId generateStudentId() {
+                    String idString = String.format("S%05d", nextStudentId++);
+                    return new StudentId(idString);
+                }
+            };
+        }
+
+        public StudentId generateStudentId() {
+            String idString = String.format("S%05d", nextStudentId++);
+            return new StudentId(idString);
         }
     }
-
 }
