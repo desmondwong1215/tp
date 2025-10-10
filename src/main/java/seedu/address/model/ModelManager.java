@@ -36,9 +36,9 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: "
                 + addressBook + "\n course book: " + courseBook + "\n user prefs: " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
-        this.courseBook = new CourseBook(courseBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.addressBook = new AddressBook(addressBook, this.userPrefs);
+        this.courseBook = new CourseBook(courseBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredCourse = new FilteredList<>(this.courseBook.getCourseList());
     }

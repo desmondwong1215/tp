@@ -9,10 +9,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -32,16 +34,24 @@ public class RegisterCommandIntegrationTest {
         Person validPerson = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getCourseBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+
+        StudentId expectedId = ((AddressBook) expectedModel.getAddressBook()).generateStudentId();
+        Person expectedPerson = new Person(
+                validPerson.getName(),
+                validPerson.getPhone(),
+                validPerson.getGender(),
+                expectedId
+        );
+        expectedModel.addPerson(expectedPerson);
 
         assertCommandSuccess(
                 new RegisterCommand(
-                    validPerson.getName(),
-                    validPerson.getPhone(),
-                    validPerson.getGender()
+                        validPerson.getName(),
+                        validPerson.getPhone(),
+                        validPerson.getGender()
                 ),
                 model,
-                String.format(RegisterCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                String.format(RegisterCommand.MESSAGE_SUCCESS, Messages.format(expectedPerson)),
                 expectedModel);
     }
 

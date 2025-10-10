@@ -56,8 +56,12 @@ public class RegisterCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Generate a new StudentId
-        StudentId id = ((AddressBook) model.getAddressBook()).generateStudentId();
+        if (!(model.getAddressBook() instanceof AddressBook)) {
+            throw new CommandException("Cannot generate student ID in read-only mode");
+        }
+
+        AddressBook addressBook = (AddressBook) model.getAddressBook();
+        StudentId id = addressBook.generateStudentId();
         Person toAdd = new Person(name, phone, gender, id);
 
         if (model.hasPerson(toAdd)) {
