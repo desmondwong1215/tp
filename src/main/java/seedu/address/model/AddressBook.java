@@ -17,38 +17,51 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UserPrefs userPrefs;
 
-    private int nextStudentId = 1;
-
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
+    /**
+     * Creates an AddressBook with default values.
      */
-    {
+    public AddressBook() {
+        this.userPrefs = new UserPrefs();
         persons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    /**
+     * Creates an AddressBook using the given UserPrefs.
+     */
+    public AddressBook(UserPrefs userPrefs) {
+        this.userPrefs = userPrefs;
+        persons = new UniquePersonList();
+    }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons in the {@code toBeCopied} and given UserPrefs.
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
-        this();
+    public AddressBook(ReadOnlyAddressBook toBeCopied, UserPrefs userPrefs) {
+        this(userPrefs);
         resetData(toBeCopied);
     }
 
     /**
      * Generates a unique student ID in the format SXXXXX where XXXXX is a 5-digit number.
-     * The ID sequence starts from S00001 and increments with each call.
+     * The ID sequence uses the higher of stored counter or max existing ID + 1.
      *
      * @return a new unique StudentId object
      */
     public StudentId generateStudentId() {
-        String idString = String.format("S%05d", nextStudentId++);
+        int storedId = userPrefs.getNextStudentId();
+
+        int maxExistingId = getPersonList().stream()
+                .map(Person::getStudentId)
+                .mapToInt(sid -> Integer.parseInt(sid.value.substring(1)))
+                .max()
+                .orElse(0);
+
+        int nextId = Math.max(storedId, maxExistingId + 1);
+
+        String idString = String.format("S%05d", nextId);
+        userPrefs.setNextStudentId(nextId + 1);
         return new StudentId(idString);
     }
 
@@ -67,7 +80,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
@@ -96,7 +108,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
     }
 
