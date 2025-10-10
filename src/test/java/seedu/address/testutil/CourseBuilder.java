@@ -5,7 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseId;
-import seedu.address.model.course.Name;
+import seedu.address.model.course.CourseName;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -17,7 +17,7 @@ public class CourseBuilder {
     public static final String DEFAULT_NAME = "Programming";
     public static final String DEFAULT_COURSEID = "C1101";
 
-    private Name name;
+    private CourseName name;
     private CourseId courseId;
     private Set<Tag> tags;
 
@@ -25,7 +25,7 @@ public class CourseBuilder {
      * Creates a {@code CourseBuilder} with the default details.
      */
     public CourseBuilder() {
-        name = new Name(DEFAULT_NAME);
+        name = new CourseName(DEFAULT_NAME);
         courseId = new CourseId(DEFAULT_COURSEID);
         tags = new HashSet<>();
     }
@@ -43,7 +43,7 @@ public class CourseBuilder {
      * Sets the {@code Name} of the {@code Course} that we are building.
      */
     public CourseBuilder withName(String name) {
-        this.name = new Name(name);
+        this.name = new CourseName(name);
         return this;
     }
 

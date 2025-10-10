@@ -16,7 +16,7 @@ import seedu.address.model.tag.Tag;
  * uniquely identified by {@code courseId}.
  */
 public class Course {
-    private final Name name;
+    private final CourseName name;
     private final CourseId courseId;
 
     // Data fields
@@ -25,7 +25,7 @@ public class Course {
     /**
      * Every field must be present and not null.
      */
-    public Course(Name name, Set<Tag> tags) {
+    public Course(CourseName name, Set<Tag> tags) {
         requireAllNonNull(name, tags);
         this.name = name;
         this.courseId = new CourseId();
@@ -35,14 +35,14 @@ public class Course {
     /**
      * Every field must be present and not null.
      */
-    public Course(Name name, CourseId courseId, Set<Tag> tags) {
+    public Course(CourseName name, CourseId courseId, Set<Tag> tags) {
         requireAllNonNull(name, tags);
         this.name = name;
         this.courseId = courseId;
         this.tags.addAll(tags);
     }
 
-    public Name getName() {
+    public CourseName getName() {
         return name;
     }
 
