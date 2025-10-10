@@ -11,8 +11,6 @@ import seedu.address.model.ReadOnlyCourseBook;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseId;
 import seedu.address.model.course.CourseName;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
