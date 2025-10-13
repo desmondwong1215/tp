@@ -11,7 +11,7 @@ import seedu.address.model.course.Course;
  */
 public class CourseCard extends UiPart<Region> {
 
-    private static final String FXML = "CourseCard.fxml";
+    private static final String FXML = "CourseListCard.fxml";
 
     public final Course course;
 

@@ -23,7 +23,7 @@ public class CreateCourseCommand extends Command {
             + PREFIX_ID + "ID\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "English "
-            + PREFIX_ID + "ES2660";
+            + PREFIX_ID + "C1234";
 
     public static final String MESSAGE_SUCCESS = "New course created: %1$s";
 
@@ -48,6 +48,7 @@ public class CreateCourseCommand extends Command {
         }
 
         model.addCourse(toAdd);
+        model.updateFilteredCourseList(Model.PREDICATE_SHOW_ALL_COURSES);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

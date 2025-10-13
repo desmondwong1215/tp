@@ -16,7 +16,6 @@ import seedu.address.model.course.Course;
 /**
  * An Immutable CourseBook that is serializable to JSON format.
  */
-@JsonRootName(value = "coursebook")
 class JsonSerializableCourseBook {
 
     public static final String MESSAGE_DUPLICATE_COURSE = "Courses list contains duplicate course(s).";
