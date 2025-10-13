@@ -24,6 +24,9 @@ public class CourseCard extends UiPart<Region> {
     @FXML
     private Label courseId;
 
+    /**
+     * Creates a {@code CourseCode} with the given {@code Course} and index to display.
+     */
     public CourseCard(Course course, int displayedIndex) {
         super(FXML);
         this.course = course;

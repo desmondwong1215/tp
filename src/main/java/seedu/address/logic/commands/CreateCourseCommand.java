@@ -48,7 +48,6 @@ public class CreateCourseCommand extends Command {
         }
 
         model.addCourse(toAdd);
-        model.updateFilteredCourseList(Model.PREDICATE_SHOW_ALL_COURSES);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

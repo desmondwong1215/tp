@@ -12,10 +12,12 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.CourseBook;
 import seedu.address.model.ReadOnlyCourseBook;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.exceptions.DuplicateCourseIdException;
 
 /**
  * An Immutable CourseBook that is serializable to JSON format.
  */
+@JsonRootName(value = "coursebook")
 class JsonSerializableCourseBook {
 
     public static final String MESSAGE_DUPLICATE_COURSE = "Courses list contains duplicate course(s).";
@@ -51,7 +53,11 @@ class JsonSerializableCourseBook {
             if (courseBook.hasCourse(course)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_COURSE);
             }
-            courseBook.addCourse(course);
+            try {
+                courseBook.addCourse(course);
+            } catch (DuplicateCourseIdException e) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_COURSE);
+            }
         }
         return courseBook;
     }

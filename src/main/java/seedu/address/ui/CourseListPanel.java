@@ -20,6 +20,9 @@ public class CourseListPanel extends UiPart<Region> {
     @FXML
     private ListView<Course> courseListView;
 
+    /**
+     * Creates a {@code CourseListPanel} with the given {@code ObservableList}.
+     */
     public CourseListPanel(ObservableList<Course> courseList) {
         super(FXML);
         courseListView.setItems(courseList);
