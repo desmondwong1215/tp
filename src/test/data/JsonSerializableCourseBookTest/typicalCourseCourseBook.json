@@ -1,0 +1,24 @@
+{
+  "courses": [
+    {
+      "courseId": "C1010",
+      "name": "Programming Methodology"
+    },
+    {
+      "courseId": "C1521",
+      "name": "Calculus"
+    },
+    {
+      "courseId": "C9876",
+      "name": "Thinking and Expression"
+    },
+    {
+      "courseId": "C2040",
+      "name": "Data Structures and Algorithms"
+    },
+    {
+      "courseId": "C3240",
+      "name": "Project Management"
+    }
+  ]
+}

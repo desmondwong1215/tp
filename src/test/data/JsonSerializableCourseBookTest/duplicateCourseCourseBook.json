@@ -1,0 +1,9 @@
+{
+  "courses": [ {
+    "name": "Valid Course",
+    "course_id": "C1101"
+  }, {
+    "name": "Valid Course",
+    "course_id": "C1101"
+  } ]
+}

@@ -92,6 +92,20 @@ public class CourseListTest {
     }
 
     @Test
+    public void setCourses_nullCourseList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> courseList.setCourses((CourseList) null));
+    }
+
+    @Test
+    public void setCourses_validCourseList_setsInternalList() {
+        CourseList newCL = new CourseList();
+        newCL.add(mathematics);
+        courseList.setCourses(newCL);
+        assertTrue(courseList.contains(mathematics));
+        assertFalse(courseList.contains(physics));
+    }
+
+    @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         courseList.add(mathematics);
         assertThrows(UnsupportedOperationException.class, () ->
