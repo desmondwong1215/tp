@@ -9,16 +9,16 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that a {@code Person}'s {@code Id} matches any of the keywords given.
  */
 public class IdMatchesKeywordsPredicate implements Predicate<Person> {
-    private final List<String> keywords;
+    private final List<StudentId> keywords;
 
-    public IdMatchesKeywordsPredicate(List<String> keywords) {
+    public IdMatchesKeywordsPredicate(List<StudentId> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> person.getStudentId().getValue().equals(keyword));
+                .anyMatch(keyword -> person.getStudentId().equals(keyword));
     }
 
     @Override
