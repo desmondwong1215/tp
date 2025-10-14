@@ -94,7 +94,8 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyCourseBook> readCourseBook(Path filePath, ObservableList<Person> personList) throws DataLoadingException {
+    public Optional<ReadOnlyCourseBook> readCourseBook(Path filePath,
+                                                       ObservableList<Person> personList) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
         return courseBookStorage.readCourseBook(filePath, personList);
     }

@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
 
-import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
