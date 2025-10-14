@@ -22,21 +22,12 @@ public class Course {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
-    /**
-     * Every field must be present and not null.
-     */
-    public Course(CourseName name, Set<Tag> tags) {
-        requireAllNonNull(name, tags);
-        this.name = name;
-        this.courseId = new CourseId();
-        this.tags.addAll(tags);
-    }
 
     /**
      * Every field must be present and not null.
      */
     public Course(CourseName name, CourseId courseId, Set<Tag> tags) {
-        requireAllNonNull(name, tags);
+        requireAllNonNull(name, tags, courseId);
         this.name = name;
         this.courseId = courseId;
         this.tags.addAll(tags);
