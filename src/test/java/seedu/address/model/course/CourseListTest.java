@@ -22,12 +22,13 @@ public class CourseListTest {
     private Course physics;
     private Set<Tag> emptyTags;
 
+
     @BeforeEach
     public void setUp() {
         courseList = new CourseList();
         emptyTags = new HashSet<>();
-        mathematics = new Course(new CourseName("Mathematics"), emptyTags);
-        physics = new Course(new CourseName("Physics"), emptyTags);
+        mathematics = new Course(new CourseName("Mathematics"), new CourseId("C0001"), emptyTags);
+        physics = new Course(new CourseName("Physics"), new CourseId("C0002"), emptyTags);
     }
 
     @Test
