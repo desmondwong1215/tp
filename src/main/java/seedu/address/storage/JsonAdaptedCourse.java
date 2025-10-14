@@ -29,7 +29,7 @@ class JsonAdaptedCourse {
      * Constructs a {@code JsonAdaptedCourse} with the given course. details.
      */
     @JsonCreator
-    public JsonAdaptedCourse(@JsonProperty("name") String name, @JsonProperty("course_id") String courseId,
+    public JsonAdaptedCourse(@JsonProperty("name") String name, @JsonProperty("courseId") String courseId,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.courseId = courseId;

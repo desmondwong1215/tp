@@ -150,7 +150,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setCourseBook(ReadOnlyCourseBook courseBook) {
-        this.courseBook.resetData(ModelManager.this.courseBook);
+        this.courseBook.resetData(courseBook);
     }
 
     @Override
@@ -172,7 +172,7 @@ public class ModelManager implements Model {
     @Override
     public void addCourse(Course course) {
         courseBook.addCourse(course);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredCourseList(PREDICATE_SHOW_ALL_COURSES);
     }
 
     @Override

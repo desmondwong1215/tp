@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.CourseBook;
 import seedu.address.model.ReadOnlyCourseBook;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.exceptions.DuplicateCourseIdException;
 
 /**
  * An Immutable CourseBook that is serializable to JSON format.
@@ -52,7 +53,11 @@ class JsonSerializableCourseBook {
             if (courseBook.hasCourse(course)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_COURSE);
             }
-            courseBook.addCourse(course);
+            try {
+                courseBook.addCourse(course);
+            } catch (DuplicateCourseIdException e) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_COURSE);
+            }
         }
         return courseBook;
     }
