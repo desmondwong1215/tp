@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.testutil.TypicalCourses.getTypicalCourseBook;
+import static seedu.address.testutil.TypicalPersons.getObservablePerson;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
@@ -79,7 +80,7 @@ public class StorageManagerTest {
          */
         CourseBook original = getTypicalCourseBook();
         storageManager.saveCourseBook(original);
-        ReadOnlyCourseBook retrieved = storageManager.readCourseBook().get();
+        ReadOnlyCourseBook retrieved = storageManager.readCourseBook(getObservablePerson()).get();
         assertEquals(original, new CourseBook(retrieved));
     }
 

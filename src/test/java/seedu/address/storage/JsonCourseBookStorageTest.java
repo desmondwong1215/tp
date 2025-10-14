@@ -6,6 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCourses.CFG1002;
 import static seedu.address.testutil.TypicalCourses.CS2040;
 import static seedu.address.testutil.TypicalCourses.getTypicalCourseBook;
+import static seedu.address.testutil.TypicalPersons.getObservablePerson;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -18,8 +19,12 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.CourseBook;
 import seedu.address.model.ReadOnlyCourseBook;
 
+
+
 public class JsonCourseBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonCourseBookStorageTest");
+    private static final Path VALID_STUDENT_DATA_FOLDER =
+            Paths.get("src", "test", "data", "JsonSerializableAddressBookTest");
 
     @TempDir
     public Path testFolder;
@@ -30,7 +35,8 @@ public class JsonCourseBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyCourseBook> readCourseBook(String filePath) throws Exception {
-        return new JsonCourseBookStorage(Paths.get(filePath)).readCourseBook(addToTestDataPathIfNotNull(filePath));
+        return new JsonCourseBookStorage(Paths.get(filePath))
+                    .readCourseBook(addToTestDataPathIfNotNull(filePath), getObservablePerson());
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -67,20 +73,20 @@ public class JsonCourseBookStorageTest {
 
         // Save in new file and read back
         jsonCourseBookStorage.saveCourseBook(original, filePath);
-        ReadOnlyCourseBook readBack = jsonCourseBookStorage.readCourseBook(filePath).get();
+        ReadOnlyCourseBook readBack = jsonCourseBookStorage.readCourseBook(filePath, getObservablePerson()).get();
         assertEquals(original, new CourseBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addCourse(CFG1002);
         original.removeCourse(CS2040);
         jsonCourseBookStorage.saveCourseBook(original, filePath);
-        readBack = jsonCourseBookStorage.readCourseBook(filePath).get();
+        readBack = jsonCourseBookStorage.readCourseBook(filePath, getObservablePerson()).get();
         assertEquals(original, new CourseBook(readBack));
 
         // Save and read without specifying file path
         original.addCourse(CS2040);
         jsonCourseBookStorage.saveCourseBook(original); // file path not specified
-        readBack = jsonCourseBookStorage.readCourseBook().get(); // file path not specified
+        readBack = jsonCourseBookStorage.readCourseBook(getObservablePerson()).get(); // file path not specified
         assertEquals(original, new CourseBook(readBack));
 
     }

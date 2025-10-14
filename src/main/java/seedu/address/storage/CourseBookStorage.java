@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyCourseBook;
+import seedu.address.model.person.Person;
 
 /**
  * Represents a storage for {@link seedu.address.model.CourseBook}.
@@ -23,12 +25,13 @@ public interface CourseBookStorage {
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    Optional<ReadOnlyCourseBook> readCourseBook() throws DataLoadingException;
+    Optional<ReadOnlyCourseBook> readCourseBook(ObservableList<Person> studentList) throws DataLoadingException;
 
     /**
      * @see #getCourseBookFilePath()
      */
-    Optional<ReadOnlyCourseBook> readCourseBook(Path filePath) throws DataLoadingException;
+    Optional<ReadOnlyCourseBook> readCourseBook(Path filePath, ObservableList<Person> studentList)
+            throws DataLoadingException;
 
     /**
      * Saves the given {@link ReadOnlyCourseBook} to the storage.

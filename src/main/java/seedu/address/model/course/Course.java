@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,18 +19,31 @@ import seedu.address.model.tag.Tag;
 public class Course {
     private final CourseName name;
     private final CourseId courseId;
+    private final UniquePersonList studentList;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
 
     /**
-     * Every field must be present and not null.
+     * Constructor for creating new course. Every field must be present and not null.
      */
     public Course(CourseName name, CourseId courseId, Set<Tag> tags) {
         requireAllNonNull(name, tags, courseId);
         this.name = name;
         this.courseId = courseId;
+        this.studentList = new UniquePersonList();
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructor for loading data from storage. Every field must be present and not null.
+     */
+    public Course(CourseName name, CourseId courseId, UniquePersonList studentList, Set<Tag> tags) {
+        requireAllNonNull(name, tags, courseId);
+        this.name = name;
+        this.courseId = courseId;
+        this.studentList = studentList;
         this.tags.addAll(tags);
     }
 
@@ -39,6 +53,10 @@ public class Course {
 
     public CourseId getCourseId() {
         return courseId;
+    }
+
+    public UniquePersonList getStudentList() {
+        return studentList;
     }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
