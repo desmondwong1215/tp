@@ -7,12 +7,14 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyCourseBook;
+import seedu.address.model.person.Person;
 
 /**
  * A class to access CourseBook data stored as a json file on the hard disk.
@@ -32,17 +34,18 @@ public class JsonCourseBookStorage implements CourseBookStorage {
     }
 
     @Override
-    public Optional<ReadOnlyCourseBook> readCourseBook() throws DataLoadingException {
-        return readCourseBook(filePath);
+    public Optional<ReadOnlyCourseBook> readCourseBook(ObservableList<Person> studentList) throws DataLoadingException {
+        return readCourseBook(filePath, studentList);
     }
 
     /**
-     * Similar to {@link #readCourseBook()}.
+     * Similar to {@link #readCourseBook(ObservableList)} )}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyCourseBook> readCourseBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyCourseBook> readCourseBook(Path filePath,
+                                                       ObservableList<Person> studentList) throws DataLoadingException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableCourseBook> jsonCourseBook = JsonUtil.readJsonFile(
@@ -52,7 +55,7 @@ public class JsonCourseBookStorage implements CourseBookStorage {
         }
 
         try {
-            return Optional.of(jsonCourseBook.get().toModelType());
+            return Optional.of(jsonCourseBook.get().toModelType(studentList));
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);

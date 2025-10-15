@@ -101,7 +101,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyCourseBook> courseBookOptional;
         ReadOnlyCourseBook initialCourseBook;
         try {
-            courseBookOptional = storage.readCourseBook();
+            courseBookOptional = storage.readCourseBook(initialAddressBook.getPersonList());
             if (!courseBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getCourseBookFilePath() + " adding new sample data.");
             }
