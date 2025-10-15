@@ -12,7 +12,7 @@ import seedu.address.model.person.StudentId;
 /**
  * Parses input arguments and creates a new FindStudentByIdCommand object
  */
-public class FindStudentByIdCommandParser {
+public class FindStudentByIdCommandParser implements Parser<FindStudentByIdCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindStudentByIdCommand
