@@ -27,7 +27,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         }
 
         StudentId studentId = ParserUtil.parseStudentId(arguments[0]);
-        CourseId courseId = ParserUtil.parseCourseId(arguments[0]);
+        CourseId courseId = ParserUtil.parseCourseId(arguments[1]);
 
         return new AddStudentCommand(studentId, courseId);
     }
