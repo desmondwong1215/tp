@@ -58,6 +58,13 @@ public class Person {
     }
 
     /**
+     * Returns true if the student id provided is same as the student id.
+     */
+    public boolean isSameStudentId(StudentId studentId) {
+        return this.studentId.equals(studentId);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

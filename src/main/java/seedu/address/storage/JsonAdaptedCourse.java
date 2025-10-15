@@ -52,8 +52,7 @@ class JsonAdaptedCourse {
     public JsonAdaptedCourse(Course source) {
         name = source.getName().fullName;
         courseId = source.getCourseId().toString();
-        studentIds = source.getStudentList().asUnmodifiableObservableList()
-                        .stream().map(person -> person.getStudentId().value).toList();
+        studentIds = source.getStudentIds();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .toList());
@@ -87,13 +86,20 @@ class JsonAdaptedCourse {
             throw new IllegalValueException(CourseId.MESSAGE_CONSTRAINTS);
         }
         final CourseId modelCourseId = new CourseId(courseId);
+        final UniquePersonList modelStudents = getPeople(studentList);
+
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+        return new Course(modelName, modelCourseId, modelStudents, modelTags);
+    }
+
+    private UniquePersonList getPeople(ObservableList<Person> studentList) throws IllegalValueException {
         final UniquePersonList modelStudents = new UniquePersonList();
         for (String id : studentIds) {
             try {
                 StudentId studentId = new StudentId(id);
                 for (int i = 0; i < studentList.size(); i++) {
                     Person student = studentList.get(i);
-                    if (student.getStudentId().equals(studentId)) {
+                    if (student.isSameStudentId(studentId)) {
                         modelStudents.add(student);
                         break;
                     }
@@ -105,9 +111,7 @@ class JsonAdaptedCourse {
                 throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
             }
         }
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Course(modelName, modelCourseId, modelStudents, modelTags);
+        return modelStudents;
     }
 
 }
