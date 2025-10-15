@@ -151,7 +151,8 @@ public class JsonAdaptedCourseTest {
         } catch (IllegalValueException e) {
             throw new AssertionError("This will not happen.");
         }
-        assertEquals("S00001", c.getStudentList().asUnmodifiableObservableList().get(0).getStudentId().value);
+        assertEquals("S00001", c.getStudentList().asUnmodifiableObservableList().get(0).getStudentId()
+                .getValue());
     }
 
     @Test
