@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,8 +37,12 @@ public class SampleDataUtil {
     }
 
     public static Course[] getSampleCourse() {
+        UniquePersonList studentList = new UniquePersonList();
+        Person[] sample = getSamplePersons();
+        studentList.add(sample[0]);
+        studentList.add(sample[1]);
         return new Course[] {
-            new Course(new CourseName("Mathematics"), new CourseId("C1231"), getTagSet())
+            new Course(new CourseName("Mathematics"), new CourseId("C1231"), studentList, getTagSet())
         };
     }
 

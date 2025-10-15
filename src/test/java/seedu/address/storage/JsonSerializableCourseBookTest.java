@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.getObservablePerson;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,7 +25,7 @@ public class JsonSerializableCourseBookTest {
     public void toModelType_typicalCourseFile_success() throws Exception {
         JsonSerializableCourseBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_COURSE_FILE,
                 JsonSerializableCourseBook.class).get();
-        CourseBook courseBookFromFile = dataFromFile.toModelType();
+        CourseBook courseBookFromFile = dataFromFile.toModelType(getObservablePerson());
         CourseBook typicalCourseBook = TypicalCourses.getTypicalCourseBook();
         assertEquals(courseBookFromFile, typicalCourseBook);
     }
@@ -33,15 +34,15 @@ public class JsonSerializableCourseBookTest {
     public void toModelType_invalidCourseFile_throwsIllegalValueException() throws Exception {
         JsonSerializableCourseBook dataFromFile = JsonUtil.readJsonFile(INVALID_COURSE_FILE,
                 JsonSerializableCourseBook.class).get();
-        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+        assertThrows(IllegalValueException.class, () -> dataFromFile.toModelType(getObservablePerson()));
     }
 
     @Test
     public void toModelType_duplicateCourse_throwsIllegalValueException() throws Exception {
         JsonSerializableCourseBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_COURSE_FILE,
                 JsonSerializableCourseBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableCourseBook.MESSAGE_DUPLICATE_COURSE,
-                dataFromFile::toModelType);
+        assertThrows(IllegalValueException.class, JsonSerializableCourseBook.MESSAGE_DUPLICATE_COURSE, () ->
+                dataFromFile.toModelType(getObservablePerson()));
     }
 
 }

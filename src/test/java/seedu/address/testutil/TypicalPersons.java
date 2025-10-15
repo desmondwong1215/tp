@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 
@@ -59,6 +60,13 @@ public class TypicalPersons {
             ab.addPerson(person);
         }
         return ab;
+    }
+
+    /**
+     * Returns an {@code Observable<Person>} with all the typical persons.
+     */
+    public static ObservableList<Person> getObservablePerson() {
+        return getTypicalAddressBook().getPersonList();
     }
 
     public static List<Person> getTypicalPersons() {
