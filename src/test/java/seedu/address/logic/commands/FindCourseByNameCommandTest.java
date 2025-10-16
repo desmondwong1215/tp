@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,13 +10,12 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.Model;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseNameContainsKeywordsPredicate;
 import seedu.address.testutil.CourseBuilder;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 class FindCourseByNameCommandTest {
     private ModelStubWithCourses model;
@@ -82,28 +82,75 @@ class FindCourseByNameCommandTest {
         }
 
         // All other Model methods throw UnsupportedOperationException
-        @Override public void setUserPrefs(seedu.address.model.ReadOnlyUserPrefs userPrefs) { throw new UnsupportedOperationException(); }
-        @Override public seedu.address.model.ReadOnlyUserPrefs getUserPrefs() { throw new UnsupportedOperationException(); }
-        @Override public seedu.address.commons.core.GuiSettings getGuiSettings() { throw new UnsupportedOperationException(); }
-        @Override public void setGuiSettings(seedu.address.commons.core.GuiSettings guiSettings) { throw new UnsupportedOperationException(); }
-        @Override public java.nio.file.Path getAddressBookFilePath() { throw new UnsupportedOperationException(); }
-        @Override public void setAddressBookFilePath(java.nio.file.Path addressBookFilePath) { throw new UnsupportedOperationException(); }
-        @Override public void setAddressBook(seedu.address.model.ReadOnlyAddressBook addressBook) { throw new UnsupportedOperationException(); }
-        @Override public java.nio.file.Path getCourseBookFilePath() { throw new UnsupportedOperationException(); }
-        @Override public void setCourseBookFilePath(java.nio.file.Path courseBookFilePath) { throw new UnsupportedOperationException(); }
-        @Override public void setCourseBook(seedu.address.model.ReadOnlyCourseBook courseBook) { throw new UnsupportedOperationException(); }
-        @Override public seedu.address.model.ReadOnlyAddressBook getAddressBook() { throw new UnsupportedOperationException(); }
-        @Override public seedu.address.model.ReadOnlyCourseBook getCourseBook() { throw new UnsupportedOperationException(); }
-        @Override public boolean hasPerson(seedu.address.model.person.Person person) { throw new UnsupportedOperationException(); }
-        @Override public void deletePerson(seedu.address.model.person.Person target) { throw new UnsupportedOperationException(); }
-        @Override public void addPerson(seedu.address.model.person.Person person) { throw new UnsupportedOperationException(); }
-        @Override public void setPerson(seedu.address.model.person.Person target, seedu.address.model.person.Person editedPerson) { throw new UnsupportedOperationException(); }
-        @Override public ObservableList<seedu.address.model.person.Person> getFilteredPersonList() { throw new UnsupportedOperationException(); }
-        @Override public void updateFilteredPersonList(Predicate<seedu.address.model.person.Person> predicate) { throw new UnsupportedOperationException(); }
-        @Override public boolean hasCourse(Course course) { throw new UnsupportedOperationException(); }
-        @Override public void deleteCourse(Course target) { throw new UnsupportedOperationException(); }
-        @Override public void addCourse(Course course) { throw new UnsupportedOperationException(); }
-        @Override public void setCourse(Course target, Course editedPerson) { throw new UnsupportedOperationException(); }
-        @Override public Course getCourseById(seedu.address.model.course.CourseId courseId) { throw new UnsupportedOperationException(); }
+        @Override public void setUserPrefs(seedu.address.model.ReadOnlyUserPrefs userPrefs) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public seedu.address.model.ReadOnlyUserPrefs getUserPrefs() {
+            throw new UnsupportedOperationException();
+        }
+        @Override public seedu.address.commons.core.GuiSettings getGuiSettings() {
+            throw new UnsupportedOperationException();
+        }
+        @Override public void setGuiSettings(seedu.address.commons.core.GuiSettings guiSettings) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public java.nio.file.Path getAddressBookFilePath() {
+            throw new UnsupportedOperationException();
+        }
+        @Override public void setAddressBookFilePath(java.nio.file.Path addressBookFilePath) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public void setAddressBook(seedu.address.model.ReadOnlyAddressBook addressBook) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public java.nio.file.Path getCourseBookFilePath() {
+            throw new UnsupportedOperationException();
+        }
+        @Override public void setCourseBookFilePath(java.nio.file.Path courseBookFilePath) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public void setCourseBook(seedu.address.model.ReadOnlyCourseBook courseBook) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public seedu.address.model.ReadOnlyAddressBook getAddressBook() {
+            throw new UnsupportedOperationException();
+        }
+        @Override public seedu.address.model.ReadOnlyCourseBook getCourseBook() {
+            throw new UnsupportedOperationException();
+        }
+        @Override public boolean hasPerson(seedu.address.model.person.Person person) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public void deletePerson(seedu.address.model.person.Person target) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public void addPerson(seedu.address.model.person.Person person) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public void setPerson(seedu.address.model.person.Person target,
+                                        seedu.address.model.person.Person editedPerson) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public ObservableList<seedu.address.model.person.Person> getFilteredPersonList() {
+            throw new UnsupportedOperationException();
+        }
+        @Override public void updateFilteredPersonList(Predicate<seedu.address.model.person.Person> predicate) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public boolean hasCourse(Course course) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public void deleteCourse(Course target) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public void addCourse(Course course) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public void setCourse(Course target, Course editedPerson) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public Course getCourseById(seedu.address.model.course.CourseId courseId) {
+            throw new UnsupportedOperationException();
+        }
     }
 }
