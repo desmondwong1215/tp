@@ -16,7 +16,11 @@ public class AddStudentCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsAddStudentCommand() {
-        assertParseSuccess(parser, "S00001 C0001", new AddStudentCommand(new StudentId("S00001"), new CourseId("C0001")));
+        assertParseSuccess(
+                parser,
+                "S00001 C0001",
+                new AddStudentCommand(new StudentId("S00001"), new CourseId("C0001"))
+        );
     }
 
     @Test

@@ -9,9 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.course.Course;
-import seedu.address.model.course.CourseId;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentId;
 import seedu.address.testutil.CourseBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -29,8 +27,16 @@ public class AddStudentCommandTest {
         AddStudentCommand addStudentCommand = new AddStudentCommand(student.getStudentId(), course.getCourseId());
         CommandResult commandResult = addStudentCommand.execute(model);
 
-        assertEquals(String.format(AddStudentCommand.MESSAGE_SUCCESS, student.getName(), student.getStudentId(), course.getName(), course.getCourseId()),
-                commandResult.getFeedbackToUser());
+        assertEquals(
+                String.format(
+                        AddStudentCommand.MESSAGE_SUCCESS,
+                        student.getName(),
+                        student.getStudentId(),
+                        course.getName(),
+                        course.getCourseId()
+                ),
+                commandResult.getFeedbackToUser()
+        );
     }
 
     @Test
@@ -43,6 +49,12 @@ public class AddStudentCommandTest {
 
         AddStudentCommand addStudentCommand = new AddStudentCommand(student.getStudentId(), course.getCourseId());
 
-        assertThrows(CommandException.class, String.format(AddStudentCommand.MESSAGE_DUPLICATE_STUDENT, "S00001"), () -> addStudentCommand.execute(model));
+        assertThrows(
+                CommandException.class,
+                String.format(
+                        AddStudentCommand.MESSAGE_DUPLICATE_STUDENT,
+                        "S00001"
+                ), () -> addStudentCommand.execute(model)
+        );
     }
 }
