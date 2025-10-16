@@ -53,7 +53,7 @@ class JsonAdaptedCourse {
         name = source.getName().fullName;
         courseId = source.getCourseId().toString();
         studentIds = source.getStudentList().asUnmodifiableObservableList()
-                        .stream().map(person -> person.getStudentId().value).toList();
+                        .stream().map(person -> person.getStudentId().getValue()).toList();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .toList());

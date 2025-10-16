@@ -54,7 +54,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         int maxExistingId = getPersonList().stream()
                 .map(Person::getStudentId)
-                .mapToInt(sid -> Integer.parseInt(sid.value.substring(1)))
+                .mapToInt(sid -> Integer.parseInt(sid.getValue().substring(1)))
                 .max()
                 .orElse(0);
 
