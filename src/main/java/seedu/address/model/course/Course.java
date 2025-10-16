@@ -74,6 +74,13 @@ public class Course {
     }
 
     /**
+     * Returns true if there are students enrolled in this course.
+     */
+    public boolean hasEnrolledStudents() {
+        return !studentList.asUnmodifiableObservableList().isEmpty();
+    }
+
+    /**
      * Returns true if both courses have the same {@code courseId}
      */
     @Override

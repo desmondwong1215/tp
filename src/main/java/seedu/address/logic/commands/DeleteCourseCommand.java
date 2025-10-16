@@ -29,7 +29,9 @@ public class DeleteCourseCommand extends Command {
         if (course == null) {
             return new CommandResult(MESSAGE_NOT_FOUND);
         }
-        // TODO: Check for enrolled students when implemented
+        if (course.hasEnrolledStudents()) {
+            return new CommandResult(MESSAGE_STUDENTS_ENROLLED);
+        }
         model.deleteCourse(course);
         return new CommandResult(String.format(MESSAGE_SUCCESS, course.getName()));
     }
