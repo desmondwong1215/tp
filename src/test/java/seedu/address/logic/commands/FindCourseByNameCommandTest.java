@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -152,5 +153,55 @@ class FindCourseByNameCommandTest {
         @Override public Course getCourseById(seedu.address.model.course.CourseId courseId) {
             throw new UnsupportedOperationException();
         }
+    }
+
+    @Test
+    void equals() {
+        CourseNameContainsKeywordsPredicate predicate1 =
+                new CourseNameContainsKeywordsPredicate(Collections.singletonList("first"));
+        CourseNameContainsKeywordsPredicate predicate2 =
+                new CourseNameContainsKeywordsPredicate(Collections.singletonList("second"));
+
+        FindCourseByNameCommand command1 = new FindCourseByNameCommand(predicate1);
+        FindCourseByNameCommand command2 = new FindCourseByNameCommand(predicate1);
+        FindCourseByNameCommand command3 = new FindCourseByNameCommand(predicate2);
+
+        // same object -> returns true
+        assertTrue(command1.equals(command1));
+
+        // same values -> returns true
+        assertTrue(command1.equals(command2));
+
+        // different types -> returns false
+        assertFalse(command1.equals(1));
+
+        // null -> returns false
+        assertFalse(command1.equals(null));
+
+        // different predicate -> returns false
+        assertFalse(command1.equals(command3));
+    }
+
+    @Test
+    void equals_variousCases() {
+        CourseNameContainsKeywordsPredicate predicate1 =
+                new CourseNameContainsKeywordsPredicate(Collections.singletonList("first"));
+        CourseNameContainsKeywordsPredicate predicate2 =
+                new CourseNameContainsKeywordsPredicate(Collections.singletonList("second"));
+
+        FindCourseByNameCommand command1 = new FindCourseByNameCommand(predicate1);
+        FindCourseByNameCommand command2 = new FindCourseByNameCommand(predicate1);
+        FindCourseByNameCommand command3 = new FindCourseByNameCommand(predicate2);
+
+        // Reflexive
+        assertTrue(command1.equals(command1));
+        // Same values
+        assertTrue(command1.equals(command2));
+        // Null
+        assertFalse(command1.equals(null));
+        // Different type
+        assertFalse(command1.equals("not a command"));
+        // Different predicate
+        assertFalse(command1.equals(command3));
     }
 }

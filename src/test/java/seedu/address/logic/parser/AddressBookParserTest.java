@@ -13,15 +13,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeregisterCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindStudentByNameCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -99,5 +92,25 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_deleteCourse() throws Exception {
+        assertTrue(parser.parseCommand(DeleteCourseCommand.COMMAND_WORD + " C1234") instanceof DeleteCourseCommand);
+    }
+
+    @Test
+    public void parseCommand_viewCourse() throws Exception {
+        assertTrue(parser.parseCommand(ViewCourseCommand.COMMAND_WORD) instanceof ViewCourseCommand);
+    }
+
+    @Test
+    public void parseCommand_findCourseByName() throws Exception {
+        assertTrue(parser.parseCommand(FindCourseByNameCommand.COMMAND_WORD + " Data") instanceof FindCourseByNameCommand);
+    }
+
+    @Test
+    public void parseCommand_createCourse() throws Exception {
+        assertTrue(parser.parseCommand(CreateCourseCommand.COMMAND_WORD + " n/Math id/C1234") instanceof CreateCourseCommand);
     }
 }

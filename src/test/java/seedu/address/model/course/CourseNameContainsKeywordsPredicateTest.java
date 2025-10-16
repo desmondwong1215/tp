@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,6 +41,37 @@ class CourseNameContainsKeywordsPredicateTest {
         CourseNameContainsKeywordsPredicate predicate =
                 new CourseNameContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(course));
+    }
+
+    @Test
+    void equals_variousCases() {
+        List<String> keywords1 = Arrays.asList("Data", "Science");
+        List<String> keywords2 = Arrays.asList("Math");
+
+        CourseNameContainsKeywordsPredicate predicate1 = new CourseNameContainsKeywordsPredicate(keywords1);
+        CourseNameContainsKeywordsPredicate predicate2 = new CourseNameContainsKeywordsPredicate(keywords1);
+        CourseNameContainsKeywordsPredicate predicate3 = new CourseNameContainsKeywordsPredicate(keywords2);
+
+        // Reflexive
+        assertTrue(predicate1.equals(predicate1));
+        // Same values
+        assertTrue(predicate1.equals(predicate2));
+        // Null
+        assertFalse(predicate1.equals(null));
+        // Different type
+        assertFalse(predicate1.equals("not a predicate"));
+        // Different keywords
+        assertFalse(predicate1.equals(predicate3));
+    }
+
+    @Test
+    void toString_containsKeywords() {
+        List<String> keywords = Arrays.asList("Data", "Science");
+        CourseNameContainsKeywordsPredicate predicate = new CourseNameContainsKeywordsPredicate(keywords);
+        String str = predicate.toString();
+        assertTrue(str.contains("Data"));
+        assertTrue(str.contains("Science"));
+        assertTrue(str.contains("CourseNameContainsKeywordsPredicate"));
     }
 }
 
