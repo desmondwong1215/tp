@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.course.Course;
@@ -7,12 +9,10 @@ import seedu.address.model.course.CourseId;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 /**
  *  Adds a student to a course.
  */
-public class AddStudentCommand extends Command{
+public class AddStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "add_student";
 
@@ -23,7 +23,8 @@ public class AddStudentCommand extends Command{
             + "Example: " + COMMAND_WORD + " S00001 C0001";
 
     public static final String MESSAGE_SUCCESS = "Student '%1$s' (%2$s) added to Course '%3$s' (%4$s) successfully.";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "Student with student ID %1$s already exists in this course.";
+    public static final String MESSAGE_DUPLICATE_STUDENT =
+            "Student with student ID %1$s already exists in this course.";
     public static final String MESSAGE_COURSE_NOT_FOUND = "Course with course ID %1$s not found.";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "Student with student ID %1$s not found.";
 
