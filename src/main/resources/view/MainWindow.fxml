@@ -50,7 +50,10 @@
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
+            <StackPane fx:id="personListPanelPlaceholder" />
+            <StackPane fx:id="courseListPanelPlaceholder" />
+          </SplitPane>
         </VBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

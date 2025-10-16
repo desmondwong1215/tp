@@ -1,0 +1,9 @@
+{
+  "course": [ {
+    "name": "Valid Course",
+    "course_id": "C1101"
+  }, {
+    "name": "Course With Invalid course id",
+    "course_id": "948asdf2424"
+  } ]
+}

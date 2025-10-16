@@ -9,16 +9,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code RegisterCommand}.
  */
-public class AddCommandIntegrationTest {
+public class RegisterCommandIntegrationTest {
 
     private Model model;
 
@@ -32,18 +34,37 @@ public class AddCommandIntegrationTest {
         Person validPerson = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getCourseBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        StudentId expectedId = ((AddressBook) expectedModel.getAddressBook()).generateStudentId();
+        Person expectedPerson = new Person(
+                validPerson.getName(),
+                validPerson.getPhone(),
+                validPerson.getGender(),
+                expectedId
+        );
+        expectedModel.addPerson(expectedPerson);
+
+        assertCommandSuccess(
+                new RegisterCommand(
+                        validPerson.getName(),
+                        validPerson.getPhone(),
+                        validPerson.getGender()
+                ),
+                model,
+                String.format(RegisterCommand.MESSAGE_SUCCESS, Messages.format(expectedPerson)),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(
+                new RegisterCommand(
+                    personInList.getName(),
+                    personInList.getPhone(),
+                    personInList.getGender()
+                ),
+                model,
+                RegisterCommand.MESSAGE_DUPLICATE_PERSON);
     }
-
 }

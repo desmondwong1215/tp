@@ -3,8 +3,8 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -45,9 +46,9 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        // Two persons with the same identity fields (same name)
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB)
+                .withStudentId("S99999").build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
@@ -73,14 +74,40 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB)
+                .withStudentId("S99999").build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void generateStudentId_generatesUniqueIds() {
+        // Test that generated student IDs are unique and in correct format
+        StudentId firstId = addressBook.generateStudentId();
+        StudentId secondId = addressBook.generateStudentId();
+        StudentId thirdId = addressBook.generateStudentId();
+
+        // Check format
+        assertTrue(firstId.getValue().matches("S\\d{5}"));
+        assertTrue(secondId.getValue().matches("S\\d{5}"));
+        assertTrue(thirdId.getValue().matches("S\\d{5}"));
+
+        // Check uniqueness
+        assertFalse(firstId.equals(secondId));
+        assertFalse(secondId.equals(thirdId));
+        assertFalse(firstId.equals(thirdId));
+
+        // Check sequential generation
+        int firstNumber = Integer.parseInt(firstId.getValue().substring(1));
+        int secondNumber = Integer.parseInt(secondId.getValue().substring(1));
+        int thirdNumber = Integer.parseInt(thirdId.getValue().substring(1));
+
+        assertEquals(firstNumber + 1, secondNumber);
+        assertEquals(secondNumber + 1, thirdNumber);
     }
 
     @Test
@@ -104,5 +131,4 @@ public class AddressBookTest {
             return persons;
         }
     }
-
 }

@@ -8,10 +8,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.CourseBook;
 import seedu.address.model.ReadOnlyCourseBook;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.exceptions.DuplicateCourseIdException;
+import seedu.address.model.person.Person;
 
 /**
  * An Immutable CourseBook that is serializable to JSON format.
@@ -45,14 +48,18 @@ class JsonSerializableCourseBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public CourseBook toModelType() throws IllegalValueException {
+    public CourseBook toModelType(ObservableList<Person> studentList) throws IllegalValueException {
         CourseBook courseBook = new CourseBook();
         for (JsonAdaptedCourse jsonAdaptedCourse : courses) {
-            Course course = jsonAdaptedCourse.toModelType();
+            Course course = jsonAdaptedCourse.toModelType(studentList);
             if (courseBook.hasCourse(course)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_COURSE);
             }
-            courseBook.addCourse(course);
+            try {
+                courseBook.addCourse(course);
+            } catch (DuplicateCourseIdException e) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_COURSE);
+            }
         }
         return courseBook;
     }

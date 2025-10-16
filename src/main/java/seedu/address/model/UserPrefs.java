@@ -16,6 +16,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
     private Path courseBookFilePath = Paths.get("data" , "coursebook.json");
+    private int nextStudentId = 1;
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -37,6 +38,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setCourseBookFilePath(newUserPrefs.getCourseBookFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -97,4 +99,21 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return sb.toString();
     }
 
+    /**
+     * Returns the next student ID to be used.
+     *
+     * @return the next student ID number
+     */
+    public int getNextStudentId() {
+        return nextStudentId;
+    }
+
+    /**
+     * Sets the next student ID to be used.
+     *
+     * @param nextStudentId the next student ID number
+     */
+    public void setNextStudentId(int nextStudentId) {
+        this.nextStudentId = nextStudentId;
+    }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.course.exceptions.CourseNotFoundException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.course.exceptions.DuplicateCourseIdException;
 
 
 /**
@@ -38,7 +38,9 @@ public class CourseList implements Iterable<Course> {
      */
     public void add(Course toAdd) {
         requireNonNull(toAdd);
-        assert !contains(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateCourseIdException();
+        }
         internalList.add(toAdd);
     }
 
@@ -66,8 +68,8 @@ public class CourseList implements Iterable<Course> {
      */
     public void setCourses(List<Course> course) {
         requireAllNonNull(course);
-        if (!personsAreUnique(course)) {
-            throw new DuplicatePersonException();
+        if (!coursesAreUnique(course)) {
+            throw new DuplicateCourseIdException();
         }
 
         internalList.setAll(course);
@@ -112,10 +114,12 @@ public class CourseList implements Iterable<Course> {
     /**
      * Returns true if {@code courses} contains only unique courses.
      */
-    private boolean personsAreUnique(List<Course> courses) {
+    private boolean coursesAreUnique(List<Course> courses) {
         for (int i = 0; i < courses.size() - 1; i++) {
             for (int j = i + 1; j < courses.size(); j++) {
-                if (courses.get(i).equals(courses.get(j))) {
+                Course courseA = courses.get(i);
+                Course courseB = courses.get(j);
+                if (courseA == courseB || courseA.getCourseId() == courseB.getCourseId()) {
                     return false;
                 }
             }

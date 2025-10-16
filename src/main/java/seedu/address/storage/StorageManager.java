@@ -5,12 +5,14 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCourseBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -87,14 +89,15 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyCourseBook> readCourseBook() throws DataLoadingException {
-        return readCourseBook(courseBookStorage.getCourseBookFilePath());
+    public Optional<ReadOnlyCourseBook> readCourseBook(ObservableList<Person> personList) throws DataLoadingException {
+        return readCourseBook(courseBookStorage.getCourseBookFilePath(), personList);
     }
 
     @Override
-    public Optional<ReadOnlyCourseBook> readCourseBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyCourseBook> readCourseBook(Path filePath,
+                                                       ObservableList<Person> personList) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return courseBookStorage.readCourseBook(filePath);
+        return courseBookStorage.readCourseBook(filePath, personList);
     }
 
     @Override

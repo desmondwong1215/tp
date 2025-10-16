@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalCourses.CS1010;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.CourseBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCourseBook;
@@ -26,65 +26,71 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseId;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.CourseBuilder;
 
-public class AddCommandTest {
-
+public class CreateCourseCommandTest {
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullCourse_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new CreateCourseCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_courseAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingCourseAdded modelStub = new ModelStubAcceptingCourseAdded();
+        Course validCourse = new CourseBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new CreateCourseCommand(validCourse).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(CreateCourseCommand.MESSAGE_SUCCESS, Messages.format(validCourse)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validCourse), modelStub.coursesAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateCourse_throwsCommandException() {
+        Course validCourse = new CourseBuilder().build();
+        CreateCourseCommand addCommand = new CreateCourseCommand(validCourse);
+        ModelStub modelStub = new ModelStubWithCourse(validCourse);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, CreateCourseCommand.MESSAGE_DUPLICATE_COURSE_ID, () ->
+                addCommand.execute(modelStub)
+        );
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Course english = new CourseBuilder().withName("English 101").withCourseId("C2660").build();
+        Course englishWithDiffId = new CourseBuilder().withName("English 101").withCourseId("C2661").build();
+        Course mathematics = new CourseBuilder().withName("Mathematics").withCourseId("C1521").build();
+        CreateCourseCommand createEnglishCourseCommand = new CreateCourseCommand(english);
+        CreateCourseCommand createEnglishWithDiffIdCourseCommand = new CreateCourseCommand(englishWithDiffId);
+        CreateCourseCommand createMathematicsCourseCommand = new CreateCourseCommand(mathematics);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(createEnglishCourseCommand.equals(createEnglishCourseCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        CreateCourseCommand createEnglishCourseCommandCopy = new CreateCourseCommand(english);
+        assertTrue(createEnglishCourseCommand.equals(createEnglishCourseCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(createEnglishCourseCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(createEnglishCourseCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different course -> returns false
+        assertFalse(createEnglishCourseCommand.equals(createMathematicsCourseCommand));
+
+        // same course name with different course id -> returns false
+        assertFalse(createEnglishCourseCommand.equals(createEnglishWithDiffIdCourseCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        CreateCourseCommand createCourseCommand = new CreateCourseCommand(CS1010);
+        String expected = CreateCourseCommand.class.getCanonicalName() + "{toCreateCourse=" + CS1010 + "}";
+        assertEquals(expected, createCourseCommand.toString());
     }
 
     /**
@@ -218,44 +224,44 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single course.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithCourse extends ModelStub {
+        private final Course course;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithCourse(Course course) {
+            requireNonNull(course);
+            this.course = course;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasCourse(Course course) {
+            requireNonNull(course);
+            return this.course.equals(this.course);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the course being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingCourseAdded extends ModelStub {
+        final ArrayList<Course> coursesAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasCourse(Course course) {
+            requireNonNull(course);
+            return coursesAdded.stream().anyMatch(course::equals);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addCourse(Course course) {
+            requireNonNull(course);
+            coursesAdded.add(course);
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyCourseBook getCourseBook() {
+            return new CourseBook();
         }
     }
 

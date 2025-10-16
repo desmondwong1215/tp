@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.course.exceptions.CourseNotFoundException;
+import seedu.address.model.course.exceptions.DuplicateCourseIdException;
 import seedu.address.model.tag.Tag;
 
 public class CourseListTest {
@@ -21,12 +22,13 @@ public class CourseListTest {
     private Course physics;
     private Set<Tag> emptyTags;
 
+
     @BeforeEach
     public void setUp() {
         courseList = new CourseList();
         emptyTags = new HashSet<>();
-        mathematics = new Course(new Name("Mathematics"), emptyTags);
-        physics = new Course(new Name("Physics"), emptyTags);
+        mathematics = new Course(new CourseName("Mathematics"), new CourseId("C0001"), emptyTags);
+        physics = new Course(new CourseName("Physics"), new CourseId("C0002"), emptyTags);
     }
 
     @Test
@@ -59,7 +61,7 @@ public class CourseListTest {
     @Test
     public void add_duplicateCourse_throwsAssertionError() {
         courseList.add(mathematics);
-        assertThrows(AssertionError.class, () -> courseList.add(mathematics));
+        assertThrows(DuplicateCourseIdException.class, () -> courseList.add(mathematics));
     }
 
     @Test
@@ -88,6 +90,20 @@ public class CourseListTest {
 
         assertFalse(courseList.contains(mathematics));
         assertTrue(courseList.contains(physics));
+    }
+
+    @Test
+    public void setCourses_nullCourseList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> courseList.setCourses((CourseList) null));
+    }
+
+    @Test
+    public void setCourses_validCourseList_setsInternalList() {
+        CourseList newCL = new CourseList();
+        newCL.add(mathematics);
+        courseList.setCourses(newCL);
+        assertTrue(courseList.contains(mathematics));
+        assertFalse(courseList.contains(physics));
     }
 
     @Test

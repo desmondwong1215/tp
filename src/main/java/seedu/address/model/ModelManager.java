@@ -36,9 +36,9 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: "
                 + addressBook + "\n course book: " + courseBook + "\n user prefs: " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
-        this.courseBook = new CourseBook(courseBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.addressBook = new AddressBook(addressBook, this.userPrefs);
+        this.courseBook = new CourseBook(courseBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredCourse = new FilteredList<>(this.courseBook.getCourseList());
     }
@@ -150,7 +150,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setCourseBook(ReadOnlyCourseBook courseBook) {
-        this.courseBook.resetData(ModelManager.this.courseBook);
+        this.courseBook.resetData(courseBook);
     }
 
     @Override
@@ -172,7 +172,7 @@ public class ModelManager implements Model {
     @Override
     public void addCourse(Course course) {
         courseBook.addCourse(course);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredCourseList(PREDICATE_SHOW_ALL_COURSES);
     }
 
     @Override

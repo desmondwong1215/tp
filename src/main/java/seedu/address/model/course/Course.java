@@ -4,10 +4,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -16,39 +18,53 @@ import seedu.address.model.tag.Tag;
  * uniquely identified by {@code courseId}.
  */
 public class Course {
-    private final Name name;
+    private final CourseName name;
     private final CourseId courseId;
+    private final UniquePersonList studentList;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
-    /**
-     * Every field must be present and not null.
-     */
-    public Course(Name name, Set<Tag> tags) {
-        requireAllNonNull(name, tags);
-        this.name = name;
-        this.courseId = new CourseId();
-        this.tags.addAll(tags);
-    }
 
     /**
-     * Every field must be present and not null.
+     * Constructor for creating new course. Every field must be present and not null.
      */
-    public Course(Name name, CourseId courseId, Set<Tag> tags) {
-        requireAllNonNull(name, tags);
+    public Course(CourseName name, CourseId courseId, Set<Tag> tags) {
+        requireAllNonNull(name, tags, courseId);
         this.name = name;
         this.courseId = courseId;
+        this.studentList = new UniquePersonList();
         this.tags.addAll(tags);
     }
 
-    public Name getName() {
+    /**
+     * Constructor for loading data from storage. Every field must be present and not null.
+     */
+    public Course(CourseName name, CourseId courseId, UniquePersonList studentList, Set<Tag> tags) {
+        requireAllNonNull(name, tags, courseId);
+        this.name = name;
+        this.courseId = courseId;
+        this.studentList = studentList;
+        this.tags.addAll(tags);
+    }
+
+    public CourseName getName() {
         return name;
     }
 
     public CourseId getCourseId() {
         return courseId;
     }
+
+    public UniquePersonList getStudentList() {
+        return studentList;
+    }
+
+    public List<String> getStudentIds() {
+        return studentList.asUnmodifiableObservableList()
+                .stream().map(person -> person.getStudentId().getValue()).toList();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

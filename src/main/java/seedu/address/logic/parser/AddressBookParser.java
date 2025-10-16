@@ -8,16 +8,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.CreateCourseCommand;
 import seedu.address.logic.commands.DeleteCourseCommand;
+import seedu.address.logic.commands.DeregisterCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindStudentByIdCommand;
+import seedu.address.logic.commands.FindStudentByNameCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RegisterCommand;
+import seedu.address.logic.commands.ViewCourseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -54,20 +57,26 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case RegisterCommand.COMMAND_WORD:
+            return new RegisterCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeregisterCommand.COMMAND_WORD:
+            return new DeregisterCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindStudentByNameCommand.COMMAND_WORD:
+            return new FindStudentByNameCommandParser().parse(arguments);
+
+        case FindStudentByIdCommand.COMMAND_WORD:
+            return new FindStudentByIdCommandParser().parse(arguments);
+
+        case CreateCourseCommand.COMMAND_WORD:
+            return new CreateCourseCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -80,6 +89,9 @@ public class AddressBookParser {
 
         case DeleteCourseCommand.COMMAND_WORD:
             return new DeleteCourseCommandParser().parse(arguments);
+
+        case ViewCourseCommand.COMMAND_WORD:
+            return new ViewCourseCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

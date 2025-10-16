@@ -1,0 +1,11 @@
+{
+  "courses": [ {
+    "name": "Valid Course",
+    "courseId": "C1101",
+    "tags" : [ ]
+  }, {
+    "name": "Valid Course",
+    "courseId": "C1101",
+    "tags" : [ ]
+  } ]
+}
