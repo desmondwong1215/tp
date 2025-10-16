@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -58,6 +59,12 @@ public class Course {
     public UniquePersonList getStudentList() {
         return studentList;
     }
+
+    public List<String> getStudentIds() {
+        return studentList.asUnmodifiableObservableList()
+                .stream().map(person -> person.getStudentId().getValue()).toList();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
