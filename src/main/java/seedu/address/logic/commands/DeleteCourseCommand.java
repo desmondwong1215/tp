@@ -33,4 +33,17 @@ public class DeleteCourseCommand extends Command {
         model.deleteCourse(course);
         return new CommandResult(String.format(MESSAGE_SUCCESS, course.getName()));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DeleteCourseCommand that = (DeleteCourseCommand) o;
+        return courseId.equals(that.courseId);
+    }
+
+    @Override
+    public int hashCode() {
+        return courseId.hashCode();
+    }
 }
