@@ -62,7 +62,7 @@ public class Course {
 
     public List<String> getStudentIds() {
         return studentList.asUnmodifiableObservableList()
-                .stream().map(person -> person.getStudentId().value).toList();
+                .stream().map(person -> person.getStudentId().getValue()).toList();
     }
 
     /**

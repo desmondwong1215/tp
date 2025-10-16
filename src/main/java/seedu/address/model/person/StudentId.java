@@ -8,7 +8,7 @@ public class StudentId {
             "Student ID must be in the format S followed by exactly 5 digits (e.g., S00001)";
     public static final String VALIDATION_REGEX = "S\\d{5}";
 
-    public final String value;
+    private final String value;
 
     /**
      * Constructs a {@code StudentId} with the specified value.

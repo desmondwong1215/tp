@@ -43,7 +43,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         gender = source.getGender().value;
-        studentId = source.getStudentId().value;
+        studentId = source.getStudentId().getValue();
     }
 
     /**
