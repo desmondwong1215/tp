@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
@@ -131,6 +133,11 @@ public interface Model {
      * The course identity of {@code editedPerson} must not be the same as another existing course in the address book.
      */
     void setCourse(Course target, Course editedPerson);
+
+    /**
+     * Returns true if the given student is in one of the course.
+     */
+    boolean checkStudentInAllCourse(Person student);
 
     /** Returns an unmodifiable view of the filtered course list */
     ObservableList<Course> getFilteredCourseList();
