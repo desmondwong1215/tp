@@ -72,11 +72,10 @@ public class RemoveStudentCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof RemoveStudentCommand)) {
+        if (!(other instanceof RemoveStudentCommand otherRemoveStudentCommand)) {
             return false;
         }
 
-        RemoveStudentCommand otherRemoveStudentCommand = (RemoveStudentCommand) other;
         return studentId.equals(otherRemoveStudentCommand.studentId)
                 && courseId.equals(otherRemoveStudentCommand.courseId);
     }
