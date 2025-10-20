@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateCourseCommand;
 import seedu.address.logic.commands.DeleteCourseCommand;
@@ -27,16 +28,32 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.commands.ViewCourseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
+import seedu.address.testutil.CourseBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonCourseUtil;
 import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
+
+    @Test
+    public void parseCommand_add() throws Exception {
+        Person person = new PersonBuilder().build();
+        Course course = new CourseBuilder().build();
+        AddStudentCommand command = (AddStudentCommand) parser.parseCommand(
+                PersonCourseUtil.getAddCommand(person, course)
+        );
+        assertEquals(
+                new AddStudentCommand(person.getStudentId(), course.getCourseId()),
+                command
+        );
+    }
 
     @Test
     public void parseCommand_register() throws Exception {
