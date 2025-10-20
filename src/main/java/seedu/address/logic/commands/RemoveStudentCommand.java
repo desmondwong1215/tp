@@ -12,28 +12,28 @@ import seedu.address.model.person.StudentId;
 /**
  *  Adds a student to a course.
  */
-public class AddStudentCommand extends Command {
+public class RemoveStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_student";
+    public static final String COMMAND_WORD = "remove_student";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to a course... "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a student to a course... "
             + "Parameters: "
             + "STUDENT_ID "
             + "COURSE_ID\n"
             + "Example: " + COMMAND_WORD + " S00001 C0001";
 
-    public static final String MESSAGE_SUCCESS = "Student '%1$s' (%2$s) added to Course '%3$s' (%4$s) successfully.";
-    public static final String MESSAGE_DUPLICATE_STUDENT =
-            "Student with student ID %1$s already exists in this course.";
+    public static final String MESSAGE_SUCCESS =
+            "Student '%1$s' (%2$s) removed from Course '%3$s' (%4$s) successfully.";
     public static final String MESSAGE_COURSE_NOT_FOUND = "Course with course ID %1$s not found.";
-    public static final String MESSAGE_STUDENT_NOT_FOUND = "Student with student ID %1$s not found.";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "Student with student ID %1$s not in addressbook.";
+    public static final String MESSAGE_STUDENT_NOT_IN_COURSE = "Student with student ID %1$s not in course.";
 
     public final StudentId studentId;
     public final CourseId courseId;
     /**
-     * Creates a AddStudentCommand to add the specified student to the specified course
+     * Creates a RemoveStudentCommand to add the specified student to the specified course
      */
-    public AddStudentCommand(StudentId studentId, CourseId courseId) {
+    public RemoveStudentCommand(StudentId studentId, CourseId courseId) {
         requireAllNonNull(studentId, courseId);
         this.studentId = studentId;
         this.courseId = courseId;
@@ -56,11 +56,11 @@ public class AddStudentCommand extends Command {
             throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, studentId));
         }
 
-        if (course.containsStudent(student)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT, studentId));
+        if (!course.containsStudent(student)) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_IN_COURSE, studentId));
         }
 
-        course.addStudent(student);
+        course.removeStudent(student);
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, student.getName(), studentId, course.getName(), courseId)
         );
@@ -72,13 +72,13 @@ public class AddStudentCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AddStudentCommand)) {
+        if (!(other instanceof RemoveStudentCommand)) {
             return false;
         }
 
-        AddStudentCommand otherAddStudentCommand = (AddStudentCommand) other;
-        return studentId.equals(otherAddStudentCommand.studentId)
-                && courseId.equals(otherAddStudentCommand.courseId);
+        RemoveStudentCommand otherRemoveStudentCommand = (RemoveStudentCommand) other;
+        return studentId.equals(otherRemoveStudentCommand.studentId)
+                && courseId.equals(otherRemoveStudentCommand.courseId);
     }
 
 }

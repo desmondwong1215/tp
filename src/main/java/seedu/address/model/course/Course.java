@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 
@@ -81,6 +82,31 @@ public class Course {
     }
 
     /**
+     * Returns true if the given student is enrolled in this course.
+     */
+    public boolean containsStudent(Person student) {
+        requireAllNonNull(student);
+        return studentList.contains(student);
+    }
+
+    /**
+     * Adds a student from course
+     * @param student student to be added
+     */
+    public void addStudent(Person student) {
+        requireAllNonNull(student);
+        studentList.add(student);
+    }
+
+    /**
+     * Removes a student from course
+     * @param student student to be removed
+     */
+    public void removeStudent(Person student) {
+        requireAllNonNull(student);
+        studentList.remove(student);
+    }
+    /**
      * Returns true if both courses have the same {@code courseId}
      */
     @Override
@@ -90,11 +116,10 @@ public class Course {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Course)) {
+        if (!(other instanceof Course otherCourse)) {
             return false;
         }
 
-        Course otherCourse = (Course) other;
         return courseId.equals(otherCourse.courseId);
     }
 

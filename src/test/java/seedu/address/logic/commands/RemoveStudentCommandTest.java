@@ -13,23 +13,25 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.CourseBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddStudentCommandTest {
+public class RemoveStudentCommandTest {
 
-    private Model model = new ModelManager();
+    private final Model model = new ModelManager();
 
     @Test
-    public void execute_addStudentToCourse_success() throws CommandException {
+    public void execute_removeStudentToCourse_success() throws CommandException {
         Person student = new PersonBuilder().withStudentId("S00001").build();
         Course course = new CourseBuilder().withCourseId("C0001").build();
+        course.addStudent(student);
         model.addPerson(student);
         model.addCourse(course);
 
-        AddStudentCommand addStudentCommand = new AddStudentCommand(student.getStudentId(), course.getCourseId());
-        CommandResult commandResult = addStudentCommand.execute(model);
+        RemoveStudentCommand removeStudentCommand =
+                new RemoveStudentCommand(student.getStudentId(), course.getCourseId());
+        CommandResult commandResult = removeStudentCommand.execute(model);
 
         assertEquals(
                 String.format(
-                        AddStudentCommand.MESSAGE_SUCCESS,
+                        RemoveStudentCommand.MESSAGE_SUCCESS,
                         student.getName(),
                         student.getStudentId(),
                         course.getName(),
@@ -40,21 +42,21 @@ public class AddStudentCommandTest {
     }
 
     @Test
-    public void execute_duplicateStudentInCourse_throwsCommandException() {
+    public void execute_studentNotInCourse_throwsCommandException() {
         Person student = new PersonBuilder().withStudentId("S00001").build();
         Course course = new CourseBuilder().withCourseId("C0001").build();
         model.addPerson(student);
         model.addCourse(course);
-        course.addStudent(student);
 
-        AddStudentCommand addStudentCommand = new AddStudentCommand(student.getStudentId(), course.getCourseId());
+        RemoveStudentCommand removeStudentCommand =
+                new RemoveStudentCommand(student.getStudentId(), course.getCourseId());
 
         assertThrows(
                 CommandException.class,
                 String.format(
-                        AddStudentCommand.MESSAGE_DUPLICATE_STUDENT,
+                        RemoveStudentCommand.MESSAGE_STUDENT_NOT_IN_COURSE,
                         "S00001"
-                ), () -> addStudentCommand.execute(model)
+                ), () -> removeStudentCommand.execute(model)
         );
     }
 }

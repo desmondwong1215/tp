@@ -10,9 +10,11 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateCourseCommand;
 import seedu.address.logic.commands.DeleteCourseCommand;
@@ -21,12 +23,15 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCourseByNameCommand;
+import seedu.address.logic.commands.FindStudentByIdCommand;
 import seedu.address.logic.commands.FindStudentByNameCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RegisterCommand;
+import seedu.address.logic.commands.RemoveStudentCommand;
 import seedu.address.logic.commands.ViewCourseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.IdMatchesKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
@@ -85,6 +90,17 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_findById() throws Exception {
+        List<String> keywords = Arrays.asList("S00001", "S00002", "S00003");
+        List<StudentId> ids = keywords.stream().map(StudentId::new).toList();
+        FindStudentByIdCommand command = (FindStudentByIdCommand) parser.parseCommand(
+                FindStudentByIdCommand.COMMAND_WORD
+                        + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindStudentByIdCommand(new IdMatchesKeywordsPredicate(ids)), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -128,5 +144,17 @@ public class AddressBookParserTest {
     public void parseCommand_createCourse() throws Exception {
         assertTrue(parser.parseCommand(CreateCourseCommand.COMMAND_WORD + " n/Math id/C1234")
                 instanceof CreateCourseCommand);
+    }
+
+    @Test
+    public void parseCommand_addStudent() throws Exception {
+        assertTrue(parser.parseCommand(AddStudentCommand.COMMAND_WORD + " S00001 C1234")
+                instanceof AddStudentCommand);
+    }
+
+    @Test
+    public void parseCommand_removeStudent() throws Exception {
+        assertTrue(parser.parseCommand(RemoveStudentCommand.COMMAND_WORD + " S00001 C1231")
+                instanceof RemoveStudentCommand);
     }
 }
