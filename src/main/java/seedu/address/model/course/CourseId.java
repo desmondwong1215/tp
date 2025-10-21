@@ -60,21 +60,15 @@ public class CourseId {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof CourseId otherId)) {
-            return false;
-        }
-
-        return Objects.equals(value, otherId.value);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CourseId courseId = (CourseId) o;
+        return value.equals(courseId.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return value.hashCode();
     }
 }

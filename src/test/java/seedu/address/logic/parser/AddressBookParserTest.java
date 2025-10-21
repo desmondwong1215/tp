@@ -77,6 +77,12 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_deleteCourse() throws Exception {
+        // Valid course ID
+        assertTrue(parser.parseCommand("delete_course C1234") instanceof seedu.address.logic.commands.DeleteCourseCommand);
+    }
+
+    @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
@@ -95,9 +101,7 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindStudentByNameCommand command = (FindStudentByNameCommand) parser.parseCommand(
-                FindStudentByNameCommand.COMMAND_WORD
-                        + " "
-                        + keywords.stream().collect(Collectors.joining(" ")));
+                FindStudentByNameCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindStudentByNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -123,11 +127,6 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
                 parser.parseCommand("unknownCommand"));
-    }
-
-    @Test
-    public void parseCommand_deleteCourse() throws Exception {
-        assertTrue(parser.parseCommand(DeleteCourseCommand.COMMAND_WORD + " C1234") instanceof DeleteCourseCommand);
     }
 
     @Test
