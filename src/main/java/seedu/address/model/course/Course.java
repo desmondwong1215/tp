@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 
@@ -78,6 +79,32 @@ public class Course {
      */
     public boolean hasEnrolledStudents() {
         return !studentList.asUnmodifiableObservableList().isEmpty();
+    }
+
+    /**
+     * Returns true if the given student is enrolled in this course.
+     */
+    public boolean containsStudent(Person student) {
+        requireAllNonNull(student);
+        return studentList.contains(student);
+    }
+
+    /**
+     * Adds a student from course
+     * @param student student to be added
+     */
+    public void addStudent(Person student) {
+        requireAllNonNull(student);
+        studentList.add(student);
+    }
+
+    /**
+     * Removes a student from course
+     * @param student student to be removed
+     */
+    public void removeStudent(Person student) {
+        requireAllNonNull(student);
+        studentList.remove(student);
     }
 
     /**

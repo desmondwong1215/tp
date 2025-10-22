@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
+import java.util.stream.Collectors;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseId;
-import seedu.address.model.person.Person;
-import java.util.stream.Collectors;
-
 
 /**
  * Displays the details of a specific course identified using its CourseId.
