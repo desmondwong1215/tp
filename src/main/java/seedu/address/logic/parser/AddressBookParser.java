@@ -66,7 +66,7 @@ public class AddressBookParser {
             return new RegisterCommandParser().parse(arguments);
 
         case EditStudentCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditStudentCommandParser().parse(arguments);
 
         case DeregisterCommand.COMMAND_WORD:
             return new DeregisterCommandParser().parse(arguments);
