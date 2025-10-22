@@ -47,8 +47,8 @@ public class EditCourseCommand extends Command {
     private final EditCourseDescriptor editCourseDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editCourseDescriptor details to edit the person with
+     * @param index of the course in the filtered course list to edit
+     * @param editCourseDescriptor details to edit the course with
      */
     public EditCourseCommand(Index index, EditCourseDescriptor editCourseDescriptor) {
         requireNonNull(index);
@@ -64,13 +64,13 @@ public class EditCourseCommand extends Command {
         List<Course> lastShownList = model.getFilteredCourseList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_COURSE_DISPLAYED_INDEX);
         }
 
         Course courseToEdit = lastShownList.get(index.getZeroBased());
         Course editedCourse = createEditedCourse(courseToEdit, editCourseDescriptor);
 
-        if (!courseToEdit.isSameCourse(editedCourse) && model.hasCourse(editedCourse)) {
+        if (!courseToEdit.equals(editedCourse) && model.hasCourse(editedCourse)) {
             throw new CommandException(MESSAGE_DUPLICATE_COURSE);
         }
 
@@ -113,13 +113,13 @@ public class EditCourseCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editCourseDescriptor)
+                .add("editCourseDescriptor", editCourseDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the course with. Each non-empty field value will replace the
+     * corresponding field value of the course.
      */
     public static class EditCourseDescriptor {
         private CourseName courseName;

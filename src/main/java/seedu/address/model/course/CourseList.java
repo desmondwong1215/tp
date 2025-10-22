@@ -10,6 +10,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.course.exceptions.CourseNotFoundException;
 import seedu.address.model.course.exceptions.DuplicateCourseIdException;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 
 /**
@@ -44,7 +47,25 @@ public class CourseList implements Iterable<Course> {
         internalList.add(toAdd);
     }
 
-    //TODO allow for editing of course
+    /**
+     * Replaces the course {@code target} in the list with {@code editedCourse}.
+     * {@code target} must exist in the list.
+     * The person identity of {@code editedCourse} must not be the same as another existing course in the list.
+     */
+    public void setCourse(Course target, Course editedCourse) {
+        requireAllNonNull(target, editedCourse);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new CourseNotFoundException();
+        }
+
+        if (!target.equals(editedCourse) && contains(editedCourse)) {
+            throw new DuplicateCourseIdException();
+        }
+
+        internalList.set(index, editedCourse);
+    }
 
     /**
      * Removes the equivalent course from the list.

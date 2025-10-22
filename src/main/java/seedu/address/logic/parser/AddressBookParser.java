@@ -14,6 +14,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateCourseCommand;
 import seedu.address.logic.commands.DeleteCourseCommand;
 import seedu.address.logic.commands.DeregisterCommand;
+import seedu.address.logic.commands.EditCourseCommand;
 import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCourseByNameCommand;
@@ -57,53 +58,26 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        switch (commandWord) {
-
-        case AddStudentCommand.COMMAND_WORD:
-            return new AddStudentCommandParser().parse(arguments);
-
-        case RegisterCommand.COMMAND_WORD:
-            return new RegisterCommandParser().parse(arguments);
-
-        case EditStudentCommand.COMMAND_WORD:
-            return new EditStudentCommandParser().parse(arguments);
-
-        case DeregisterCommand.COMMAND_WORD:
-            return new DeregisterCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindStudentByNameCommand.COMMAND_WORD:
-            return new FindStudentByNameCommandParser().parse(arguments);
-
-        case FindStudentByIdCommand.COMMAND_WORD:
-            return new FindStudentByIdCommandParser().parse(arguments);
-
-        case CreateCourseCommand.COMMAND_WORD:
-            return new CreateCourseCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        case DeleteCourseCommand.COMMAND_WORD:
-            return new DeleteCourseCommandParser().parse(arguments);
-
-        case ViewCourseCommand.COMMAND_WORD:
-            return new ViewCourseCommand();
-
-        case FindCourseByNameCommand.COMMAND_WORD:
-            return new FindCourseByNameCommandParser().parse(arguments);
-
-        default:
+        return switch (commandWord) {
+        case AddStudentCommand.COMMAND_WORD -> new AddStudentCommandParser().parse(arguments);
+        case RegisterCommand.COMMAND_WORD -> new RegisterCommandParser().parse(arguments);
+        case EditCourseCommand.COMMAND_WORD -> new EditCourseCommandParser().parse(arguments);
+        case EditStudentCommand.COMMAND_WORD -> new EditStudentCommandParser().parse(arguments);
+        case DeregisterCommand.COMMAND_WORD -> new DeregisterCommandParser().parse(arguments);
+        case ClearCommand.COMMAND_WORD -> new ClearCommand();
+        case FindStudentByNameCommand.COMMAND_WORD -> new FindStudentByNameCommandParser().parse(arguments);
+        case FindStudentByIdCommand.COMMAND_WORD -> new FindStudentByIdCommandParser().parse(arguments);
+        case CreateCourseCommand.COMMAND_WORD -> new CreateCourseCommandParser().parse(arguments);
+        case ListCommand.COMMAND_WORD -> new ListCommand();
+        case ExitCommand.COMMAND_WORD -> new ExitCommand();
+        case HelpCommand.COMMAND_WORD -> new HelpCommand();
+        case DeleteCourseCommand.COMMAND_WORD -> new DeleteCourseCommandParser().parse(arguments);
+        case ViewCourseCommand.COMMAND_WORD -> new ViewCourseCommand();
+        case FindCourseByNameCommand.COMMAND_WORD -> new FindCourseByNameCommandParser().parse(arguments);
+        default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+        };
     }
 }

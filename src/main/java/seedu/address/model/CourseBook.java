@@ -84,7 +84,7 @@ public class CourseBook implements ReadOnlyCourseBook {
      */
     public void setCourse(Course target, Course edittedCourse) {
         requireNonNull(edittedCourse);
-        ///     TODO: courses.setPerson(target, edittedCourse);
+        courses.setCourse(target, edittedCourse);
     }
 
     /**
