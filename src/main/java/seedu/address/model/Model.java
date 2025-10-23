@@ -132,6 +132,11 @@ public interface Model {
      */
     void setCourse(Course target, Course editedPerson);
 
+    /**
+     * Returns true if the given student is in one of the course.
+     */
+    boolean checkStudentInAllCourse(Person student);
+
     /** Returns an unmodifiable view of the filtered course list */
     ObservableList<Course> getFilteredCourseList();
 

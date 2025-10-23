@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseId;
 import seedu.address.model.course.CourseList;
+import seedu.address.model.person.Person;
 
 /**
  * Wraps all data at the address-book level
@@ -100,6 +101,14 @@ public class CourseBook implements ReadOnlyCourseBook {
      */
     public Course getCourseById(CourseId courseId) {
         return courses.getByCourseId(courseId);
+    }
+
+    /**
+     * Returns true if the given student is in one of the course.
+     */
+    public boolean containsStudent(Person student) {
+        requireNonNull(student);
+        return courses.containsStudent(student);
     }
 
     //// util methods

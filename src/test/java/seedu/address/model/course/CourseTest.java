@@ -3,8 +3,10 @@ package seedu.address.model.course;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -44,7 +46,7 @@ public class CourseTest {
         assertEquals(VALID_NAME, course.getName());
         assertEquals(VALID_COURSE_ID, course.getCourseId());
         assertEquals(tags, course.getTags());
-        assertTrue(course.getCourseId() != null);
+        assertNotNull(course.getCourseId());
     }
 
     @Test
@@ -127,5 +129,52 @@ public class CourseTest {
         assertEquals(anotherId, course2.getCourseId());
 
         assertNotEquals(course1.getCourseId(), course2.getCourseId());
+    }
+
+    @Test
+    public void addStudent_null_throwsNullPointerException() {
+        Course course1 = new Course(VALID_NAME, VALID_COURSE_ID, VALID_TAGS);
+        assertThrows(NullPointerException.class, () -> course1.addStudent(null));
+    }
+
+    @Test
+    public void addStudent_valid() {
+        Course course1 = new Course(VALID_NAME, VALID_COURSE_ID, VALID_TAGS);
+        course1.addStudent(ALICE);
+        assertTrue(course1.getStudentList().contains(ALICE));
+    }
+
+    @Test
+    public void removeStudent_null_throwsNullPointerException() {
+        Course course1 = new Course(VALID_NAME, VALID_COURSE_ID, VALID_TAGS);
+        assertThrows(NullPointerException.class, () -> course1.removeStudent(null));
+    }
+
+    @Test
+    public void removeStudent_valid() {
+        Course course1 = new Course(VALID_NAME, VALID_COURSE_ID, VALID_TAGS);
+        course1.addStudent(ALICE);
+        assertTrue(course1.getStudentList().contains(ALICE));
+        course1.removeStudent(ALICE);
+        assertFalse(course1.getStudentList().contains(ALICE));
+    }
+
+    @Test
+    public void containsStudent_null_throwsNullPointerException() {
+        Course course1 = new Course(VALID_NAME, VALID_COURSE_ID, VALID_TAGS);
+        assertThrows(NullPointerException.class, () -> course1.containsStudent(null));
+    }
+
+    @Test
+    public void containsStudent_returnsTrue() {
+        Course course1 = new Course(VALID_NAME, VALID_COURSE_ID, VALID_TAGS);
+        course1.addStudent(ALICE);
+        assertTrue(() -> course1.containsStudent(ALICE));
+    }
+
+    @Test
+    public void containsStudent_returnsFalse() {
+        Course course1 = new Course(VALID_NAME, VALID_COURSE_ID, VALID_TAGS);
+        assertFalse(() -> course1.containsStudent(ALICE));
     }
 }

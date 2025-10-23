@@ -47,7 +47,7 @@ public class AddStudentCommandTest {
         Course course = new CourseBuilder().withCourseId("C0001").build();
         model.addPerson(student);
         model.addCourse(course);
-        course.getStudentList().add(student);
+        course.addStudent(student);
 
         AddStudentCommand addStudentCommand = new AddStudentCommand(student.getStudentId(), course.getCourseId());
 
