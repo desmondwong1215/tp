@@ -211,6 +211,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredStudentListForCourse(Course course) {
+        requireNonNull(course);
+        Predicate<Person> isInCourse = course::containsStudent;
+        updateFilteredPersonList(isInCourse);
+    }
+
+    @Override
+    public void updateFilteredCourseListForCourse(Course course) {
+        requireNonNull(course);
+        Predicate<Course> isTargetCourse = c -> c.equals(course);
+        updateFilteredCourseList(isTargetCourse);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

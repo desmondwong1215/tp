@@ -45,6 +45,9 @@ public class ViewCourseDetailsCommand extends Command {
             throw new CommandException(String.format(MESSAGE_COURSE_NOT_FOUND, targetId));
         }
 
+        model.updateFilteredCourseListForCourse(courseToShow);
+        model.updateFilteredStudentListForCourse(courseToShow);
+
         String studentListString = courseToShow.getStudentList().asUnmodifiableObservableList()
                 .stream()
                 .map(student -> "  - " + student.getName().fullName + " (" + student.getStudentId().getValue() + ")")
