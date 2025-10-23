@@ -75,6 +75,7 @@ public class AddressBookParser {
         case DeleteCourseCommand.COMMAND_WORD -> new DeleteCourseCommandParser().parse(arguments);
         case ViewCourseCommand.COMMAND_WORD -> new ViewCourseCommand();
         case FindCourseByNameCommand.COMMAND_WORD -> new FindCourseByNameCommandParser().parse(arguments);
+        case ViewCourseDetailsCommand.COMMAND_WORD -> new ViewCourseDetailsCommandParser().parse(arguments);
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
