@@ -83,15 +83,15 @@ Format: `help`
 
 Allows teachers to create a new course. A unique **Course ID** (e.g., C0001) will be generated automatically. Duplicate course names are allowed.
 
-Format: `create_course <COURSE_NAME>`
+Format: `create_course n/<COURSE_NAME> id/<COURSE_ID>`
 
 <box type="tip" seamless>
 **Tip:** Course names can only contain letters, spaces, hyphens, and apostrophes.
 </box>
 
 Examples:
-* `create_course English 101`
-* `create_course Calculus II`
+* `create_course n/English 101 id/C0002`
+* `create_course Calculus II id/C1231`
 
 ---
 
@@ -125,44 +125,36 @@ Examples:
 
 Allows teachers to add a new student to the school-level address book. A unique **Student ID** (e.g., S00001) is automatically assigned.
 
-Format: `register /n <NAME> /g <GENDER>`
+Format: `register n/<NAME> p/<PHONE> g/<GENDER>`
 
 <box type="tip" seamless>
 **Tip:** Student names can only contain letters, spaces, hyphens, and apostrophes. Duplicate names are allowed but will receive a new unique Student ID.
 </box>
 
 Examples:
-* `register /n John Doe /g Male`
-* `register /g Female /n Jane Doe`
+* `register n/John Doe p/12345678 g/Male` 
+* `register n/Jane Doe p/12345678 g/Female` 
 
 ---
 
-### Deregistering a Student: `deregister_student`
+### Deregistering a Student: `deregister`
 
 Allows teachers to permanently delete a student from the school-level address book using their unique **Student ID**.
 
-Format: `deregister_student <STUDENT_ID>`
+Format: `deregister <STUDENT_ID>`
 
 Examples:
 * `deregister_student S00001`
 
 ---
 
-### Entering a Course: `enter_course`
+### Viewing Course Details: `view_course details`
 
-Allows teachers to enter the context of a specific course to perform course-level commands.
+Allows teachers to view all courses details and all of the students in that class.
 
-Format: `enter_course <COURSE_ID>`
+Format: `view_course_details <COURSE_ID>`
 
-Examples:
-* `enter_course C0001`
-
----
---------------------------------------------------------------------------------------------------------------------
-
-### Course-Level Commands
-
-These commands can only be executed **after** successfully using the `enter_course` command.
+Examples: `view_course_details C0001`
 
 ---
 
@@ -170,14 +162,14 @@ These commands can only be executed **after** successfully using the `enter_cour
 
 Allows teachers to enroll an already-registered student into the currently entered course using their **Student ID**.
 
-Format: `add_student <STUDENT_ID>`
+Format: `add_student <STUDENT_ID> <COURSE_ID>`
 
 <box type="warning" seamless>
-**Caution:** A student cannot be added to a course if they are already enrolled.
+**Caution:** A student cannot be added to a course if they are already inside the course.
 </box>
 
 Examples:
-* `add_student S00001`
+* `add_student S00001 C0001`
 
 ---
 
@@ -185,67 +177,13 @@ Examples:
 
 Allows teachers to unenroll a student from the currently entered course using their **Student ID**.
 
-Format: `remove_student <STUDENT_ID>`
+Format: `remove_student <STUDENT_ID> <COURSE_ID>`
 
 Examples:
-* `remove_student S00001`
+* `remove_student S00001 C0001`
 
 ---
 
-### Creating a Session: `create_session`
-
-Creates a new attendance record for **all** enrolled students in the current course for a specified date. Attendance for each student is initially set to **"unmarked"**.
-
-Format: `create_session /d <DATE>`
-
-<box type="tip" seamless>
-**Tip:** The date must be in `YYYY-MM-DD` format and cannot be a future date. The system assigns a unique **Session ID** (an integer) upon success.
-</box>
-
-Examples:
-* `create_session /d 2025-09-18`
-
----
-
-### Marking/Unmarking Attendance: `mark` / `unmark`
-
-Allows teachers to update a student's attendance status for a specific session.
-
-Format:
-* `mark /id <STUDENT_ID> /s <SESSION_ID>`
-* `unmark /id <STUDENT_ID> /s <SESSION_ID>`
-
-<box type="tip" seamless>
-**Tip:** `mark` sets the student status to **Present**. `unmark` sets the student status to **Absent**.
-</box>
-
-Examples:
-* `mark /id S00001 /s 1`
-* `unmark /id S00001 /s 1`
-
----
-
-### Viewing Attendance: `view_attendance`
-
-Allows teachers to view the full class attendance for a specific session.
-
-Format: `view_attendance /s <SESSION_ID>`
-
-Examples:
-* `view_attendance /s 1`
-
----
-
-### Exiting a Course: `exit_course`
-
-Allows teachers to exit the current course context and return to the School Level.
-
-Format: `exit_course`
-
-Examples:
-* `exit_course`
-
----
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -269,19 +207,14 @@ Examples:
 
 Action | Format, Examples
 ---|---
-**System-Wide Commands** |
-**Create Course** | `create_course <COURSE_NAME>` <br> e.g., `create_course Chemistry I`
+**Commands** |
+**Create Course** | `create_course n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `create_course Calculus II id/C1231`
 **View Courses** | `view_all_courses`
 **Delete Course** | `delete_course <COURSE_ID>` <br> e.g., `delete_course C0003`
-**Register Student** | `register /n <NAME> /g <GENDER>` <br> e.g., `register /n Alice /g Female`
-**Deregister Student** | `deregister_student <STUDENT_ID>` <br> e.g., `deregister_student S00005`
+**Register Student** | `register n/<NAME> p/<PHONE> g/<GENDER>` <br> e.g., `register n/John Doe p/12345678 g/Male`
+**Deregister** | `deregister <STUDENT_ID>` <br> e.g., `deregisterd S00005`
 **Enter Course** | `enter_course <COURSE_ID>` <br> e.g., `enter_course C0001`
-**Course-Level Commands** |
-**Add Student** | `add_student <STUDENT_ID>` <br> e.g., `add_student S00001`
-**Remove Student** | `remove_student <STUDENT_ID>` <br> e.g., `remove_student S00001`
-**Create Session** | `create_session /d <DATE>` <br> e.g., `create_session /d 2025-09-29`
-**Mark Attendance** | `mark /id <STUDENT_ID> /s <SESSION_ID>` <br> e.g., `mark /id S00001 /s 1`
-**Unmark Attendance** | `unmark /id <STUDENT_ID> /s <SESSION_ID>` <br> e.g., `unmark /id S00001 /s 1`
-**View Attendance** | `view_attendance /s <SESSION_ID>` <br> e.g., `view_attendance /s 1`
-**Exit Course** | `exit_course`
+**Add Student** | `add_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `add_student S00001 C0001`
+**View Course Details** | `view_course_details <COURSE_ID>` <br> e.g., `view_course_details C0001`
+**Remove Student** | `remove_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `remove_student S00001 C0001`
 **Exit Program** | `exit`

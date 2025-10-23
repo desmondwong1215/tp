@@ -1,0 +1,17 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class UniqueCourseList
+Class Course
+Class CourseId
+
+CourseBook *--> "1" UniqueCourseList
+UniqueCourseList --> "~* all" Course
+Course *--> CourseName
+Course *--> CourseId
+Course *--> UniquePersonList
+
+@enduml

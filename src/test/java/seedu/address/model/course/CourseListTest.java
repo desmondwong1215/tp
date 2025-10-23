@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_ID_C2660;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_NAME_ENGLISH;
+import static seedu.address.testutil.TypicalCourses.CS1010;
+import static seedu.address.testutil.TypicalCourses.CS2040;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +18,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.course.exceptions.CourseNotFoundException;
 import seedu.address.model.course.exceptions.DuplicateCourseIdException;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.Assert;
+import seedu.address.testutil.CourseBuilder;
 
 public class CourseListTest {
 
@@ -63,6 +69,60 @@ public class CourseListTest {
         courseList.add(mathematics);
         assertThrows(DuplicateCourseIdException.class, () -> courseList.add(mathematics));
     }
+
+
+    @Test
+    public void setCourse_nullTargetCourse_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> courseList.setCourse(null, CS1010));
+    }
+
+    @Test
+    public void setCourse_nullEditedCourse_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> courseList.setCourse(CS1010, null));
+    }
+
+    @Test
+    public void setCourse_targetCourseNotInList_throwsCourseNotFoundException() {
+        Assert.assertThrows(CourseNotFoundException.class, () -> courseList.setCourse(CS1010, CS1010));
+    }
+
+    @Test
+    public void setCourse_editedCoursesEqualsCourse_success() {
+        courseList.add(CS1010);
+        courseList.setCourse(CS1010, CS1010);
+        CourseList expectedCourseList = new CourseList();
+        expectedCourseList.add(CS1010);
+        assertEquals(expectedCourseList, courseList);
+    }
+
+    @Test
+    public void setCourse_editedCourseHasSameIdentity_success() {
+        courseList.add(CS1010);
+        Course editedCourse = new CourseBuilder(CS1010).withName(VALID_COURSE_NAME_ENGLISH)
+                .withCourseId(VALID_COURSE_ID_C2660)
+                .build();
+        courseList.setCourse(CS1010, editedCourse);
+        CourseList expectedCourseList = new CourseList();
+        expectedCourseList.add(editedCourse);
+        assertEquals(expectedCourseList, courseList);
+    }
+
+    @Test
+    public void setCourse_editedCourseHasDifferentIdentity_success() {
+        courseList.add(CS1010);
+        courseList.setCourse(CS1010, CS2040);
+        CourseList expectedCourseList = new CourseList();
+        expectedCourseList.add(CS2040);
+        assertEquals(expectedCourseList, courseList);
+    }
+
+    @Test
+    public void setCourse_editedCourseHasNonUniqueIdentity_throwsDuplicateCourseIdException() {
+        courseList.add(CS1010);
+        courseList.add(CS2040);
+        Assert.assertThrows(DuplicateCourseIdException.class, () -> courseList.setCourse(CS1010, CS2040));
+    }
+
 
     @Test
     public void remove_nullCourse_throwsNullPointerException() {

@@ -19,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditCourseDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -47,8 +48,8 @@ public class CommandTestUtil {
 
     public static final String COURSE_NAME_DESC_MATH = " " + PREFIX_NAME + VALID_COURSE_NAME_MATH;
     public static final String COURSE_NAME_DESC_ENGLISH = " " + PREFIX_NAME + VALID_COURSE_NAME_ENGLISH;
-    public static final String COURSE_ID_DESC_CS1010 = " " + PREFIX_ID + VALID_COURSE_ID_C1010;
-    public static final String COURSE_ID_DESC_CS2660 = " " + PREFIX_ID + VALID_COURSE_ID_C2660;
+    public static final String COURSE_ID_DESC_C1010 = " " + PREFIX_ID + VALID_COURSE_ID_C1010;
+    public static final String COURSE_ID_DESC_C2660 = " " + PREFIX_ID + VALID_COURSE_ID_C2660;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -60,14 +61,25 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditStudentCommand.EditPersonDescriptor DESC_AMY;
+    public static final EditStudentCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final EditCourseCommand.EditCourseDescriptor DESC_C1010;
+    public static final EditCourseCommand.EditCourseDescriptor DESC_C2660;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withGender(VALID_GENDER_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB).build();
+        DESC_C1010 = new EditCourseDescriptorBuilder()
+                .withCourseName(VALID_COURSE_NAME_MATH)
+                .withCourseId(VALID_COURSE_ID_C1010)
+                .build();
+        DESC_C2660 = new EditCourseDescriptorBuilder()
+                .withCourseName(VALID_COURSE_NAME_ENGLISH)
+                .withCourseId(VALID_COURSE_ID_C2660)
+                .build();
     }
 
     /**
