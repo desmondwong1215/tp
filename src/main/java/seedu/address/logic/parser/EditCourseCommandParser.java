@@ -11,17 +11,22 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCourseCommand;
 import seedu.address.logic.commands.EditCourseCommand.EditCourseDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ModelManager;
 import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCourseCommand object
  */
 public class EditCourseCommandParser implements Parser<EditCourseCommand> {
+
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCourseCommand
@@ -38,6 +43,7 @@ public class EditCourseCommandParser implements Parser<EditCourseCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
+            logger.warning(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE),
                     pe);
         }
@@ -53,6 +59,7 @@ public class EditCourseCommandParser implements Parser<EditCourseCommand> {
             editCourseDescriptor.setCourseId(ParserUtil.parseCourseId(argMultimap.getValue(PREFIX_ID).get()));
         }
         if (!editCourseDescriptor.isAnyFieldEdited()) {
+            logger.warning(MESSAGE_NOT_EDITED);
             throw new ParseException(MESSAGE_NOT_EDITED);
         }
 
