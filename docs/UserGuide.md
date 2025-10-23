@@ -83,15 +83,15 @@ Format: `help`
 
 Allows teachers to create a new course. A unique **Course ID** (e.g., C0001) will be generated automatically. Duplicate course names are allowed.
 
-Format: `create_course <COURSE_NAME>`
+Format: `create_course n/<COURSE_NAME> id/<COURSE_ID>`
 
 <box type="tip" seamless>
 **Tip:** Course names can only contain letters, spaces, hyphens, and apostrophes.
 </box>
 
 Examples:
-* `create_course English 101`
-* `create_course Calculus II`
+* `create_course n/English 101 id/C0002`
+* `create_course Calculus II id/C1231`
 
 ---
 
@@ -208,11 +208,11 @@ Examples:
 Action | Format, Examples
 ---|---
 **Commands** |
-**Create Course** | `create_course <COURSE_NAME>` <br> e.g., `create_course Chemistry I`
+**Create Course** | `create_course n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `create_course Calculus II id/C1231`
 **View Courses** | `view_all_courses`
 **Delete Course** | `delete_course <COURSE_ID>` <br> e.g., `delete_course C0003`
 **Register Student** | `register n/<NAME> p/<PHONE> g/<GENDER>` <br> e.g., `register n/John Doe p/12345678 g/Male`
-**Deregister Student** | `deregister_student <STUDENT_ID>` <br> e.g., `deregister_student S00005`
+**Deregister** | `deregister <STUDENT_ID>` <br> e.g., `deregisterd S00005`
 **Enter Course** | `enter_course <COURSE_ID>` <br> e.g., `enter_course C0001`
 **Add Student** | `add_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `add_student S00001 C0001`
 **View Course Details** | `view_course_details <COURSE_ID>` <br> e.g., `view_course_details C0001`
