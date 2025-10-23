@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.COURSE_ID_DESC_CS1010;
-import static seedu.address.logic.commands.CommandTestUtil.COURSE_ID_DESC_CS2660;
+import static seedu.address.logic.commands.CommandTestUtil.COURSE_ID_DESC_C1010;
+import static seedu.address.logic.commands.CommandTestUtil.COURSE_ID_DESC_C2660;
 import static seedu.address.logic.commands.CommandTestUtil.COURSE_NAME_DESC_ENGLISH;
 import static seedu.address.logic.commands.CommandTestUtil.COURSE_NAME_DESC_MATH;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COURSE_ID_DESC;
@@ -31,19 +31,19 @@ public class CreateCourseCommandParserTest {
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedCourseString = COURSE_NAME_DESC_ENGLISH + COURSE_ID_DESC_CS2660;
+        String validExpectedCourseString = COURSE_NAME_DESC_ENGLISH + COURSE_ID_DESC_C2660;
 
         // multiple course names
         assertParseFailure(parser, COURSE_NAME_DESC_ENGLISH + validExpectedCourseString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple course id
-        assertParseFailure(parser, COURSE_ID_DESC_CS2660 + validExpectedCourseString,
+        assertParseFailure(parser, COURSE_ID_DESC_C2660 + validExpectedCourseString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ID));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedCourseString + COURSE_NAME_DESC_ENGLISH + COURSE_ID_DESC_CS2660
+                validExpectedCourseString + COURSE_NAME_DESC_ENGLISH + COURSE_ID_DESC_C2660
                         + validExpectedCourseString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ID));
 
@@ -64,7 +64,7 @@ public class CreateCourseCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Course expectedCourse = new CourseBuilder(CS1010).withTags().build();
-        assertParseSuccess(parser, COURSE_NAME_DESC_MATH + COURSE_ID_DESC_CS1010,
+        assertParseSuccess(parser, COURSE_NAME_DESC_MATH + COURSE_ID_DESC_C1010,
                 new CreateCourseCommand(expectedCourse));
     }
 
@@ -73,7 +73,7 @@ public class CreateCourseCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateCourseCommand.MESSAGE_USAGE);
 
         // missing course name prefix
-        assertParseFailure(parser, VALID_COURSE_NAME_ENGLISH + COURSE_ID_DESC_CS2660,
+        assertParseFailure(parser, VALID_COURSE_NAME_ENGLISH + COURSE_ID_DESC_C2660,
                 expectedMessage);
 
         // missing course id prefix
@@ -84,7 +84,7 @@ public class CreateCourseCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_COURSE_NAME_DESC + COURSE_ID_DESC_CS1010,
+        assertParseFailure(parser, INVALID_COURSE_NAME_DESC + COURSE_ID_DESC_C1010,
                 CourseName.MESSAGE_CONSTRAINTS);
 
         // invalid phone
@@ -96,7 +96,7 @@ public class CreateCourseCommandParserTest {
                 CourseName.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + COURSE_NAME_DESC_MATH + COURSE_ID_DESC_CS1010,
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + COURSE_NAME_DESC_MATH + COURSE_ID_DESC_C1010,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateCourseCommand.MESSAGE_USAGE));
     }
 }
