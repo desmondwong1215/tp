@@ -117,11 +117,10 @@ public class Course {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Course)) {
+        if (!(other instanceof Course otherCourse)) {
             return false;
         }
 
-        Course otherCourse = (Course) other;
         return courseId.equals(otherCourse.courseId);
     }
 

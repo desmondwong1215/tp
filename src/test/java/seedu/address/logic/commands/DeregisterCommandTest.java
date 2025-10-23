@@ -12,8 +12,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
+import seedu.address.testutil.CourseBuilder;
 import seedu.address.testutil.TypicalCourses;
 
 /**
@@ -22,7 +24,7 @@ import seedu.address.testutil.TypicalCourses;
  */
 public class DeregisterCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), TypicalCourses.getTypicalCourseBook(),
+    private final Model model = new ModelManager(getTypicalAddressBook(), TypicalCourses.getTypicalCourseBook(),
             new UserPrefs());
 
     @Test
@@ -47,6 +49,21 @@ public class DeregisterCommandTest {
 
         assertCommandFailure(deregisterCommand, model,
                 String.format(DeregisterCommand.MESSAGE_STUDENT_NOT_FOUND, invalidStudentId));
+    }
+
+    @Test
+    public void execute_studentInCourse_throwsCommandException() {
+        Person personToDelete = model.getAddressBook().getPersonList().get(0);
+        StudentId targetId = personToDelete.getStudentId();
+        Course course = new CourseBuilder().withCourseId("C0001").build();
+
+        model.addCourse(course);
+        course.addStudent(personToDelete);
+
+        DeregisterCommand deregisterCommand = new DeregisterCommand(targetId);
+
+        assertCommandFailure(deregisterCommand, model,
+                String.format(DeregisterCommand.MESSAGE_STUDENT_IN_COURSE, targetId));
     }
 
     @Test
