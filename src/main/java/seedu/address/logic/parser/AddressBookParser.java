@@ -24,6 +24,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.commands.RemoveStudentCommand;
 import seedu.address.logic.commands.ViewCourseCommand;
+import seedu.address.logic.commands.ViewCourseDetailsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
