@@ -45,6 +45,9 @@ public class DeleteCourseCommand extends Command {
             return new CommandResult(MESSAGE_STUDENTS_ENROLLED);
         }
         model.deleteCourse(course);
+        if (course.getName() == null) {
+            return new CommandResult(MESSAGE_SUCCESS);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, course.getName()));
     }
 
