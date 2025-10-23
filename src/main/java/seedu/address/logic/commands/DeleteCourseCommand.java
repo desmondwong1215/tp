@@ -34,6 +34,9 @@ public class DeleteCourseCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        if (model == null) {
+            throw new IllegalArgumentException("Model cannot be null.");
+        }
         Course course = model.getCourseById(courseId);
         if (course == null) {
             return new CommandResult(MESSAGE_NOT_FOUND);
@@ -54,14 +57,11 @@ public class DeleteCourseCommand extends Command {
             return false;
         }
         DeleteCourseCommand that = (DeleteCourseCommand) o;
-        if (courseId == null || that.courseId == null) {
-            return false;
-        }
         return courseId.equals(that.courseId);
     }
 
     @Override
     public int hashCode() {
-        return courseId == null ? 0 : courseId.hashCode();
+        return courseId.hashCode();
     }
 }
