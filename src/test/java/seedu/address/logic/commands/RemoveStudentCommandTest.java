@@ -68,14 +68,15 @@ public class RemoveStudentCommandTest {
         CourseId nonExistentCourseId = new CourseId("C9999");
         model.addPerson(student);
 
-        RemoveStudentCommand addStudentCommand = new RemoveStudentCommand(student.getStudentId(), nonExistentCourseId);
+        RemoveStudentCommand removeStudentCommand = new RemoveStudentCommand(student.getStudentId(),
+                nonExistentCourseId);
 
         assertThrows(
                 CommandException.class,
                 String.format(
                         RemoveStudentCommand.MESSAGE_COURSE_NOT_FOUND,
                         nonExistentCourseId
-                ), () -> addStudentCommand.execute(model)
+                ), () -> removeStudentCommand.execute(model)
         );
     }
 
@@ -85,14 +86,15 @@ public class RemoveStudentCommandTest {
         StudentId nonExistentStudentId = new StudentId("S99999");
         model.addCourse(course);
 
-        RemoveStudentCommand addStudentCommand = new RemoveStudentCommand(nonExistentStudentId, course.getCourseId());
+        RemoveStudentCommand removeStudentCommand = new RemoveStudentCommand(nonExistentStudentId,
+                course.getCourseId());
 
         assertThrows(
                 CommandException.class,
                 String.format(
                         RemoveStudentCommand.MESSAGE_STUDENT_NOT_FOUND,
                         nonExistentStudentId
-                ), () -> addStudentCommand.execute(model)
+                ), () -> removeStudentCommand.execute(model)
         );
     }
 }
