@@ -20,6 +20,9 @@ public class DeleteCourseCommand extends Command {
     private final CourseId courseId;
 
     public DeleteCourseCommand(CourseId courseId) {
+        if (courseId == null) {
+            throw new IllegalArgumentException(MESSAGE_MISSING_ID);
+        }
         this.courseId = courseId;
     }
 
@@ -45,11 +48,14 @@ public class DeleteCourseCommand extends Command {
             return false;
         }
         DeleteCourseCommand that = (DeleteCourseCommand) o;
+        if (courseId == null || that.courseId == null) {
+            return false;
+        }
         return courseId.equals(that.courseId);
     }
 
     @Override
     public int hashCode() {
-        return courseId.hashCode();
+        return courseId == null ? 0 : courseId.hashCode();
     }
 }
