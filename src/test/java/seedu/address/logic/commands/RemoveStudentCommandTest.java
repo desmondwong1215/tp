@@ -9,7 +9,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseId;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
 import seedu.address.testutil.CourseBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -57,6 +59,40 @@ public class RemoveStudentCommandTest {
                         RemoveStudentCommand.MESSAGE_STUDENT_NOT_IN_COURSE,
                         "S00001"
                 ), () -> removeStudentCommand.execute(model)
+        );
+    }
+
+    @Test
+    public void execute_courseNotFound_throwsCommandException() {
+        Person student = new PersonBuilder().withStudentId("S00001").build();
+        CourseId nonExistentCourseId = new CourseId("C9999");
+        model.addPerson(student);
+
+        RemoveStudentCommand addStudentCommand = new RemoveStudentCommand(student.getStudentId(), nonExistentCourseId);
+
+        assertThrows(
+                CommandException.class,
+                String.format(
+                        RemoveStudentCommand.MESSAGE_COURSE_NOT_FOUND,
+                        nonExistentCourseId
+                ), () -> addStudentCommand.execute(model)
+        );
+    }
+
+    @Test
+    public void execute_studentNotFound_throwsCommandException() {
+        Course course = new CourseBuilder().withCourseId("C0001").build();
+        StudentId nonExistentStudentId = new StudentId("S99999");
+        model.addCourse(course);
+
+        RemoveStudentCommand addStudentCommand = new RemoveStudentCommand(nonExistentStudentId, course.getCourseId());
+
+        assertThrows(
+                CommandException.class,
+                String.format(
+                        RemoveStudentCommand.MESSAGE_STUDENT_NOT_FOUND,
+                        nonExistentStudentId
+                ), () -> addStudentCommand.execute(model)
         );
     }
 }
