@@ -132,8 +132,8 @@ Format: `register n/<NAME> p/<PHONE> g/<GENDER>`
 </box>
 
 Examples:
-* `register n/John Doe p/12345678 g/Male` 
-* `register n/Jane Doe p/12345678 g/Female` 
+* `register n/John Doe p/12345678 g/Male`
+* `register n/Jane Doe p/12345678 g/Female`
 
 ---
 

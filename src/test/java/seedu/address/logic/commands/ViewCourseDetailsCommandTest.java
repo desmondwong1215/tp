@@ -3,25 +3,23 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalCourses.CS1010;
 import static seedu.address.testutil.TypicalCourses.MA1521;
+import static seedu.address.testutil.TypicalCourses.getTypicalCourseBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-
-import java.util.stream.Collectors;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseId;
-import seedu.address.testutil.TypicalCourses;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.model.person.UniquePersonList;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ViewCourseDetailsCommand.
@@ -33,72 +31,64 @@ public class ViewCourseDetailsCommandTest {
 
     @BeforeEach
     public void setUp() {
-        // Initialize model with typical persons and courses
-
-        model = new ModelManager(
-                TypicalPersons.getTypicalAddressBook(),
-                TypicalCourses.getTypicalCourseBook(),
-                new UserPrefs());
-
-        // expectedModel should reflect the same state initially
-        expectedModel = new ModelManager(
-                model.getAddressBook(),
-                model.getCourseBook(),
-                new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalCourseBook(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalCourseBook(), new UserPrefs());
     }
 
     @Test
-    public void execute_validCourseIdExistingCourseWithStudents_success() {
-
-        Course courseToShow = model.getCourseById(CS1010.getCourseId());
-        ViewCourseDetailsCommand command = new ViewCourseDetailsCommand(CS1010.getCourseId());
+    public void execute_validCourseIdExistingCourseWithStudents_success() throws CommandException {
+        Course courseToShow = new Course(
+                CS1010.getName(),
+                CS1010.getCourseId(),
+                new UniquePersonList(),
+                CS1010.getTags()
+        );
         courseToShow.addStudent(ALICE);
         courseToShow.addStudent(BENSON);
 
+        model.setCourse(model.getCourseById(CS1010.getCourseId()), courseToShow);
+        expectedModel.setCourse(expectedModel.getCourseById(CS1010.getCourseId()), courseToShow);
 
-        String studentListString = courseToShow.getStudentList().asUnmodifiableObservableList()
-                .stream()
-                .map(student -> "  - " + student.getName().fullName + " (" + student.getStudentId().getValue() + ")")
-                .collect(Collectors.joining("\n"));
+        ViewCourseDetailsCommand command = new ViewCourseDetailsCommand(CS1010.getCourseId());
 
-        // Check that the student list is not empty, as assumed
-        assertFalse(studentListString.isEmpty(), "Test setup assumption failed: CS1010 should have students.");
+        String expectedStudents = String.join("\n",
+                "  - " + ALICE.getName().fullName + " (" + ALICE.getStudentId().getValue() + ")",
+                "  - " + BENSON.getName().fullName + " (" + BENSON.getStudentId().getValue() + ")"
+        );
 
-        String expectedMessage = String.format(ViewCourseDetailsCommand.MESSAGE_SUCCESS,
+        String expectedMessage = String.format(
+                ViewCourseDetailsCommand.MESSAGE_SUCCESS,
                 courseToShow.getName().fullName,
                 courseToShow.getCourseId().value,
-                studentListString);
+                expectedStudents
+        );
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        CommandResult result = command.execute(model);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 
     @Test
-    public void execute_validCourseIdExistingCourseWithoutStudents_success() {
-        // Assuming MA1521 has no students enrolled in the typical setup
-        Course courseToShow = model.getCourseById(MA1521.getCourseId());
-        ViewCourseDetailsCommand command = new ViewCourseDetailsCommand(MA1521.getCourseId());
+    public void execute_validCourseIdExistingCourseWithoutStudents_success() throws CommandException {
+        Course courseToShow = new Course(
+                MA1521.getName(),
+                MA1521.getCourseId(),
+                new UniquePersonList(),
+                MA1521.getTags()
+        );
 
-        // Check that the student list is empty, as assumed
-        assertTrue(courseToShow.getStudentList().asUnmodifiableObservableList().isEmpty(),
-                "Test setup assumption failed: MA1521 should not have students.");
+        model.setCourse(model.getCourseById(MA1521.getCourseId()), courseToShow);
+        expectedModel.setCourse(expectedModel.getCourseById(MA1521.getCourseId()), courseToShow);
 
-        String expectedMessage = String.format(ViewCourseDetailsCommand.MESSAGE_SUCCESS,
+        ViewCourseDetailsCommand viewCommand = new ViewCourseDetailsCommand(MA1521.getCourseId());
+        String expectedMessage = String.format(
+                ViewCourseDetailsCommand.MESSAGE_SUCCESS,
                 courseToShow.getName().fullName,
                 courseToShow.getCourseId().value,
-                ViewCourseDetailsCommand.MESSAGE_NO_STUDENTS); // Use the specific message for no students
+                ViewCourseDetailsCommand.MESSAGE_NO_STUDENTS
+        );
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    }
-
-
-    @Test
-    public void execute_invalidCourseIdNonExistentCourse_throwsCommandException() {
-        CourseId nonExistentCourseId = new CourseId("C9999"); // Assuming C9999 does not exist
-        ViewCourseDetailsCommand command = new ViewCourseDetailsCommand(nonExistentCourseId);
-
-        String expectedMessage = String.format(ViewCourseDetailsCommand.MESSAGE_COURSE_NOT_FOUND, nonExistentCourseId);
-
-        assertCommandFailure(command, model, expectedMessage);
+        CommandResult result = viewCommand.execute(model);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 
     @Test

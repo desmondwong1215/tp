@@ -34,14 +34,20 @@ public class TypicalCourses {
     private TypicalCourses() {} // prevents instantiation
 
     /**
-     * Returns a list of all the typical courses.
+     * Returns a list of *fresh* copies of all the typical courses.
      */
     public static List<Course> getTypicalCourses() {
-        return new ArrayList<>(Arrays.asList(CS1010, MA1521, GEQ1000, CS2040, IS3240));
+        return new ArrayList<>(Arrays.asList(
+                new CourseBuilder().withCourseId("C1010").withName("Programming Methodology").build(),
+                new CourseBuilder().withCourseId("C1521").withName("Calculus").build(),
+                new CourseBuilder().withCourseId("C9876").withName("Thinking and Expression").build(),
+                new CourseBuilder().withCourseId("C2040").withName("Data Structures and Algorithms").build(),
+                new CourseBuilder().withCourseId("C3240").withName("Project Management").build()
+        ));
     }
 
     /**
-     * Returns an {@code CourseBook} with all the typical courses.
+     * Returns a {@code CourseBook} with all the typical courses.
      */
     public static CourseBook getTypicalCourseBook() {
         CourseBook cb = new CourseBook();
