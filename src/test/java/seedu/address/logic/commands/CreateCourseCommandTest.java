@@ -208,6 +208,11 @@ public class CreateCourseCommandTest {
         }
 
         @Override
+        public boolean checkStudentInAllCourse(Person student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Course> getFilteredCourseList() {
             throw new AssertionError("This method should not be called.");
         }

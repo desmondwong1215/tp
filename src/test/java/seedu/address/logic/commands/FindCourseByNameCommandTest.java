@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.Model;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseNameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.CourseBuilder;
 
 class FindCourseByNameCommandTest {
@@ -150,6 +151,12 @@ class FindCourseByNameCommandTest {
         @Override public void setCourse(Course target, Course editedPerson) {
             throw new UnsupportedOperationException();
         }
+
+        @Override
+        public boolean checkStudentInAllCourse(Person student) {
+            throw new UnsupportedOperationException();
+        }
+
         @Override public Course getCourseById(seedu.address.model.course.CourseId courseId) {
             throw new UnsupportedOperationException();
         }

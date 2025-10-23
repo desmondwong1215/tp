@@ -182,6 +182,12 @@ public class ModelManager implements Model {
         courseBook.setCourse(target, editedPerson);
     }
 
+    @Override
+    public boolean checkStudentInAllCourse(Person student) {
+        requireAllNonNull(student);
+        return courseBook.containsStudent(student);
+    }
+
     //=========== Filtered Course List Accessors =============================================================
 
     /**

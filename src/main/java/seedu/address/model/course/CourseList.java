@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.course.exceptions.CourseNotFoundException;
 import seedu.address.model.course.exceptions.DuplicateCourseIdException;
+import seedu.address.model.person.Person;
 
 
 /**
@@ -156,5 +157,18 @@ public class CourseList implements Iterable<Course> {
             }
         }
         return null;
+    }
+
+    /**
+     * Returns true if the given student is in one of the course.
+     */
+    public boolean containsStudent(Person student) {
+        requireNonNull(student);
+        for (Course course : internalList) {
+            if (course.containsStudent(student)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -24,6 +24,7 @@ public class DeregisterCommand extends Command {
 
     public static final String MESSAGE_DEREGISTER_SUCCESS = "Student '%1$s' (%2$s) deregistered successfully.";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "No student found with ID: %1$s";
+    public static final String MESSAGE_STUDENT_IN_COURSE = "Student %1$s is still enrolled in one of the course.";
 
     private final StudentId targetId;
 
@@ -50,6 +51,10 @@ public class DeregisterCommand extends Command {
 
         if (toDelete == null) {
             throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, targetId));
+        }
+
+        if (model.checkStudentInAllCourse(toDelete)) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_IN_COURSE, targetId));
         }
 
         model.deletePerson(toDelete);
