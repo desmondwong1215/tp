@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateCourseCommand;
+import seedu.address.logic.commands.DeleteCourseCommand;
 import seedu.address.logic.commands.DeregisterCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -77,9 +78,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deleteCourse() throws Exception {
-        // Valid course ID
         assertTrue(parser.parseCommand(
-                "delete_course C1234") instanceof seedu.address.logic.commands.DeleteCourseCommand);
+                DeleteCourseCommand.COMMAND_WORD + " C1234") instanceof DeleteCourseCommand);
     }
 
     @Test
@@ -101,7 +101,9 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindStudentByNameCommand command = (FindStudentByNameCommand) parser.parseCommand(
-                FindStudentByNameCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindStudentByNameCommand.COMMAND_WORD
+                        + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindStudentByNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 

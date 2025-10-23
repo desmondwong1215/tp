@@ -37,16 +37,6 @@ public class DeleteCourseCommandTest {
         model.addCourse(validCourse);
     }
 
-    @Test
-    public void constructor_nullCourseId_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new DeleteCourseCommand(null));
-    }
-
-    @Test
-    public void execute_nullModel_throwsIllegalArgumentException() {
-        DeleteCourseCommand command = new DeleteCourseCommand(validCourseId);
-        assertThrows(IllegalArgumentException.class, () -> command.execute(null));
-    }
 
     @Test
     public void execute_validCourseId_success() {

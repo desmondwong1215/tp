@@ -30,5 +30,10 @@ public class DeleteCourseCommandParserTest {
     public void parse_emptyArgs_throwsParseException() {
         assertThrows(ParseException.class, () -> parser.parse(" "));
     }
+
+    @Test
+    public void parse_nullArgs_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> parser.parse(null));
+    }
 }
 

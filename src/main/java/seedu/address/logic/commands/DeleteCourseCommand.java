@@ -23,20 +23,15 @@ public class DeleteCourseCommand extends Command {
      * Constructs a DeleteCourseCommand with the specified {@link CourseId}.
      *
      * @param courseId The ID of the course to delete. Must not be null.
-     * @throws IllegalArgumentException if courseId is null.
      */
     public DeleteCourseCommand(CourseId courseId) {
-        if (courseId == null) {
-            throw new IllegalArgumentException(MESSAGE_MISSING_ID);
-        }
+        assert courseId != null : "CourseId cannot be null";
         this.courseId = courseId;
     }
 
     @Override
     public CommandResult execute(Model model) {
-        if (model == null) {
-            throw new IllegalArgumentException("Model cannot be null.");
-        }
+        assert model != null : "Model cannot be null";
         Course course = model.getCourseById(courseId);
         if (course == null) {
             return new CommandResult(MESSAGE_NOT_FOUND);
@@ -52,15 +47,18 @@ public class DeleteCourseCommand extends Command {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object other) {
+        if (other == this) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteCourseCommand)) {
             return false;
         }
-        DeleteCourseCommand that = (DeleteCourseCommand) o;
-        return courseId.equals(that.courseId);
+
+        DeleteCourseCommand otherCommand = (DeleteCourseCommand) other;
+        return java.util.Objects.equals(courseId, otherCommand.courseId);
     }
 
     @Override
