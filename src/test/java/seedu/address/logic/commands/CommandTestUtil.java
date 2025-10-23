@@ -17,6 +17,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditCourseDescriptorBuilder;
@@ -138,5 +140,19 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the course at the given {@code targetIndex} in the
+     * {@code model}'s course book.
+     */
+    public static void showCourseAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredCourseList().size());
+
+        Course course = model.getFilteredCourseList().get(targetIndex.getZeroBased());
+        final String[] splitName = course.getName().fullName.split("\\s+");
+        model.updateFilteredCourseList(new CourseNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredCourseList().size());
     }
 }
