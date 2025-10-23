@@ -85,6 +85,12 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_deleteCourse() throws Exception {
+        assertTrue(parser.parseCommand(
+                DeleteCourseCommand.COMMAND_WORD + " C1234") instanceof DeleteCourseCommand);
+    }
+
+    @Test
     public void parseCommand_editStudent() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
@@ -151,11 +157,6 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
                 parser.parseCommand("unknownCommand"));
-    }
-
-    @Test
-    public void parseCommand_deleteCourse() throws Exception {
-        assertTrue(parser.parseCommand(DeleteCourseCommand.COMMAND_WORD + " C1234") instanceof DeleteCourseCommand);
     }
 
     @Test

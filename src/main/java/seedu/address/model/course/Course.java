@@ -106,6 +106,7 @@ public class Course {
         requireAllNonNull(student);
         studentList.remove(student);
     }
+
     /**
      * Returns true if both courses have the same {@code courseId}
      */
