@@ -88,6 +88,13 @@ public class CourseBookTest {
     }
 
     @Test
+    public void setCourse_validCourse_success() {
+        courseBook.addCourse(CS1010);
+        courseBook.setCourse(CS1010, CS2040);
+        assert(true);
+    }
+
+    @Test
     public void removeCourse_nullCourse_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> courseBook.removeCourse(null));
     }
