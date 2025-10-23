@@ -19,6 +19,12 @@ public class DeleteCourseCommand extends Command {
 
     private final CourseId courseId;
 
+    /**
+     * Constructs a DeleteCourseCommand with the specified {@link CourseId}.
+     *
+     * @param courseId The ID of the course to delete. Must not be null.
+     * @throws IllegalArgumentException if courseId is null.
+     */
     public DeleteCourseCommand(CourseId courseId) {
         if (courseId == null) {
             throw new IllegalArgumentException(MESSAGE_MISSING_ID);
