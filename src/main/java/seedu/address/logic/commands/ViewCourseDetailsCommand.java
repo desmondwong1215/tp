@@ -57,7 +57,6 @@ public class ViewCourseDetailsCommand extends Command {
             studentListString = MESSAGE_NO_STUDENTS;
         }
 
-
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 courseToShow.getName().fullName,
                 courseToShow.getCourseId().value,
