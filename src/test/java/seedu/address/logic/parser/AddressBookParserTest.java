@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateCourseCommand;
-import seedu.address.logic.commands.DeleteCourseCommand;
 import seedu.address.logic.commands.DeregisterCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -79,7 +78,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_deleteCourse() throws Exception {
         // Valid course ID
-        assertTrue(parser.parseCommand("delete_course C1234") instanceof seedu.address.logic.commands.DeleteCourseCommand);
+        assertTrue(parser.parseCommand(
+                "delete_course C1234") instanceof seedu.address.logic.commands.DeleteCourseCommand);
     }
 
     @Test

@@ -3,7 +3,6 @@ package seedu.address.model.course;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.Objects;
 
 /**
  * Unique identifier for Course
@@ -61,8 +60,12 @@ public class CourseId {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         CourseId courseId = (CourseId) o;
         return value.equals(courseId.value);
     }
