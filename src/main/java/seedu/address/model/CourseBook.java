@@ -79,13 +79,13 @@ public class CourseBook implements ReadOnlyCourseBook {
     }
 
     /**
-     * Replaces the given course {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The course identity of {@code editedPerson} must not be the same as another existing course in the address book.
+     * Replaces the given course {@code target} in the list with {@code editedCourse}.
+     * {@code target} must exist in the course book.
+     * The course identity of {@code editedCourse} must not be the same as another existing course in the course book.
      */
-    public void setCourse(Course target, Course edittedCourse) {
-        requireNonNull(edittedCourse);
-        courses.setCourse(target, edittedCourse);
+    public void setCourse(Course target, Course editedCourse) {
+        requireNonNull(editedCourse);
+        courses.setCourse(target, editedCourse);
     }
 
     /**
