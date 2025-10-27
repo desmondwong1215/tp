@@ -30,9 +30,6 @@ Package Model as ModelPackage <<Rectangle>> {
     Class I #FFFFFF
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
-
 AddressBook .up.|> ReadOnlyAddressBook
 CourseBook .up.|> ReadOnlyCourseBook
 UserPrefs .up.|> ReadOnlyUserPrefs
@@ -52,7 +49,6 @@ Person --> Name
 Person --> Phone
 Person --> Gender
 Person --> StudentId
-Person --> "*" Tag
 
 CourseBook --> "1" CourseList
 CourseList --> "       ~* all" Course
