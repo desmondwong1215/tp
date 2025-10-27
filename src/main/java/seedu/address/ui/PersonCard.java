@@ -32,7 +32,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label gender;
+    private Label genderLabel;
+    @FXML
+    private Label genderValue;
     @FXML
     private Label studentId;
 
@@ -45,7 +47,25 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText("Phone: " + person.getPhone().value);
-        gender.setText("Gender: " + person.getGender().value);
         studentId.setText("Student ID: " + person.getStudentId().getValue());
+        genderLabel.setText("Gender:");
+        genderValue.setText(person.getGender().value);
+
+        String genderValueLower = person.getGender().value.toLowerCase();
+
+        switch (genderValueLower) {
+        case "female":
+            genderValue.setStyle("-fx-text-fill: #ff76a3;");
+            break;
+        case "male":
+            genderValue.setStyle("-fx-text-fill: #4da3ff;");
+            break;
+        case "other":
+            genderValue.setStyle("-fx-text-fill: #c56bff;");
+            break;
+        default:
+            genderValue.setStyle("-fx-text-fill: #ffffff;");
+        }
+
     }
 }
