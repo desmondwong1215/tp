@@ -46,9 +46,9 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonCourseUtil;
 import seedu.address.testutil.PersonUtil;
 
-public class AddressBookParserTest {
+public class MainParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final MainParser parser = new MainParser();
 
     @Test
     public void parseCommand_add() throws Exception {
