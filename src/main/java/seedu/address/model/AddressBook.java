@@ -45,23 +45,20 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Generates a unique student ID in the format SXXXXX where XXXXX is a 5-digit number.
-     * The ID sequence uses the higher of stored counter or max existing ID + 1.
+     * The ID sequence uses the higher of max existing ID + 1.
      *
      * @return a new unique StudentId object
      */
-    public StudentId generateStudentId() {
-        int storedId = userPrefs.getNextStudentId();
-
+    public StudentId getLatestStudentId() {
         int maxExistingId = getPersonList().stream()
                 .map(Person::getStudentId)
                 .mapToInt(sid -> Integer.parseInt(sid.getValue().substring(1)))
                 .max()
                 .orElse(0);
 
-        int nextId = Math.max(storedId, maxExistingId + 1);
+        int nextId = maxExistingId + 1;
 
         String idString = String.format("S%05d", nextId);
-        userPrefs.setNextStudentId(nextId + 1);
         return new StudentId(idString);
     }
 

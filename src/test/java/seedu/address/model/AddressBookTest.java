@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -85,29 +86,27 @@ public class AddressBookTest {
     }
 
     @Test
-    public void generateStudentId_generatesUniqueIds() {
+    public void getLatestStudentId_generatesUniqueIds() {
+        addressBook.resetData(new AddressBook());
         // Test that generated student IDs are unique and in correct format
-        StudentId firstId = addressBook.generateStudentId();
-        StudentId secondId = addressBook.generateStudentId();
-        StudentId thirdId = addressBook.generateStudentId();
+        StudentId firstId = addressBook.getLatestStudentId();
+        StudentId secondId = addressBook.getLatestStudentId();
+
+        addressBook.addPerson(ALICE);
+        StudentId thirdId = addressBook.getLatestStudentId();
 
         // Check format
+        assertEquals("S00001", firstId.getValue());
         assertTrue(firstId.getValue().matches("S\\d{5}"));
         assertTrue(secondId.getValue().matches("S\\d{5}"));
         assertTrue(thirdId.getValue().matches("S\\d{5}"));
 
-        // Check uniqueness
-        assertFalse(firstId.equals(secondId));
-        assertFalse(secondId.equals(thirdId));
-        assertFalse(firstId.equals(thirdId));
+        // Check consistency
+        assertEquals(firstId, secondId);
+        assertNotEquals(firstId, thirdId);
 
-        // Check sequential generation
-        int firstNumber = Integer.parseInt(firstId.getValue().substring(1));
-        int secondNumber = Integer.parseInt(secondId.getValue().substring(1));
-        int thirdNumber = Integer.parseInt(thirdId.getValue().substring(1));
-
-        assertEquals(firstNumber + 1, secondNumber);
-        assertEquals(secondNumber + 1, thirdNumber);
+        assertEquals(Integer.parseInt(ALICE.getStudentId().getValue().substring(1)) + 1,
+                Integer.parseInt(thirdId.getValue().substring(1)));
     }
 
     @Test

@@ -61,7 +61,7 @@ public class RegisterCommand extends Command {
         }
 
         AddressBook addressBook = (AddressBook) model.getAddressBook();
-        StudentId id = addressBook.generateStudentId();
+        StudentId id = addressBook.getLatestStudentId();
         Person toAdd = new Person(name, phone, gender, id);
 
         if (model.hasPerson(toAdd)) {
