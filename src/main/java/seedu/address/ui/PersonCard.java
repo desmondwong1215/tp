@@ -30,13 +30,17 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
     private Label genderLabel;
     @FXML
     private Label genderValue;
     @FXML
-    private Label studentId;
+    private Label studentIdLabel;
+    @FXML
+    private Label studentIdValue;
+    @FXML
+    private Label phoneLabel;
+    @FXML
+    private Label phoneValue;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -46,8 +50,13 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText("Phone: " + person.getPhone().value);
-        studentId.setText("Student ID: " + person.getStudentId().getValue());
+
+        studentIdLabel.setText("Student ID:");
+        studentIdValue.setText(person.getStudentId().getValue());
+
+        phoneLabel.setText("Phone:");
+        phoneValue.setText(person.getPhone().value);
+
         genderLabel.setText("Gender:");
         genderValue.setText(person.getGender().value);
 
