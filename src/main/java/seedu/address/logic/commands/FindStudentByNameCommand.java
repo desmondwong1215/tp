@@ -30,8 +30,14 @@ public class FindStudentByNameCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        int matchedCount = model.getFilteredPersonList().size();
+
+        if (matchedCount == 0) {
+            return new CommandResult("Error: No student found.");
+        }
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, matchedCount));
     }
 
     @Override
