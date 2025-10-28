@@ -319,7 +319,7 @@ public class RegisterCommandTest {
             // Override generateStudentId to provide predictable IDs for testing
             return new AddressBook() {
                 @Override
-                public StudentId generateStudentId() {
+                public StudentId getLatestStudentId() {
                     String idString = String.format("S%05d", nextStudentId++);
                     return new StudentId(idString);
                 }

@@ -35,7 +35,7 @@ public class RegisterCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getCourseBook(), new UserPrefs());
 
-        StudentId expectedId = ((AddressBook) expectedModel.getAddressBook()).generateStudentId();
+        StudentId expectedId = ((AddressBook) expectedModel.getAddressBook()).getLatestStudentId();
         Person expectedPerson = new Person(
                 validPerson.getName(),
                 validPerson.getPhone(),
