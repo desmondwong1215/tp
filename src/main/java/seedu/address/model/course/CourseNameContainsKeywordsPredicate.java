@@ -35,7 +35,7 @@ public class CourseNameContainsKeywordsPredicate implements Predicate<Course> {
 
     @Override
     public String toString() {
-        return "CourseNameContainsKeywordsPredicate{"
+        return "CourseNameContainsKeywordsPredicate{" 
                 + "keywords=" + keywords
                 + '}';
     }
