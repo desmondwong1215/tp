@@ -35,7 +35,8 @@ public class AddStudentCommandTest {
                         student.getName(),
                         student.getStudentId(),
                         course.getName(),
-                        course.getCourseId()
+                        course.getCourseId(),
+                        1
                 ),
                 commandResult.getFeedbackToUser()
         );

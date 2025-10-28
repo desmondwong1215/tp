@@ -23,7 +23,9 @@ public class RemoveStudentCommand extends Command {
             + "Example: " + COMMAND_WORD + " S00001 C0001";
 
     public static final String MESSAGE_SUCCESS =
-            "Student '%1$s' (%2$s) removed from Course '%3$s' (%4$s) successfully.";
+            "Student '%1$s' (%2$s) removed from Course '%3$s' (%4$s) successfully.\n"
+            + "Course '%3$s' (%4$s) now have %5$s student(s) enrolled.\n"
+            + "Use 'view_course_details' command to view course details.";
     public static final String MESSAGE_COURSE_NOT_FOUND = "Course with course ID %1$s not found.";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "Student with student ID %1$s not in addressbook.";
     public static final String MESSAGE_STUDENT_NOT_IN_COURSE = "Student with student ID %1$s not in course.";
@@ -62,7 +64,14 @@ public class RemoveStudentCommand extends Command {
 
         course.removeStudent(student);
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS, student.getName(), studentId, course.getName(), courseId)
+                String.format(
+                        MESSAGE_SUCCESS,
+                        student.getName(),
+                        studentId,
+                        course.getName(),
+                        courseId,
+                        course.getStudentList().asUnmodifiableObservableList().size()
+                )
         );
     }
 
