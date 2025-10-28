@@ -14,8 +14,8 @@ public class FindCourseByNameCommand extends Command {
     public static final String COMMAND_WORD = "find_course_by_name";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all courses whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "the specified keywords (case-insensitive).\n"
+            + "Parameters: COURSE_NAME\n"
             + "Example: " + COMMAND_WORD + " data science";
 
     private final CourseNameContainsKeywordsPredicate predicate;

@@ -9,13 +9,15 @@ import seedu.address.model.course.CourseId;
  */
 public class DeleteCourseCommand extends Command {
     public static final String COMMAND_WORD = "delete_course";
-    public static final String MESSAGE_USAGE = "delete_course <COURSE_ID>";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete all courses whose Course ID matches any of "
+            + "the specified ID.\n"
+            + "Parameters: COURSE_ID (must be in the format C####, e.g., C1234)\n"
+            + "Example: " + COMMAND_WORD + " C0001";
     public static final String MESSAGE_SUCCESS = "Course \"%1$s\" deleted successfully.";
     public static final String MESSAGE_NOT_FOUND = "Error: Course not found. No course with that ID exists.";
     public static final String MESSAGE_INVALID_FORMAT = "Error: Invalid course id format. It should be CXXXX.";
     public static final String MESSAGE_STUDENTS_ENROLLED =
             "Error: Remove all students from the course before deleting.";
-    public static final String MESSAGE_MISSING_ID = "Error: Missing course id.";
 
     private final CourseId courseId;
 

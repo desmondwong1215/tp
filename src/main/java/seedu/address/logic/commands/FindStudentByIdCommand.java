@@ -16,8 +16,8 @@ public class FindStudentByIdCommand extends Command {
     public static final String COMMAND_WORD = "find_student_by_id";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose id matches any of "
-            + "the specified id and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "the specified id.\n"
+            + "Parameters: STUDENT_ID \n"
             + "Example: " + COMMAND_WORD + " S00001 S00003 S10000";
 
     private final IdMatchesKeywordsPredicate predicate;
