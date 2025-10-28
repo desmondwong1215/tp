@@ -53,7 +53,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getStudentId().equals(getStudentId());
+                && otherPerson.isSameStudentId(getStudentId());
     }
 
     /**

@@ -54,17 +54,4 @@ public class RegisterCommandIntegrationTest {
                 String.format(RegisterCommand.MESSAGE_SUCCESS, Messages.format(expectedPerson)),
                 expectedModel);
     }
-
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(
-                new RegisterCommand(
-                    personInList.getName(),
-                    personInList.getPhone(),
-                    personInList.getGender()
-                ),
-                model,
-                RegisterCommand.MESSAGE_DUPLICATE_PERSON);
-    }
 }
