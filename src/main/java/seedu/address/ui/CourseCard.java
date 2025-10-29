@@ -22,16 +22,20 @@ public class CourseCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label courseId;
+    private Label courseIdLabel;
+    @FXML
+    private Label courseIdValue;
 
     /**
-     * Creates a {@code CourseCode} with the given {@code Course} and index to display.
+     * Creates a {@code CourseCard} with the given {@code Course} and index to display.
      */
     public CourseCard(Course course, int displayedIndex) {
         super(FXML);
         this.course = course;
         id.setText(displayedIndex + ". ");
         name.setText(course.getName().fullName);
-        courseId.setText("Course ID: " + course.getCourseId().toString());
+
+        courseIdLabel.setText("Course ID:");
+        courseIdValue.setText(course.getCourseId().toString());
     }
 }
