@@ -17,6 +17,7 @@ public class FindCourseByNameCommand extends Command {
             + "the specified keywords (case-insensitive).\n"
             + "Parameters: COURSE_NAME\n"
             + "Example: " + COMMAND_WORD + " science english";
+    public static final String MESSAGE_COURSE_NOT_FOUND = "No course found!";
 
     private final CourseNameContainsKeywordsPredicate predicate;
 
@@ -31,7 +32,7 @@ public class FindCourseByNameCommand extends Command {
         int matchedCount = model.getFilteredCourseList().size();
 
         if (matchedCount == 0) {
-            return new CommandResult("Error: No course found.");
+            return new CommandResult(MESSAGE_COURSE_NOT_FOUND);
         }
 
         return new CommandResult(

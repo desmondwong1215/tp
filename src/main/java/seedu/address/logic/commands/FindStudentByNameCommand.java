@@ -19,6 +19,7 @@ public class FindStudentByNameCommand extends Command {
             + "the specified keywords (case-insensitive).\n"
             + "Parameters: NAME \n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "No student found";
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -33,7 +34,7 @@ public class FindStudentByNameCommand extends Command {
         int matchedCount = model.getFilteredPersonList().size();
 
         if (matchedCount == 0) {
-            return new CommandResult("Error: No student found.");
+            return new CommandResult(MESSAGE_STUDENT_NOT_FOUND);
         }
 
         return new CommandResult(

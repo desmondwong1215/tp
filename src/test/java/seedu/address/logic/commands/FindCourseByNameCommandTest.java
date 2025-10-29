@@ -40,7 +40,7 @@ class FindCourseByNameCommandTest {
         CommandResult result = command.execute(model);
         assertEquals(1, model.getFilteredCourseList().size());
         assertTrue(model.getFilteredCourseList().contains(course2));
-        assertTrue(result.getFeedbackToUser().contains("1 courses listed"));
+        assertTrue(result.getFeedbackToUser().contains("1 course(s) listed"));
     }
 
     @Test
@@ -51,7 +51,7 @@ class FindCourseByNameCommandTest {
         assertEquals(2, model.getFilteredCourseList().size());
         assertTrue(model.getFilteredCourseList().contains(course1));
         assertTrue(model.getFilteredCourseList().contains(course3));
-        assertTrue(result.getFeedbackToUser().contains("2 courses listed"));
+        assertTrue(result.getFeedbackToUser().contains("2 course(s) listed"));
     }
 
     @Test
@@ -60,7 +60,7 @@ class FindCourseByNameCommandTest {
                 new CourseNameContainsKeywordsPredicate(Collections.singletonList("History")));
         CommandResult result = command.execute(model);
         assertEquals(0, model.getFilteredCourseList().size());
-        assertTrue(result.getFeedbackToUser().contains("Error: No course found"));
+        assertTrue(result.getFeedbackToUser().contains(FindCourseByNameCommand.MESSAGE_COURSE_NOT_FOUND));
     }
 
     // Minimal Model stub for testing

@@ -34,7 +34,7 @@ public class EditCourseCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_ID + "COURSE_ID] "
+            + "[" + PREFIX_ID + "COURSE_ID] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "English 101 "
             + PREFIX_ID + "C0001";

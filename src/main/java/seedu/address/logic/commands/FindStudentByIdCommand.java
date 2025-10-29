@@ -19,6 +19,7 @@ public class FindStudentByIdCommand extends Command {
             + "the specified id.\n"
             + "Parameters: STUDENT_ID \n"
             + "Example: " + COMMAND_WORD + " S00001 S00003 S10000";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "No student found!";
 
     private final IdMatchesKeywordsPredicate predicate;
 
@@ -33,7 +34,7 @@ public class FindStudentByIdCommand extends Command {
         int matchedCount = model.getFilteredPersonList().size();
 
         if (matchedCount == 0) {
-            return new CommandResult("Error: No student found.");
+            return new CommandResult(MESSAGE_STUDENT_NOT_FOUND);
         }
 
         return new CommandResult(

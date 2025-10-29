@@ -59,7 +59,7 @@ public class FindStudentByNameCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = "Error: No student found.";
+        String expectedMessage = FindStudentByNameCommand.MESSAGE_STUDENT_NOT_FOUND;
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindStudentByNameCommand command = new FindStudentByNameCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
