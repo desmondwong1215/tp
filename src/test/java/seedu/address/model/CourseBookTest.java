@@ -4,14 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCourses.CS1010;
 import static seedu.address.testutil.TypicalCourses.CS2040;
 import static seedu.address.testutil.TypicalCourses.MA1521;
 import static seedu.address.testutil.TypicalCourses.getTypicalCourseBook;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,9 +25,7 @@ import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseId;
 import seedu.address.model.course.exceptions.CourseNotFoundException;
 import seedu.address.model.course.exceptions.DuplicateCourseIdException;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.CourseBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class CourseBookTest {
 
