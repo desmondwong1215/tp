@@ -16,8 +16,8 @@ public class FindStudentByNameCommand extends Command {
     public static final String COMMAND_WORD = "find_student_by_name";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "the specified keywords (case-insensitive).\n"
+            + "Parameters: NAME \n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
@@ -30,8 +30,14 @@ public class FindStudentByNameCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        int matchedCount = model.getFilteredPersonList().size();
+
+        if (matchedCount == 0) {
+            return new CommandResult("Error: No student found.");
+        }
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, matchedCount));
     }
 
     @Override

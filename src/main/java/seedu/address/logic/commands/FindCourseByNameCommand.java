@@ -14,9 +14,9 @@ public class FindCourseByNameCommand extends Command {
     public static final String COMMAND_WORD = "find_course_by_name";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all courses whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " data science";
+            + "the specified keywords (case-insensitive).\n"
+            + "Parameters: COURSE_NAME\n"
+            + "Example: " + COMMAND_WORD + " science english";
 
     private final CourseNameContainsKeywordsPredicate predicate;
 
@@ -28,8 +28,14 @@ public class FindCourseByNameCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredCourseList(predicate);
+        int matchedCount = model.getFilteredCourseList().size();
+
+        if (matchedCount == 0) {
+            return new CommandResult("Error: No course found.");
+        }
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_COURSES_LISTED_OVERVIEW, model.getFilteredCourseList().size()));
+                String.format(Messages.MESSAGE_COURSES_LISTED_OVERVIEW, matchedCount));
     }
 
     @Override

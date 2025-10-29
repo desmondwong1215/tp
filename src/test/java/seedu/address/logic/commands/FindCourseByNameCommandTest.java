@@ -60,7 +60,7 @@ class FindCourseByNameCommandTest {
                 new CourseNameContainsKeywordsPredicate(Collections.singletonList("History")));
         CommandResult result = command.execute(model);
         assertEquals(0, model.getFilteredCourseList().size());
-        assertTrue(result.getFeedbackToUser().contains("0 courses listed"));
+        assertTrue(result.getFeedbackToUser().contains("Error: No course found"));
     }
 
     // Minimal Model stub for testing
