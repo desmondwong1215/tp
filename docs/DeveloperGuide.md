@@ -324,16 +324,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  Teacher commands to create a new course with a course name.
-2.  EB validates the course name.
-3.  EB assigns a unique COURSE_ID and creates the course.
+1.  Teacher commands to create a new course with a course name and a course id.
+2.  EB validates the course id.
+3.  EB creates the course with indicated course name and course id.
 4.  EB indicates success.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. EB detects invalid data (e.g., name containing digits or missing required parameter) and shows error message.
+* 2a. EB detects invalid data (e.g., course id is used, course id is in an invalid format or missing required parameter) and shows error message.
 
   Use case ends.
 
@@ -343,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Teacher commands to view all existing courses.
 2.  EB retrieves the list of all created courses.
-3.  EB displays a formatted list showing each course's ID and name.
+3.  EB displays a formatted list showing each course's id and name.
 
     Use case ends.
 
@@ -351,7 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. EB detects that no courses have been created yet.
 
-    * 2a1. EB Shows empty list and prompts Teacher to create new course
+    * 2a1. EB Shows empty list.
       Use case ends.
 
       Use case ends.
@@ -360,23 +360,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  Teacher chooses to delete a course.
-2.  EB requests for the COURSE_ID to be deleted.
-3.  Teacher enters the valid COURSE_ID.
-4.  EB checks if the course has any enrolled students.
-5.  EB deletes the course and indicates success.
+1.  Teacher commands to delete course with a course id.
+2.  EB checks if the course has any enrolled students.
+3.  EB deletes the course and indicates success.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. EB detects that the COURSE_ID is not found or is in an invalid format and then shows error.
+* 1a. EB detects that the course id is not found or is in an invalid format and then shows error.
 
   Use case ends.
 
-* 4a. EB detects that the course has enrolled students.
+* 2a. EB detects that the course has enrolled students.
 
-    * 4a1. EB prompts Teacher to remove all existing students from the course before deleting the course.
+    * 4a1. EB prompts teacher to remove all existing students from the course before deleting the course.
 
       Use case ends.
 
@@ -400,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  Teacher commands to deregister a student from the address book with a valid student ID.
+1.  Teacher commands to deregister a student from the address book with a valid student id.
 2.  EB checks if the student is currently enrolled in any courses.
 3.  EB removes the student from the address book database.
 4.  EB displays a success message.
@@ -417,19 +415,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC06 - Enter Course**
+**Use case: UC06 - Find Student by Id**
 
 **MSS:**
 
-1.  Teacher commands to enter a specific course with a course id.
-2.  EB checks if the course id is valid.
-3.  EB sets the system context to the specified course and indicates success.
+1.  Teacher commands to enter a find student with STUDENT_ID.
+2.  EB retrieves the list of filtered students.
+3.  EB displays a formatted list showing each student's details.
 
     Use case ends.
 
 **Extensions**
 
-* 2a.  EB detects an invalid format for course ID or an ID that does not exist and shows error.
+* 1a.  EB detects any STUDENT_ID in an invalid format or missing arguments and shows error.
+
+  Use case ends.
+
+**Use case: UC07 - Edit Course**
+
+**MSS:**
+
+1.  Teacher commands to edit the course with new course name or new course id. Teacher need to select the course by indicating its index used in the full displayed course list.
+2.  EB edits the details of the course selected.
+3.  EB shows a success message and displays the edited course.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a.  EB detects invalid index, no new detail is provided, new course id is in an invalid format or new course id is used by other course and shows error.
 
   Use case ends.
 
@@ -437,7 +451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (Requires Teacher to be inside a course context)
 
-**Use case: UC07 - Add Student To Course**
+**Use case: UC08 - Add Student To Course**
 
 **Precondition**: Teacher is currently inside a course.
 
@@ -460,7 +474,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes at step 2.
 
-**Use case: UC08 -  Remove Student From Course**
+**Use case: UC09 -  Remove Student From Course**
 
 **Precondition**: Teacher is currently inside a course.
 
@@ -484,7 +498,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC09 - Create Session**
+**Use case: UC10 - Create Session**
 
 **Precondition**: Teacher is currently inside a course .
 
@@ -507,7 +521,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC10 - Mark/Unmark Attendance**
+**Use case: UC11 - Mark/Unmark Attendance**
 
 **Precondition**: Teacher is currently inside a course and sessions exist.
 
@@ -526,7 +540,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC11 - View Attendance**
+**Use case: UC12 - View Attendance**
 
 **Precondition**: Teacher is currently inside a course.
 
@@ -552,7 +566,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-**Use case: UC12 - Exit Course**
+**Use case: UC13 - Exit Course**
 
 **Precondition**: Teacher is currently inside a course.
 
