@@ -36,6 +36,8 @@ public class CommandTestUtil {
     public static final String VALID_GENDER_AMY = "Female";
     public static final String VALID_GENDER_BOB = "Male";
 
+    public static final String VALID_ID_AMY = "S00001";
+
     public static final String VALID_COURSE_NAME_MATH = "Math";
     public static final String VALID_COURSE_NAME_ENGLISH = "English";
     public static final String VALID_COURSE_ID_C1010 = "C1010";
@@ -47,6 +49,7 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
     public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
+    public static final String ID_DESC_AMY = " " + PREFIX_ID + VALID_ID_AMY;
 
     public static final String COURSE_NAME_DESC_MATH = " " + PREFIX_NAME + VALID_COURSE_NAME_MATH;
     public static final String COURSE_NAME_DESC_ENGLISH = " " + PREFIX_NAME + VALID_COURSE_NAME_ENGLISH;
