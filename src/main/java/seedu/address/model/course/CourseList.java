@@ -95,6 +95,13 @@ public class CourseList implements Iterable<Course> {
     }
 
     /**
+     * Returns true if there is no course in the list.
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Course> asUnmodifiableObservableList() {

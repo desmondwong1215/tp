@@ -10,6 +10,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -115,6 +116,20 @@ public class AddressBookTest {
         assertEquals(expected, addressBook.toString());
     }
 
+    @Test
+    public void isEmpty_emptyList_true() {
+        addressBook.setPersons(new ArrayList<>());
+        assertTrue(addressBook.isEmpty());
+    }
+
+    @Test
+    public void isEmpty_nonEmptyList_false() {
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB)
+                .build();
+        addressBook.addPerson(editedAlice);
+        assertFalse(addressBook.isEmpty());
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
@@ -128,6 +143,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return persons.isEmpty();
         }
     }
 }

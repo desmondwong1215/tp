@@ -119,6 +119,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// util methods
 
     @Override
+    public boolean isEmpty() {
+        return persons.isEmpty();
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)

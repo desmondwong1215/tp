@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalCourses.CS2040;
 import static seedu.address.testutil.TypicalCourses.MA1521;
 import static seedu.address.testutil.TypicalCourses.getTypicalCourseBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -198,6 +199,19 @@ public class CourseBookTest {
         assertEquals(cb1.hashCode(), cb2.hashCode());
     }
 
+    @Test
+    public void isEmpty_emptyList_true() {
+        courseBook.setCourses(new ArrayList<>());
+        assertTrue(courseBook.isEmpty());
+    }
+
+    @Test
+    public void isEmpty_nonEmptyList_false() {
+        Course newCourse = new CourseBuilder(CS1010).withName("A Different Name").build();
+        courseBook.addCourse(newCourse);
+        assertFalse(courseBook.isEmpty());
+    }
+
     /**
      * A stub ReadOnlyCourseBook whose courses list can violate interface constraints.
      * This is used for testing scenarios with duplicate courses.
@@ -212,6 +226,11 @@ public class CourseBookTest {
         @Override
         public ObservableList<Course> getCourseList() {
             return courses;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return courses.isEmpty();
         }
     }
 }

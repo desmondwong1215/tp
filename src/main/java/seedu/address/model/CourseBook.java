@@ -114,6 +114,11 @@ public class CourseBook implements ReadOnlyCourseBook {
     //// util methods
 
     @Override
+    public boolean isEmpty() {
+        return courses.isEmpty();
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("courses", courses)
