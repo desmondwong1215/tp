@@ -11,7 +11,6 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -84,7 +83,7 @@ public class EditStudentCommandParserTest {
 
     @ Test
     public void parse_idFieldProvided_failure() {
-        assertParseFailure(parser, "1" +ID_DESC_AMY, EditStudentCommand.MESSAGE_ID_IS_IMMUTABLE);
+        assertParseFailure(parser, "1" + ID_DESC_AMY, EditStudentCommand.MESSAGE_ID_IS_IMMUTABLE);
     }
 
     @Test
