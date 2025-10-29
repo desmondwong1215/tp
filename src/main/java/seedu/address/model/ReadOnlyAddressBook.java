@@ -14,4 +14,9 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns true if there is no student in the address book.
+     */
+    boolean isEmpty();
+
 }

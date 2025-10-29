@@ -4,12 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCourses.CS1010;
 import static seedu.address.testutil.TypicalCourses.CS2040;
 import static seedu.address.testutil.TypicalCourses.MA1521;
 import static seedu.address.testutil.TypicalCourses.getTypicalCourseBook;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,7 +28,9 @@ import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseId;
 import seedu.address.model.course.exceptions.CourseNotFoundException;
 import seedu.address.model.course.exceptions.DuplicateCourseIdException;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.CourseBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class CourseBookTest {
 
@@ -198,6 +204,19 @@ public class CourseBookTest {
         assertEquals(cb1.hashCode(), cb2.hashCode());
     }
 
+    @Test
+    public void isEmpty_emptyList_true() {
+        courseBook.setCourses(new ArrayList<>());
+        assertTrue(courseBook.isEmpty());
+    }
+
+    @Test
+    public void isEmpty_nonEmptyList_false() {
+        Course newCourse = new CourseBuilder(CS1010).withName("A Different Name").build();
+        courseBook.addCourse(newCourse);
+        assertFalse(courseBook.isEmpty());
+    }
+
     /**
      * A stub ReadOnlyCourseBook whose courses list can violate interface constraints.
      * This is used for testing scenarios with duplicate courses.
@@ -212,6 +231,11 @@ public class CourseBookTest {
         @Override
         public ObservableList<Course> getCourseList() {
             return courses;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return courses.isEmpty();
         }
     }
 }
