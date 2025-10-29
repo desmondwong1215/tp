@@ -35,7 +35,7 @@ public class EditStudentCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_GENDER + "GENDER] "
+            + "[" + PREFIX_GENDER + "GENDER] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_GENDER + "Male";
