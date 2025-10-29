@@ -28,18 +28,18 @@
       </HBox>
 
       <HBox fx:id="studentIdContainer" spacing="5" alignment="CENTER_LEFT">
-        <Label fx:id="studentIdLabel" text="Student ID:" styleClass="cell_small_label_bold" />
-        <Label fx:id="studentIdValue" styleClass="cell_small_label" />
+        <Label fx:id="studentIdLabel" styleClass="cell_small_label_bold" />
+        <Label fx:id="studentIdValue" styleClass="cell_small_value" />
       </HBox>
 
       <HBox fx:id="phoneContainer" spacing="5" alignment="CENTER_LEFT">
-        <Label fx:id="phoneLabel" text="Phone:" styleClass="cell_small_label_bold" />
-        <Label fx:id="phoneValue" styleClass="cell_small_label" />
+        <Label fx:id="phoneLabel" styleClass="cell_small_label_bold" />
+        <Label fx:id="phoneValue" styleClass="cell_small_value" />
       </HBox>
 
       <HBox fx:id="genderContainer" spacing="5" alignment="CENTER_LEFT">
-        <Label fx:id="genderLabel" text="Gender:" styleClass="cell_small_label_bold" />
-        <Label fx:id="genderValue" styleClass="cell_small_label" />
+        <Label fx:id="genderLabel" styleClass="cell_small_label_bold" />
+        <Label fx:id="genderValue" styleClass="cell_small_value" />
       </HBox>
     </VBox>
   </GridPane>
