@@ -85,11 +85,11 @@ Allows teachers to create a new course. Duplicate course names are allowed, but 
 
 **Format:** `create_course n/<COURSE_NAME> id/<COURSE_ID>`
 
-<box type="tip" seamless>
-
 **Requirements:**
 * COURSE_ID need to be in valid format, which is `C` followed by 4 digits (e.g., CXXXX).
 * COURSE_ID cannot be used by other courses in the course list.
+
+<box type="tip" seamless>
 
 **Tip:** Course names can only contain letters, spaces, hyphens, and apostrophes.
 
@@ -178,7 +178,7 @@ Allows teachers to add a new student to the EB database. A unique **Student ID**
 * Names are case-sensitive.<br>
 * Genders are case-insensitive.
 
-- </box>
+</box>
 
 **Examples:**
 * `register n/John Doe p/12345678 g/Male`
@@ -257,7 +257,7 @@ Allows teachers to enroll an already-registered student into a course using **St
 
 **Format:** `add_student <STUDENT_ID> <COURSE_ID>`
 
-*Requirements:*
+**Requirements:**
 * `Student ID` must follow the correct format which is ‘S’ followed by 5 numeric digits. (e.g. `S00001`)
 * `Course ID` must follow the correct format which is ‘C’ followed by 4 numeric digits. (e.g. `C0001`)
 * The target student exists in the EB database.
@@ -281,7 +281,7 @@ Allows teachers to unenroll a student from the currently entered course using **
 
 **Format:** `remove_student <STUDENT_ID> <COURSE_ID>`
 
-*Requirements:*
+**Requirements:**
 * `Student ID` must follow the correct format which is ‘S’ followed by 5 numeric digits. (e.g. `S00001`)
 * `Course ID` must follow the correct format which is ‘C’ followed by 4 numeric digits. (e.g. `C0001`)
 * The target student exists in the EB database.
