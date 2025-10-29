@@ -50,7 +50,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete S00001`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `CourseListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -90,19 +90,19 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete_course C0001")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete_course C0001` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `DeleteCourseCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `MainParser` object which in turn creates a parser that matches the command (e.g., `DeleteCourseCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCourseCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -112,8 +112,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `MainParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `RegisterCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `RegisterCommand`) which the `MainParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `RegisterCommandParser`, `DeleteCourseCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -124,7 +124,8 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the course book data i.e., all `Course` objects (which are contained in a `CourseList` object).
+* stores the currently 'selected' `Person`, `Course` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>`, `ObservableList<Course>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -144,8 +145,8 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save course book data, address book data, and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `CourseBookStorage`, `AddressBookStorage`, and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -323,16 +324,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  Teacher commands to create a new course with a course name.
-2.  EB validates the course name.
-3.  EB assigns a unique COURSE_ID and creates the course.
+1.  Teacher commands to create a new course with a course name and a course id.
+2.  EB validates the course id.
+3.  EB creates the course with indicated course name and course id.
 4.  EB indicates success.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. EB detects invalid data (e.g., name containing digits or missing required parameter) and shows error message.
+* 2a. EB detects invalid data (e.g., course id is used, course id is in an invalid format or missing required parameter) and shows error message.
 
   Use case ends.
 
@@ -342,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Teacher commands to view all existing courses.
 2.  EB retrieves the list of all created courses.
-3.  EB displays a formatted list showing each course's ID and name.
+3.  EB displays a formatted list showing each course's id and name.
 
     Use case ends.
 
@@ -350,7 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. EB detects that no courses have been created yet.
 
-    * 2a1. EB Shows empty list and prompts Teacher to create new course
+    * 2a1. EB Shows empty list.
       Use case ends.
 
       Use case ends.
@@ -359,23 +360,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  Teacher chooses to delete a course.
-2.  EB requests for the COURSE_ID to be deleted.
-3.  Teacher enters the valid COURSE_ID.
-4.  EB checks if the course has any enrolled students.
-5.  EB deletes the course and indicates success.
+1.  Teacher commands to delete course with a course id.
+2.  EB checks if the course has any enrolled students.
+3.  EB deletes the course and indicates success.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. EB detects that the COURSE_ID is not found or is in an invalid format and then shows error.
+* 1a. EB detects that the course id is not found or is in an invalid format and then shows error.
 
   Use case ends.
 
-* 4a. EB detects that the course has enrolled students.
+* 2a. EB detects that the course has enrolled students.
 
-    * 4a1. EB prompts Teacher to remove all existing students from the course before deleting the course.
+    * 4a1. EB prompts teacher to remove all existing students from the course before deleting the course.
 
       Use case ends.
 
@@ -399,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  Teacher commands to deregister a student from the address book with a valid student ID.
+1.  Teacher commands to deregister a student from the address book with a valid student id.
 2.  EB checks if the student is currently enrolled in any courses.
 3.  EB removes the student from the address book database.
 4.  EB displays a success message.
@@ -416,19 +415,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC06 - Enter Course**
+**Use case: UC06 - Find Student by Id**
 
 **MSS:**
 
-1.  Teacher commands to enter a specific course with a course id.
-2.  EB checks if the course id is valid.
-3.  EB sets the system context to the specified course and indicates success.
+1.  Teacher commands to enter a find student with STUDENT_ID.
+2.  EB retrieves the list of filtered students.
+3.  EB displays a formatted list showing each student's details.
 
     Use case ends.
 
 **Extensions**
 
-* 2a.  EB detects an invalid format for course ID or an ID that does not exist and shows error.
+* 1a.  EB detects any STUDENT_ID in an invalid format or missing arguments and shows error.
+
+  Use case ends.
+
+**Use case: UC07 - Edit Course**
+
+**MSS:**
+
+1.  Teacher commands to edit the course with new course name or new course id. Teacher need to select the course by indicating its index used in the full displayed course list.
+2.  EB edits the details of the course selected.
+3.  EB shows a success message and displays the edited course.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a.  EB detects invalid index, no new detail is provided, new course id is in an invalid format or new course id is used by other course and shows error.
 
   Use case ends.
 
@@ -436,7 +451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (Requires Teacher to be inside a course context)
 
-**Use case: UC07 - Add Student To Course**
+**Use case: UC08 - Add Student To Course**
 
 **Precondition**: Teacher is currently inside a course.
 
@@ -459,7 +474,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes at step 2.
 
-**Use case: UC08 -  Remove Student From Course**
+**Use case: UC09 -  Remove Student From Course**
 
 **Precondition**: Teacher is currently inside a course.
 
@@ -483,7 +498,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC09 - Create Session**
+**Use case: UC10 - Create Session**
 
 **Precondition**: Teacher is currently inside a course .
 
@@ -506,7 +521,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC10 - Mark/Unmark Attendance**
+**Use case: UC11 - Mark/Unmark Attendance**
 
 **Precondition**: Teacher is currently inside a course and sessions exist.
 
@@ -525,7 +540,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC11 - View Attendance**
+**Use case: UC12 - View Attendance**
 
 **Precondition**: Teacher is currently inside a course.
 
@@ -551,7 +566,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-**Use case: UC12 - Exit Course**
+**Use case: UC13 - Exit Course**
 
 **Precondition**: Teacher is currently inside a course.
 
