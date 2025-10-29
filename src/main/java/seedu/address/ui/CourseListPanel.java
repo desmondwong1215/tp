@@ -2,8 +2,10 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -19,6 +21,8 @@ public class CourseListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Course> courseListView;
+    @FXML
+    private Label courseTotal;
 
     /**
      * Creates a {@code CourseListPanel} with the given {@code ObservableList}.
@@ -26,6 +30,7 @@ public class CourseListPanel extends UiPart<Region> {
     public CourseListPanel(ObservableList<Course> courseList) {
         super(FXML);
         courseListView.setItems(courseList);
+        courseTotal.textProperty().bind(Bindings.size(courseList).asString());
         courseListView.setCellFactory(listView -> new CourseListViewCell());
     }
 

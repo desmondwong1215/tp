@@ -24,12 +24,12 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
+                <Label fx:id="courseIdValue" styleClass="course-id-label" />
                 <Label fx:id="name" styleClass="cell_big_label" />
             </HBox>
-
             <HBox fx:id="courseIdContainer" spacing="5" alignment="CENTER_LEFT">
-                <Label fx:id="courseIdLabel" text="Course ID:" styleClass="cell_small_label_bold" />
-                <Label fx:id="courseIdValue" styleClass="cell_small_label" />
+                <Label fx:id="courseSizeLabel" styleClass="cell_small_label_bold" />
+                <Label fx:id="courseSizeValue" styleClass="cell_small_value" />
             </HBox>
         </VBox>
     </GridPane>

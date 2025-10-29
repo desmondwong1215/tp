@@ -64,16 +64,16 @@ public class PersonCard extends UiPart<Region> {
 
         switch (genderValueLower) {
         case "female":
-            genderValue.setStyle("-fx-text-fill: #ff76a3;");
+            genderValue.setStyle("-fx-text-fill: #D9457E;");
             break;
         case "male":
-            genderValue.setStyle("-fx-text-fill: #4da3ff;");
+            genderValue.setStyle("-fx-text-fill: #0052CC;");
             break;
         case "other":
-            genderValue.setStyle("-fx-text-fill: #c56bff;");
+            genderValue.setStyle("-fx-text-fill: #657786;");
             break;
         default:
-            genderValue.setStyle("-fx-text-fill: #ffffff;");
+            genderValue.setStyle("-fx-text-fill: #000000;");
         }
 
     }
