@@ -61,7 +61,7 @@ EduBase is a **desktop app for teachers to manage student attendance, optimized 
 * Extraneous parameters for commands that do not take in parameters (such as `view_all_courses`, `exit_course`, and `exit`) will be ignored.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+</box>
 
 ### System-Wide Commands (School Level)
 
@@ -75,7 +75,7 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+**Format:** `help`
 
 ---
 
@@ -83,13 +83,15 @@ Format: `help`
 
 Allows teachers to create a new course. A unique **Course ID** (e.g., C0001) will be generated automatically. Duplicate course names are allowed.
 
-Format: `create_course n/<COURSE_NAME> id/<COURSE_ID>`
+**Format:** `create_course n/<COURSE_NAME> id/<COURSE_ID>`
 
 <box type="tip" seamless>
+
 **Tip:** Course names can only contain letters, spaces, hyphens, and apostrophes.
+
 </box>
 
-Examples:
+**Examples:**
 * `create_course n/English 101 id/C0002`
 * `create_course Calculus II id/C1231`
 
@@ -99,7 +101,7 @@ Examples:
 
 Allows users to view a list of all existing courses with their Course IDs.
 
-Format: `view_all_courses`
+**Format:** `view_all_courses`
 
 Example:
 * `view_all_courses`
@@ -110,28 +112,41 @@ Example:
 
 Allows teachers to delete an existing course using its unique **Course ID**.
 
-Format: `delete_course <COURSE_ID>`
+**Format:** `delete_course <COURSE_ID>`
 
 <box type="warning" seamless>
+
 **Caution:** Ensure the Course ID is correct, as this action cannot be undone.
+
 </box>
 
-Examples:
+**Examples:**
 * `delete_course C0001`
 
 ---
 
 ### Registering a New Student: `register`
 
-Allows teachers to add a new student to the school-level address book. A unique **Student ID** (e.g., S00001) is automatically assigned.
+Allows teachers to add a new student to the EB database. A unique **Student ID** (e.g., S00001) is automatically assigned.
 
-Format: `register n/<NAME> p/<PHONE> g/<GENDER>`
+**Format:** `register n/<NAME> p/<PHONE> g/<GENDER>`
+
+**Requirements:**
+* Names can only include alphanumeric characters and spaces.
+* Phone numbers can only include numbers and more than 3 digits.
+* Genders can only accept values of `Male`, `Female`, and `Other`.
 
 <box type="tip" seamless>
-**Tip:** Student names can only contain letters, spaces, hyphens, and apostrophes. Duplicate names are allowed but will receive a new unique Student ID.
-</box>
 
-Examples:
+**Tips:**<br>
+* Student names can only contain alphanumeric characters and spaces.<br>
+* Duplicate names are allowed but will receive a new unique Student ID.<br>
+* Names are case-sensitive.<br>
+* Genders are case-insensitive.
+
+- </box>
+
+**Examples:**
 * `register n/John Doe p/12345678 g/Male`
 * `register n/Jane Doe p/12345678 g/Female`
 
@@ -139,11 +154,16 @@ Examples:
 
 ### Deregistering a Student: `deregister`
 
-Allows teachers to permanently delete a student from the school-level address book using their unique **Student ID**.
+Allows teachers to permanently delete a student from the EB database using their unique **Student ID**.
 
-Format: `deregister <STUDENT_ID>`
+**Format:** `deregister <STUDENT_ID>`
 
-Examples:
+**Requirements:**
+* `Student Id` must follow the correct format which is ‘S’ followed by 5 numeric digits. (e.g. `S00001`)
+* The target student exists in the EB database.
+* The target student is not enrolled in either of the courses.
+
+**Examples:**
 * `deregister_student S00001`
 
 ---
@@ -152,37 +172,59 @@ Examples:
 
 Allows teachers to view all courses details and all of the students in that class.
 
-Format: `view_course_details <COURSE_ID>`
+**Format:** `view_course_details <COURSE_ID>`
 
-Examples: `view_course_details C0001`
+**Examples:** `view_course_details C0001`
 
 ---
 
 ### Adding Student to Course: `add_student`
 
-Allows teachers to enroll an already-registered student into the currently entered course using their **Student ID**.
+Allows teachers to enroll an already-registered student into a course using **Student ID** and **Course ID**.
 
-Format: `add_student <STUDENT_ID> <COURSE_ID>`
+**Format:** `add_student <STUDENT_ID> <COURSE_ID>`
+
+*Requirements:*
+* `Student ID` must follow the correct format which is ‘S’ followed by 5 numeric digits. (e.g. `S00001`)
+* `Course ID` must follow the correct format which is ‘C’ followed by 4 numeric digits. (e.g. `C0001`)
+* The target student exists in the EB database.
+* The target course exists in the EB database.
+* The target student is not enrolled in the target course.
 
 <box type="warning" seamless>
+
 **Caution:** A student cannot be added to a course if they are already inside the course.
+
 </box>
 
-Examples:
+**Examples:**
 * `add_student S00001 C0001`
 
 ---
 
 ### Removing Student from Course: `remove_student`
 
-Allows teachers to unenroll a student from the currently entered course using their **Student ID**.
+Allows teachers to unenroll a student from the currently entered course using **Student ID** and **Course ID**.
 
-Format: `remove_student <STUDENT_ID> <COURSE_ID>`
+**Format:** `remove_student <STUDENT_ID> <COURSE_ID>`
 
-Examples:
+*Requirements:*
+* `Student ID` must follow the correct format which is ‘S’ followed by 5 numeric digits. (e.g. `S00001`)
+* `Course ID` must follow the correct format which is ‘C’ followed by 4 numeric digits. (e.g. `C0001`)
+* The target student exists in the EB database.
+* The target course exists in the EB database.
+* The target student is currently enrolled in the target course.
+
+**Examples:**
 * `remove_student S00001 C0001`
 
 ---
+
+### Exiting the System: `exit`
+
+Allows teachers to exit from the system using the command box.
+
+**Format:** `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -205,15 +247,14 @@ Examples:
 
 ## Command summary
 
-Action | Format, Examples
----|---
+Action | **Format,** **Examples
+**---|---
 **Commands** |
 **Create Course** | `create_course n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `create_course Calculus II id/C1231`
 **View Courses** | `view_all_courses`
 **Delete Course** | `delete_course <COURSE_ID>` <br> e.g., `delete_course C0003`
 **Register Student** | `register n/<NAME> p/<PHONE> g/<GENDER>` <br> e.g., `register n/John Doe p/12345678 g/Male`
 **Deregister** | `deregister <STUDENT_ID>` <br> e.g., `deregisterd S00005`
-**Enter Course** | `enter_course <COURSE_ID>` <br> e.g., `enter_course C0001`
 **Add Student** | `add_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `add_student S00001 C0001`
 **View Course Details** | `view_course_details <COURSE_ID>` <br> e.g., `view_course_details C0001`
 **Remove Student** | `remove_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `remove_student S00001 C0001`
