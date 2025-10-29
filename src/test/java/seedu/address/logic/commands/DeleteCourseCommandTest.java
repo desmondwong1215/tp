@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.util.Collections;
 import java.util.Set;
@@ -11,10 +13,12 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.DeleteCourseCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseId;
 import seedu.address.model.course.CourseName;
@@ -39,23 +43,29 @@ public class DeleteCourseCommandTest {
 
 
     @Test
-    public void execute_validCourseId_success() {
+    public void execute_validCourseId_success() throws CommandException {
+
+        Course courseToDelete = model.getFilteredCourseList().get(0);
         DeleteCourseCommand command = new DeleteCourseCommand(validCourseId);
-        CommandResult result = command.execute(model);
-        assertEquals(String.format(DeleteCourseCommand.MESSAGE_SUCCESS, validCourse.getName()),
-                result.getFeedbackToUser());
+
+        String expectedMessage = String.format(DeleteCourseCommand.MESSAGE_SUCCESS,
+                courseToDelete.getName());
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getCourseBook(), new UserPrefs());
+        expectedModel.deleteCourse(courseToDelete);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_nonExistentCourseId_failure() {
+    public void execute_nonExistentCourseId_failure() throws CommandException {
         CourseId nonExistentId = new CourseId("C9999");
         DeleteCourseCommand command = new DeleteCourseCommand(nonExistentId);
-        CommandResult result = command.execute(model);
-        assertEquals(DeleteCourseCommand.MESSAGE_NOT_FOUND, result.getFeedbackToUser());
+        assertCommandFailure(command, model, String.format(DeleteCourseCommand.MESSAGE_NOT_FOUND, nonExistentId));
     }
 
     @Test
-    public void execute_courseWithStudents_returnsStudentsEnrolledMessage() {
+    public void execute_courseWithStudents_returnsStudentsEnrolledMessage() throws CommandException {
         UniquePersonList students = new UniquePersonList();
         Person p = new PersonBuilder().build();
         students.add(p);
@@ -65,13 +75,11 @@ public class DeleteCourseCommandTest {
         model.addCourse(courseWithStudents);
 
         DeleteCourseCommand command = new DeleteCourseCommand(cid);
-        CommandResult result = command.execute(model);
-        assertEquals(DeleteCourseCommand.MESSAGE_STUDENTS_ENROLLED,
-                result.getFeedbackToUser());
+        assertCommandFailure(command, model, DeleteCourseCommand.MESSAGE_STUDENTS_ENROLLED);
     }
 
     @Test
-    public void execute_courseNameNull_returnsGenericSuccessMessage() {
+    public void execute_courseNameNull_returnsGenericSuccessMessage() throws CommandException {
         class CourseWithNullName extends Course {
             CourseWithNullName(CourseName name, CourseId id, UniquePersonList students,
                     Set<Tag> tags) {
@@ -91,8 +99,13 @@ public class DeleteCourseCommandTest {
         model.addCourse(courseNullName);
 
         DeleteCourseCommand command = new DeleteCourseCommand(cid);
-        CommandResult result = command.execute(model);
-        assertEquals(DeleteCourseCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+
+        String expectedMessage = DeleteCourseCommand.MESSAGE_SUCCESS;
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getCourseBook(), new UserPrefs());
+        expectedModel.deleteCourse(courseNullName);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
