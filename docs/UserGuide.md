@@ -61,7 +61,7 @@ EduBase is a **desktop app for teachers to manage student attendance, optimized 
 * Extraneous parameters for commands that do not take in parameters (such as `view_all_courses`, `exit_course`, and `exit`) will be ignored.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+</box>
 
 ### System-Wide Commands (School Level)
 
@@ -86,7 +86,9 @@ Allows teachers to create a new course. A unique **Course ID** (e.g., C0001) wil
 Format: `create_course n/<COURSE_NAME> id/<COURSE_ID>`
 
 <box type="tip" seamless>
+
 **Tip:** Course names can only contain letters, spaces, hyphens, and apostrophes.
+
 </box>
 
 Examples:
@@ -127,9 +129,20 @@ Allows teachers to add a new student to the school-level address book. A unique 
 
 Format: `register n/<NAME> p/<PHONE> g/<GENDER>`
 
+Requirements:
+* Names can only include alphanumeric characters and spaces.
+* Phone numbers can only include numbers and more than 3 digits.
+* Genders can only accept values of `Male`, `Female`, and `Other`.
+
 <box type="tip" seamless>
-**Tip:** Student names can only contain letters, spaces, hyphens, and apostrophes. Duplicate names are allowed but will receive a new unique Student ID.
-</box>
+
+**Tip:**<br>
+* Student names can only contain alphanumeric characters and spaces.
+* Duplicate names are allowed but will receive a new unique Student ID.
+* Names are case-sensitive.
+* Genders are case-insensitive.
+
+- </box>
 
 Examples:
 * `register n/John Doe p/12345678 g/Male`
