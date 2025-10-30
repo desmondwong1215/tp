@@ -203,7 +203,7 @@ Allows users to view a list of all existing courses and student.
 **Example:**
 * `list`
 
---- 
+---
 
 ### Find Student By ID: `find_student_by_id`
 

@@ -255,7 +255,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 ### Proposed Feature — Tags for Courses
 
 #### Motivation
-Currently, each course can only store fixed information such as course name, code, and number of students enrolled. However, users may wish to add **custom remarks** — for example, the **name of the teacher-in-charge**, **difficulty level**, or **semester offered**.  
+Currently, each course can only store fixed information such as course name, code, and number of students enrolled. However, users may wish to add **custom remarks** — for example, the **name of the teacher-in-charge**, **difficulty level**, or **semester offered**.
 A flexible **tagging system** allows users to attach personalized tags to courses without altering the base data model.
 
 #### User Stories
@@ -307,7 +307,7 @@ The following sequence diagram illustrates this process:
 
 `addtag 2 t/Dr Tan teaches this course`
 
-**Expected behavior:**  
+**Expected behavior:**
 Adds a new tag to the course in position 2. The course now displays: CS2103 Software Engineering [Tags: Dr Tan teaches this course]
 
 --------------------------------------------------------------------------------------------------------------------
@@ -571,7 +571,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. EB detects that no STUDENT_ID is provided or there exists invalid STUDENT_IDs and shows error message.
-  
+
   Use case ends.
 
 **Use case: UC12 -  Find Course By Name**
