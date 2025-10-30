@@ -30,11 +30,17 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label genderLabel;
     @FXML
-    private Label gender;
+    private Label genderValue;
     @FXML
-    private Label studentId;
+    private Label studentIdLabel;
+    @FXML
+    private Label studentIdValue;
+    @FXML
+    private Label phoneLabel;
+    @FXML
+    private Label phoneValue;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -44,8 +50,31 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText("Phone: " + person.getPhone().value);
-        gender.setText("Gender: " + person.getGender().value);
-        studentId.setText("Student ID: " + person.getStudentId().getValue());
+
+        studentIdLabel.setText("Student ID:");
+        studentIdValue.setText(person.getStudentId().getValue());
+
+        phoneLabel.setText("Phone:");
+        phoneValue.setText(person.getPhone().value);
+
+        genderLabel.setText("Gender:");
+        genderValue.setText(person.getGender().value);
+
+        String genderValueLower = person.getGender().value.toLowerCase();
+
+        switch (genderValueLower) {
+        case "female":
+            genderValue.setStyle("-fx-text-fill: #D9457E;");
+            break;
+        case "male":
+            genderValue.setStyle("-fx-text-fill: #0052CC;");
+            break;
+        case "other":
+            genderValue.setStyle("-fx-text-fill: #657786;");
+            break;
+        default:
+            genderValue.setStyle("-fx-text-fill: #000000;");
+        }
+
     }
 }

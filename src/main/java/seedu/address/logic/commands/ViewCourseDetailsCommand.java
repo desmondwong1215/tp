@@ -21,7 +21,7 @@ public class ViewCourseDetailsCommand extends Command {
             + "Parameters: COURSE_ID (must be in the format C####, e.g., C1234)\n"
             + "Example: " + COMMAND_WORD + " C1234";
 
-    public static final String MESSAGE_SUCCESS = "Course: %1$s (%2$s)\nStudents enrolled:\n%3$s";
+    public static final String MESSAGE_SUCCESS = "Filter applied.\nCourse: %1$s (%2$s)\nStudents enrolled:\n%3$s";
     public static final String MESSAGE_COURSE_NOT_FOUND = "No course found with ID: %1$s";
     public static final String MESSAGE_NO_STUDENTS = "No students enrolled in this course.";
 
@@ -45,6 +45,9 @@ public class ViewCourseDetailsCommand extends Command {
             throw new CommandException(String.format(MESSAGE_COURSE_NOT_FOUND, targetId));
         }
 
+        model.updateFilteredCourseListForCourse(courseToShow);
+        model.updateFilteredStudentListForCourse(courseToShow);
+
         String studentListString = courseToShow.getStudentList().asUnmodifiableObservableList()
                 .stream()
                 .map(student -> "  - " + student.getName().fullName + " (" + student.getStudentId().getValue() + ")")
@@ -53,7 +56,6 @@ public class ViewCourseDetailsCommand extends Command {
         if (studentListString.isEmpty()) {
             studentListString = MESSAGE_NO_STUDENTS;
         }
-
 
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 courseToShow.getName().fullName,

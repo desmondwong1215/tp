@@ -259,6 +259,16 @@ public class RegisterCommandTest {
         public Course getCourseById(CourseId courseId) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateFilteredStudentListForCourse(Course course) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredCourseListForCourse(Course course) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -309,7 +319,7 @@ public class RegisterCommandTest {
             // Override generateStudentId to provide predictable IDs for testing
             return new AddressBook() {
                 @Override
-                public StudentId generateStudentId() {
+                public StudentId getLatestStudentId() {
                     String idString = String.format("S%05d", nextStudentId++);
                     return new StudentId(idString);
                 }

@@ -150,4 +150,9 @@ public interface Model {
      * Returns the course with the given CourseId, or null if not found.
      */
     Course getCourseById(CourseId courseId);
+
+    void updateFilteredStudentListForCourse(Course course);
+
+    void updateFilteredCourseListForCourse(Course course);
+
 }

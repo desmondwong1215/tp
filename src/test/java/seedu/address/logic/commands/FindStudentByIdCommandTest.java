@@ -63,7 +63,7 @@ public class FindStudentByIdCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = FindStudentByIdCommand.MESSAGE_STUDENT_NOT_FOUND;
         IdMatchesKeywordsPredicate predicate = preparePredicate(new ArrayList<>());
         FindStudentByIdCommand command = new FindStudentByIdCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);

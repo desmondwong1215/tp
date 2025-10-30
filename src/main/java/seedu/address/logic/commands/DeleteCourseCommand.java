@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseId;
@@ -9,13 +10,16 @@ import seedu.address.model.course.CourseId;
  */
 public class DeleteCourseCommand extends Command {
     public static final String COMMAND_WORD = "delete_course";
-    public static final String MESSAGE_USAGE = "delete_course <COURSE_ID>";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete all courses whose Course ID matches any of "
+            + "the specified ID.\n"
+            + "Parameters: COURSE_ID (must be in the format C####, e.g., C1234)\n"
+            + "Example: " + COMMAND_WORD + " C0001";
     public static final String MESSAGE_SUCCESS = "Course \"%1$s\" deleted successfully.";
-    public static final String MESSAGE_NOT_FOUND = "Error: Course not found. No course with that ID exists.";
-    public static final String MESSAGE_INVALID_FORMAT = "Error: Invalid course id format. It should be CXXXX.";
+    public static final String MESSAGE_NOT_FOUND = "Error: Course not found. No course with id \"%1$s\" exists.";
+    public static final String MESSAGE_INVALID_FORMAT = "Error: Invalid course id format. It should be CXXXX "
+            + "(e.g., C1234).";
     public static final String MESSAGE_STUDENTS_ENROLLED =
             "Error: Remove all students from the course before deleting.";
-    public static final String MESSAGE_MISSING_ID = "Error: Missing course id.";
 
     private final CourseId courseId;
 
@@ -30,14 +34,14 @@ public class DeleteCourseCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         assert model != null : "Model cannot be null";
         Course course = model.getCourseById(courseId);
         if (course == null) {
-            return new CommandResult(MESSAGE_NOT_FOUND);
+            throw new CommandException(String.format(MESSAGE_NOT_FOUND, courseId));
         }
         if (course.hasEnrolledStudents()) {
-            return new CommandResult(MESSAGE_STUDENTS_ENROLLED);
+            throw new CommandException(MESSAGE_STUDENTS_ENROLLED);
         }
         model.deleteCourse(course);
         if (course.getName() == null) {

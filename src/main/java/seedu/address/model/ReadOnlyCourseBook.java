@@ -14,4 +14,9 @@ public interface ReadOnlyCourseBook {
      */
     ObservableList<Course> getCourseList();
 
+    /**
+     * Returns true if there is no course in the course book.
+     */
+    boolean isEmpty();
+
 }

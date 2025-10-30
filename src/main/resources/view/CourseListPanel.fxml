@@ -3,6 +3,12 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox alignment="CENTER">
+        <Label text="Course: " styleClass="label-secondary"/>
+        <Label fx:id="courseTotal" styleClass="label-secondary"/>
+    </HBox>
     <ListView fx:id="courseListView" VBox.vgrow="ALWAYS" />
 </VBox>

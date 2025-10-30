@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -22,16 +23,24 @@ public class CourseCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label courseId;
+    private Label courseIdValue;
+    @FXML
+    private Label courseSizeLabel;
+    @FXML
+    private Label courseSizeValue;
 
     /**
-     * Creates a {@code CourseCode} with the given {@code Course} and index to display.
+     * Creates a {@code CourseCard} with the given {@code Course} and index to display.
      */
     public CourseCard(Course course, int displayedIndex) {
         super(FXML);
         this.course = course;
         id.setText(displayedIndex + ". ");
         name.setText(course.getName().fullName);
-        courseId.setText("Course ID: " + course.getCourseId().toString());
+        courseIdValue.setText(course.getCourseId().value);
+
+        courseSizeLabel.setText("Student(s) enrolled:");
+        courseSizeValue.textProperty().bind(
+                Bindings.size(course.getStudentList().asUnmodifiableObservableList()).asString());
     }
 }

@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -9,6 +10,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -48,7 +50,7 @@ public class AddressBookTest {
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields (same name)
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB)
-                .withStudentId("S99999").build();
+                .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
@@ -75,7 +77,7 @@ public class AddressBookTest {
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB)
-                .withStudentId("S99999").build();
+                .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 
@@ -85,35 +87,47 @@ public class AddressBookTest {
     }
 
     @Test
-    public void generateStudentId_generatesUniqueIds() {
+    public void getLatestStudentId_generatesUniqueIds() {
+        addressBook.resetData(new AddressBook());
         // Test that generated student IDs are unique and in correct format
-        StudentId firstId = addressBook.generateStudentId();
-        StudentId secondId = addressBook.generateStudentId();
-        StudentId thirdId = addressBook.generateStudentId();
+        StudentId firstId = addressBook.getLatestStudentId();
+        StudentId secondId = addressBook.getLatestStudentId();
+
+        addressBook.addPerson(ALICE);
+        StudentId thirdId = addressBook.getLatestStudentId();
 
         // Check format
+        assertEquals("S00001", firstId.getValue());
         assertTrue(firstId.getValue().matches("S\\d{5}"));
         assertTrue(secondId.getValue().matches("S\\d{5}"));
         assertTrue(thirdId.getValue().matches("S\\d{5}"));
 
-        // Check uniqueness
-        assertFalse(firstId.equals(secondId));
-        assertFalse(secondId.equals(thirdId));
-        assertFalse(firstId.equals(thirdId));
+        // Check consistency
+        assertEquals(firstId, secondId);
+        assertNotEquals(firstId, thirdId);
 
-        // Check sequential generation
-        int firstNumber = Integer.parseInt(firstId.getValue().substring(1));
-        int secondNumber = Integer.parseInt(secondId.getValue().substring(1));
-        int thirdNumber = Integer.parseInt(thirdId.getValue().substring(1));
-
-        assertEquals(firstNumber + 1, secondNumber);
-        assertEquals(secondNumber + 1, thirdNumber);
+        assertEquals(Integer.parseInt(ALICE.getStudentId().getValue().substring(1)) + 1,
+                Integer.parseInt(thirdId.getValue().substring(1)));
     }
 
     @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void isEmpty_emptyList_true() {
+        addressBook.setPersons(new ArrayList<>());
+        assertTrue(addressBook.isEmpty());
+    }
+
+    @Test
+    public void isEmpty_nonEmptyList_false() {
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB)
+                .build();
+        addressBook.addPerson(editedAlice);
+        assertFalse(addressBook.isEmpty());
     }
 
     /**
@@ -129,6 +143,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return persons.isEmpty();
         }
     }
 }

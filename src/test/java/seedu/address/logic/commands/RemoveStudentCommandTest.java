@@ -37,7 +37,8 @@ public class RemoveStudentCommandTest {
                         student.getName(),
                         student.getStudentId(),
                         course.getName(),
-                        course.getCourseId()
+                        course.getCourseId(),
+                        0
                 ),
                 commandResult.getFeedbackToUser()
         );

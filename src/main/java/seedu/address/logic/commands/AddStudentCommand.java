@@ -22,7 +22,9 @@ public class AddStudentCommand extends Command {
             + "COURSE_ID\n"
             + "Example: " + COMMAND_WORD + " S00001 C0001";
 
-    public static final String MESSAGE_SUCCESS = "Student '%1$s' (%2$s) added to Course '%3$s' (%4$s) successfully.";
+    public static final String MESSAGE_SUCCESS = "Student '%1$s' (%2$s) added to Course '%3$s' (%4$s) successfully.\n"
+            + "Course '%3$s' (%4$s) now have %5$s student(s) enrolled.\n"
+            + "Use 'view_course_details' command to view course details.";
     public static final String MESSAGE_DUPLICATE_STUDENT =
             "Student with student ID %1$s already exists in this course.";
     public static final String MESSAGE_COURSE_NOT_FOUND = "Course with course ID %1$s not found.";
@@ -62,7 +64,14 @@ public class AddStudentCommand extends Command {
 
         course.addStudent(student);
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS, student.getName(), studentId, course.getName(), courseId)
+                String.format(
+                        MESSAGE_SUCCESS,
+                        student.getName(),
+                        studentId,
+                        course.getName(),
+                        courseId,
+                        course.getStudentList().asUnmodifiableObservableList().size()
+                )
         );
     }
 

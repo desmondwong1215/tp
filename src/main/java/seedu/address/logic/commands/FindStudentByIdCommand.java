@@ -16,9 +16,10 @@ public class FindStudentByIdCommand extends Command {
     public static final String COMMAND_WORD = "find_student_by_id";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose id matches any of "
-            + "the specified id and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "the specified id.\n"
+            + "Parameters: STUDENT_ID \n"
             + "Example: " + COMMAND_WORD + " S00001 S00003 S10000";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "No student found!";
 
     private final IdMatchesKeywordsPredicate predicate;
 
@@ -30,8 +31,14 @@ public class FindStudentByIdCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        int matchedCount = model.getFilteredPersonList().size();
+
+        if (matchedCount == 0) {
+            return new CommandResult(MESSAGE_STUDENT_NOT_FOUND);
+        }
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, matchedCount));
     }
 
     @Override

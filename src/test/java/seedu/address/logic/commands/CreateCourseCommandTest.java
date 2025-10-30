@@ -226,6 +226,16 @@ public class CreateCourseCommandTest {
         public Course getCourseById(CourseId courseId) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateFilteredStudentListForCourse(Course course) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredCourseListForCourse(Course course) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
