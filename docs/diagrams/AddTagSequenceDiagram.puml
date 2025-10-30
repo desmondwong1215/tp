@@ -1,0 +1,24 @@
+@startuml
+
+title Sequence Diagram for addtag Command
+
+actor User
+participant LogicManager
+participant CourseBookParser
+participant AddTagCommand
+participant Model
+participant Course
+
+User -> LogicManager: execute("addtag 1 t/Dr Tan teaches this course")
+LogicManager -> CourseBookParser: parseCommand("addtag 1 t/Dr Tan teaches this course")
+CourseBookParser -> AddTagCommand: new AddTagCommand(Index(1), Tag("Dr Tan teaches this course"))
+LogicManager -> AddTagCommand: execute(model)
+AddTagCommand -> Model: getFilteredCourseList()
+Model --> AddTagCommand: List<Course>
+AddTagCommand -> Course: withAddedTag(new Tag("Dr Tan teaches this course"))
+AddTagCommand -> Model: setCourse(originalCourse, updatedCourse)
+Model --> AddTagCommand: confirmation
+AddTagCommand --> LogicManager: new CommandResult("Tag added to course: CS2103T")
+LogicManager --> User: displays CommandResult
+
+@enduml
