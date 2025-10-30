@@ -33,7 +33,7 @@ public class CourseNameTest {
         assertFalse(CourseName.isValidName(" Programming")); // leading space
         assertFalse(CourseName.isValidName(
                 "111111111111111111111111111111111111111111111111111111")
-        );//more than 50 char
+        ); //more than 50 char
 
         // valid names
         assertTrue(CourseName.isValidName("mathematics")); // alphabets only
