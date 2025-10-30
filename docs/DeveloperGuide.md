@@ -250,12 +250,61 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+### \[Proposed\] Add tag to courses
 
-### \[Proposed\] Data archiving
+### Proposed Feature — Tags for Courses
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Motivation
+Currently, each course can only store fixed information such as course name, code, and number of students enrolled. However, users may wish to add **custom remarks** — for example, the **name of the teacher-in-charge**, **difficulty level**, or **semester offered**.
+A flexible **tagging system** allows users to attach personalized tags to courses without altering the base data model.
 
+#### User Stories
+| Version | As a ...          | I want to ... | So that I can ... |
+|----------|-------------------|----------------|-------------------|
+| v1.3 | busy teacher      | add tags to my courses | remember who teaches each module |
+| v1.3 | teacher           | remove tags from a course | keep my course list tidy |
+| v1.4 | organized teacher | list all tags | quickly find courses with certain remarks |
+| v1.4 | advanced teacher  | edit a tag | update outdated information |
+
+---
+
+#### Proposed Implementation
+
+The `Tag` feature introduces a `Tag` class that represents a single tag, and integrates it into the `Course` model as a `Set<Tag>`.
+
+Each course stores its own independent tag list. Tags can be added or removed through dedicated commands like `addtag` and `removetag`.
+
+##### Class Structure
+
+The following class diagram shows the key relationships among `Course` and `Tag`:
+
+![](images/CourseClassDiagram.png)
+
+##### Sequence of Operations
+
+When a user executes the `addtag` command — e.g.,
+
+`addtag 1 t/Dr Tan teaches this course`
+
+the following steps occur:
+
+1. The `LogicManager` receives the command text and passes it to the `CourseBookParser`.
+2. The parser creates an `AddTagCommand` object with the parsed `Index` and `Tag`.
+3. The `AddTagCommand` retrieves the specified course from the model using its index.
+4. The command creates a new `Course` object with the updated tag set.
+5. The `Model` replaces the old course with the new course in its course list.
+6. The UI updates to reflect the change.
+
+---
+
+#### Example
+
+**Command:**
+
+`addtag 2 t/Dr Tan teaches this course`
+
+**Expected behavior:**
+Adds a new tag to the course in position 2. The course now displays: CS2103 Software Engineering [Tags: Dr Tan teaches this course]
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -302,11 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | teacher | delete an existing course                         | remove outdated or cancelled offerings         |
 | `* * *`  | teacher | register a new student with their name and gender | add them to the school's central address book. |
 | `* * *`  | teacher | deregister an student                             | delete them from the school's address book.    |
-| `* * *`  | teacher | enter a specifc course                            | perform course-level management commands.      |
-
-### Course Level Stories
-| Priority | As a …​ | I want to …​                                                                    | So that I can…​                                                   |
-|----------|---------|---------------------------------------------------------------------------------|-------------------------------------------------------------------|
+| `* * *`  | teacher | enter a specific course                           | perform course-level management commands.      |
 | `* * *`  | teacher | add an already-created student to a specified course                            | enroll them in my class roster.                                   |
 | `* * *`  | teacher | remove a student from a specific course                                         | update my class roster.                                           |
 | `* * *`  | teacher | create a session for a given date                                               | establish a new attendance record for all students in the course. |
@@ -518,7 +563,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. EB detects that no STUDENT_ID is provided or there exists invalid STUDENT_IDs and shows error message.
-  
+
   Use case ends.
 
 **Use case: UC12 -  Find Course By Name**
@@ -604,9 +649,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Student**: Contains details such as student_ID, name, gender and parents contact number.
 * **Course ID**: Unique identifier automatically generated for each course (e.g., `C0001`).
 * **Student ID**: Unique identifier automatically generated for each student (e.g., `S00001`).
-* **Session**: An attendance record created for a course on a given date.
-* **Session ID**: Unique identifier assigned to each session within a course (e.g., `1`).
-* **Attendance Record**: The record of whether a student is present or absent in a given session.
 * **Register Student**: The action of adding a new student to the school database.
 * **Deregister Student**: The action of permanently removing a student from the school database.
 * **Add Student to Course**: The action of enrolling a student (who is already registered) into a specific course.
