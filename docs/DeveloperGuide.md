@@ -449,7 +449,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  Teacher commands to add a student to the current course with a valid student ID.
+1.  Teacher commands to add a student to the current course with a valid student id.
 2.  EB checks if the student is already in the course.
 3.  EB adds the student to the course roster.
 4.  EB displays a success message.
@@ -458,7 +458,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. EB detects an invalid format for STUDENT_ID, STUDENT_ID does not exist in the address book and shows an error message.
+* 2a. EB detects an invalid format for student id, student id does not exist in the address book and shows an error message.
 
   Use case ends.
 
@@ -470,8 +470,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  Teacher commands to remove student from course command with a STUDENT_ID.
-2.  EB checks the validity of the STUDENT_ID.
+1.  Teacher commands to remove student from course command with a student id.
+2.  EB checks the validity of the student id.
 3.  EB checks if the student is currently enrolled in the course.
 4.  EB removes the student from the course roster.
 5.  EB displays a success message confirming the removal.
