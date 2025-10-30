@@ -60,7 +60,7 @@ public class ViewCourseDetailsCommandTest {
                 ViewCourseDetailsCommand.MESSAGE_SUCCESS,
                 courseToShow.getName().fullName,
                 courseToShow.getCourseId().value,
-                expectedStudents
+                2
         );
 
         CommandResult result = command.execute(model);
@@ -84,7 +84,7 @@ public class ViewCourseDetailsCommandTest {
                 ViewCourseDetailsCommand.MESSAGE_SUCCESS,
                 courseToShow.getName().fullName,
                 courseToShow.getCourseId().value,
-                ViewCourseDetailsCommand.MESSAGE_NO_STUDENTS
+                0
         );
 
         CommandResult result = viewCommand.execute(model);
