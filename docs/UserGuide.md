@@ -384,25 +384,25 @@ Allows teachers to unenroll a student from the currently entered course using **
 
 ## Command summary
 
-| **Action** | **Format,** **Examples**                                                                                    |
-| :--- |:------------------------------------------------------------------------------------------------------------|
-| **General Application** |                                                                                                             |
-| **Viewing help** | `help`                                                                                                      |
-| **View All** | `list`                                                                                                      |
-| **Exit Program** | `exit`                                                                                                      |
-| **Course Management** |                                                                                                             |
-| **Create Course** | `create_course n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `create_course n/Calculus II id/C1231`            |
-| **View Courses** | `view_courses`                                                                                              |
-| **View Course Details** | `view_course_details <COURSE_ID>` <br> e.g., `view_course_details C0001`                                    |
-| **Find Course By Name** | `find_course_by_name <COURSE_NAME>` <br> e.g., `find_course_by_name English`                                |
-| **Edit Course** | `edit_course INDEX n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `edit_course 1 n/Calculus II id/C1231`        |
-| **Delete Course** | `delete_course <COURSE_ID>` <br> e.g., `delete_course C0003`                                                |
-| **Student Management** |                                                                                                             |
-| **Register Student** | `register n/<NAME> p/<PHONE> g/<GENDER>` <br> e.g., `register n/John Doe p/12345678 g/Male`                 |
-| **Find Student By ID** | `find_student_by_id <STUDENT_ID>` <br> e.g., `find_student_by_id S00001 S00002`                             |
-| **Find Student By Name** | `find_student_by_name <STUDENT_NAME>` <br> e.g., `find_student_by_name Alice Bob`                           |
-| **Edit Student** | `edit_student INDEX n/<NAME> p/<PHONE> g/<GENDER>` <br> e.g., `edit_student 1 n/John Doe p/12345678 g/Male` |
-| **Deregister Student** | `deregister <STUDENT_ID>` <br> e.g., `deregister S00005`                                                    |
+| **Action**                | **Format,** **Examples**                                                                                    |
+|:--------------------------|:------------------------------------------------------------------------------------------------------------|
+| **General Application**   |                                                                                                             |
+| **Viewing help**          | `help`                                                                                                      |
+| **View All**              | `list`                                                                                                      |
+| **Exit Program**          | `exit`                                                                                                      |
+| **Course Management**     |                                                                                                             |
+| **Create Course**         | `create_course n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `create_course n/Calculus II id/C1231`            |
+| **View Courses**          | `view_courses`                                                                                              |
+| **View Course Details**   | `view_course_details <COURSE_ID>` <br> e.g., `view_course_details C0001`                                    |
+| **Find Course By Name**   | `find_course_by_name <COURSE_NAME>` <br> e.g., `find_course_by_name English`                                |
+| **Edit Course**           | `edit_course INDEX n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `edit_course 1 n/Calculus II id/C1231`        |
+| **Delete Course**         | `delete_course <COURSE_ID>` <br> e.g., `delete_course C0003`                                                |
+| **Student Management**    |                                                                                                             |
+| **Register Student**      | `register n/<NAME> p/<PHONE> g/<GENDER>` <br> e.g., `register n/John Doe p/12345678 g/Male`                 |
+| **Find Student By ID**    | `find_student_by_id <STUDENT_ID>` <br> e.g., `find_student_by_id S00001 S00002`                             |
+| **Find Student By Name**  | `find_student_by_name <STUDENT_NAME>` <br> e.g., `find_student_by_name Alice Bob`                           |
+| **Edit Student**          | `edit_student INDEX n/<NAME> p/<PHONE> g/<GENDER>` <br> e.g., `edit_student 1 n/John Doe p/12345678 g/Male` |
+| **Deregister Student**    | `deregister <STUDENT_ID>` <br> e.g., `deregister S00005`                                                    |
 | **Enrollment Management** |                                                                                                             |
-| **Add Student** | `add_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `add_student S00001 C0001`                                |
-| **Remove Student** | `remove_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `remove_student S00001 C0001`                          |
+| **Add Student**           | `add_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `add_student S00001 C0001`                                |
+| **Remove Student**        | `remove_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `remove_student S00001 C0001`                          |
