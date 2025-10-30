@@ -9,38 +9,43 @@ AddressBook - Level 3 is a desktop address book application used for teaching So
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added the ability to create a course.
+    * **What it does**: allows the teacher to create a course by specifying the COURSE_ID and course name.
+    * **Justification**: This is a core feature of the course, as teacher needs to add students to the course.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Find student by STUDENT_ID
+  * **What it does**: allows the teacher to easily find the students by entering their STUDENT_IDs.
+  * **Justification**: It provides a convenient and efficient ways for teacher to find a student, instead of browsing through the whole list of students.
 
-* **Code contributed**: [RepoSense link]()
+* **New Feature**: Edit course.
+  * **What it does**: allows the teacher to edit the course details, such as COURSE_ID and course name.
+  * **Justification**: TInstead of deleting the existing course and creating a new course, teachers can easily edit the course details with this command.
+
+* **Improved Feature**: Clear the storage.
+  * **What it does**: allows the teacher to delete all students and courses with one command.
+
+* **Code contributed**: 
+  * [create_course](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/60)
+  * [find_student_by_id](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/73)
+  * [edit_course](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/90), [test case for edit_course](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/99)
+  * [clear](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/141)
 
 * **Project management**:
     * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 
 * **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+    * Wrote additional tests for existing features to increase coverage(Pull requests [test cases for edit_course](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/99)
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+        * Added documentation for the features `create_course`, `find_student_by_id` and `edit_course`. [\#153](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/153)
+        * Did cosmetic tweaks to existing documentation of features `clear`, `edit_student`, `find_student_by_name`: [\#153](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/153)
     * Developer Guide:
-        * Added implementation details of the `delete` feature.
+        * Added implementation details of the `create_course`, `find_student_by_id` and `edit_course` feature. [\#136](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/136)
+        * Added more uses cases. [\#172](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/172)
+        * Updated relevant UML diagrams. [\#104](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/104)
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-    * Integrated a third party library (Natty) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+    * PRs reviewed (with non-trivial review comments): [\#82](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/82), [\#83](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/83), [\#101](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/101), [\#107](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/107), [\#114](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/114), [\#130](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/130), [\#148](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/148)
+    * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2526S1/forum/issues/207#issuecomment-3307279071))
+    * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/AY2526S1-CS2103T-T13-4/tp/issues/146), [2](https://github.com/AY2526S1-CS2103T-T13-4/tp/issues/145), [3](http://github.com/AY2526S1-CS2103T-T13-4/tp/issues/139), [4](https://github.com/AY2526S1-CS2103T-T13-4/tp/issues/137), [5](https://github.com/AY2526S1-CS2103T-T13-4/tp/issues/134), [6](https://github.com/AY2526S1-CS2103T-T13-4/tp/issues/149))
