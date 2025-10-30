@@ -13,14 +13,14 @@ Given below are my contributions to the project.
 
 #### **New Features**
 
-* **Added the `view_course` and `viewcoursedetails` commands**
-    * **What it does:** Displays detailed information about a specific course, including the list of registered students.
-    * **Justification:** Allows administrators to easily check course details and student enrolments without manually filtering data.
+* **Added the `view_courses`commands**
+    * **What it does:** Displays list of courses.
+    * **Justification:** Allows administrators to easily check all courses.
     * **Highlights:** Required integration between the command layer, model layer, and UI components. Involved linking the course logic to the split-screen UI and updating JavaFX bindings dynamically.
     * **Pull Requests:** [#64](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/64), [#91](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/91)
 
-* **Added `find_course_name` and `add_stu_to_course` commands**
-    * **What it does:** Enables users to search for courses by name and register students into courses using command-line input.
+* **Added `find_course_by_name` commands**
+    * **What it does:** Enables users to search for courses by name.
     * **Justification:** Enhances usability and core functionality by allowing both quick lookup and registration directly from the CLI.
     * **Highlights:** Implemented new predicates and refactored existing logic to support course-specific filters.
     * **Pull Requests:** [#74](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/74), [#80](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/80)
