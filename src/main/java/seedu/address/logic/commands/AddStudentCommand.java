@@ -63,6 +63,11 @@ public class AddStudentCommand extends Command {
         }
 
         course.addStudent(student);
+
+        // Update the filtered lists to reflect the addition
+        model.updateFilteredStudentListForCourse(course);
+        model.updateFilteredCourseListForCourse(course);
+
         return new CommandResult(
                 String.format(
                         MESSAGE_SUCCESS,

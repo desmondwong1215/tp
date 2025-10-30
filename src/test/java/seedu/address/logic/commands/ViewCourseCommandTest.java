@@ -5,6 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.AddressBook;
+import seedu.address.model.CourseBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -38,5 +40,13 @@ public class ViewCourseCommandTest {
     public void execute_viewCourse_showsAllCourses() {
         assertCommandSuccess(new ViewCourseCommand(), model,
                 ViewCourseCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_emptyCourseBook_showsNoCourses() {
+        Model emptyModel = new ModelManager(new AddressBook(), new CourseBook(), new UserPrefs());
+        Model emptyExpectedModel = new ModelManager(new AddressBook(), new CourseBook(), new UserPrefs());
+        assertCommandSuccess(new ViewCourseCommand(), emptyModel,
+                ViewCourseCommand.MESSAGE_NO_COURSES, emptyExpectedModel);
     }
 }

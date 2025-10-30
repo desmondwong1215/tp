@@ -50,7 +50,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deregister S00001`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `CourseListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -90,19 +90,19 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete_course C0001")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete_course C0001` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `DeleteCourseCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `MainParser` object which in turn creates a parser that matches the command (e.g., `DeleteCourseCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCourseCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -112,8 +112,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `MainParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `RegisterCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `RegisterCommand`) which the `MainParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `RegisterCommandParser`, `DeleteCourseCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -124,7 +124,8 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the course book data i.e., all `Course` objects (which are contained in a `CourseList` object).
+* stores the currently 'selected' `Person`, `Course` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>`, `ObservableList<Course>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -144,8 +145,8 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save course book data, address book data, and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `CourseBookStorage`, `AddressBookStorage`, and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -249,12 +250,61 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+### \[Proposed\] Add tag to courses
 
-### \[Proposed\] Data archiving
+### Proposed Feature — Tags for Courses
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Motivation
+Currently, each course can only store fixed information such as course name, code, and number of students enrolled. However, users may wish to add **custom remarks** — for example, the **name of the teacher-in-charge**, **difficulty level**, or **semester offered**.
+A flexible **tagging system** allows users to attach personalized tags to courses without altering the base data model.
 
+#### User Stories
+| Version | As a ...          | I want to ... | So that I can ... |
+|----------|-------------------|----------------|-------------------|
+| v1.3 | busy teacher      | add tags to my courses | remember who teaches each module |
+| v1.3 | teacher           | remove tags from a course | keep my course list tidy |
+| v1.4 | organized teacher | list all tags | quickly find courses with certain remarks |
+| v1.4 | advanced teacher  | edit a tag | update outdated information |
+
+---
+
+#### Proposed Implementation
+
+The `Tag` feature introduces a `Tag` class that represents a single tag, and integrates it into the `Course` model as a `Set<Tag>`.
+
+Each course stores its own independent tag list. Tags can be added or removed through dedicated commands like `addtag` and `removetag`.
+
+##### Class Structure
+
+The following class diagram shows the key relationships among `Course` and `Tag`:
+
+![](images/CourseClassDiagram.png)
+
+##### Sequence of Operations
+
+When a user executes the `addtag` command — e.g.,
+
+`addtag 1 t/Dr Tan teaches this course`
+
+the following steps occur:
+
+1. The `LogicManager` receives the command text and passes it to the `CourseBookParser`.
+2. The parser creates an `AddTagCommand` object with the parsed `Index` and `Tag`.
+3. The `AddTagCommand` retrieves the specified course from the model using its index.
+4. The command creates a new `Course` object with the updated tag set.
+5. The `Model` replaces the old course with the new course in its course list.
+6. The UI updates to reflect the change.
+
+---
+
+#### Example
+
+**Command:**
+
+`addtag 2 t/Dr Tan teaches this course`
+
+**Expected behavior:**
+Adds a new tag to the course in position 2. The course now displays: CS2103 Software Engineering [Tags: Dr Tan teaches this course]
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -294,45 +344,39 @@ The following user stories are derived from the project's feature list, grouped 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 ### School Level Stories
-| Priority | As a …​ | I want to …​                                      | So that I can…​                                |
-|----------|---------|---------------------------------------------------|------------------------------------------------|
-| `* * *`  | teacher | create a new course                               | manage a new subject or class offering.        |
-| `* * *`  | user    | view a list of all existing courses               | see the school's full course catalog.          |
-| `* * *`  | teacher | delete an existing course                         | remove outdated or cancelled offerings         |
-| `* * *`  | teacher | register a new student with their name and gender | add them to the school's central address book. |
-| `* * *`  | teacher | deregister an student                             | delete them from the school's address book.    |
-| `* * *`  | teacher | enter a specifc course                            | perform course-level management commands.      |
-
-### Course Level Stories
-| Priority | As a …​ | I want to …​                                                                    | So that I can…​                                                   |
-|----------|---------|---------------------------------------------------------------------------------|-------------------------------------------------------------------|
-| `* * *`  | teacher | add an already-created student to a specified course                            | enroll them in my class roster.                                   |
-| `* * *`  | teacher | remove a student from a specific course                                         | update my class roster.                                           |
-| `* * *`  | teacher | create a session for a given date                                               | establish a new attendance record for all students in the course. |
-| `* * *`  | teacher | mark or unmark a student's attendance for a session.                            | accurately record their presence or absence.                      |
-| `* * *`  | teacher | view a student's attendance record or the full class attendance on a given date | check historical records.                                         |
-| `* * *`  | teacher | exit the current course                                                         | return to school-level commands.                                  |
+| Priority | As a …​ | I want to …​                                                                   | So that I can…​                                                  |
+|----------|------------|-----------------------------------------------------------------------------------|---------------------------------------------------------------------|
+| `* * *`  | teacher    | create a new course                                                               | manage a new subject or class offering.                             |
+| `* * *`  | user       | view a list of all existing courses                                               | see the school's full course catalog.                               |
+| `* * *`  | teacher    | delete an existing course                                                         | remove outdated or cancelled offerings                              |
+| `* * *`  | teacher    | register a new student with their name and gender                                 | add them to the school's central address book.                      |
+| `* * *`  | teacher    | deregister an student                                                             | delete them from the school's address book.                         |
+| `* * *`  | teacher    | enter a specific course                                                           | perform course-level management commands.                           |
+| `* * *`  | teacher    | add an already-created student to a specified course                              | enroll them in my class roster.                                     |
+| `* * *`  | teacher    | remove a student from a specific course                                           | update my class roster.                                             |
+| `* * *`  | teacher    | create a session for a given date                                                 | establish a new attendance record for all students in the course.   |
+| `* * *`  | teacher    | mark or unmark a student's attendance for a session.                              | accurately record their presence or absence.                        |
+| `* * *`  | teacher    | view a student's attendance record or the full class attendance on a given date   | check historical records.                                           |
+| `* * *`  | teacher    | exit the current course                                                           | return to school-level commands.                                    |
 
 ### Use cases
 
 (For all use cases below, the **System** is the EduBase (EB) and the **Actor** is the Teacher, unless specified otherwise)
 
-### School Level Features
-
 **Use case: UC01 - Create Course**
 
 **MSS:**
 
-1.  Teacher commands to create a new course with a course name.
-2.  EB validates the course name.
-3.  EB assigns a unique COURSE_ID and creates the course.
+1.  Teacher commands to create a new course with a course name and a course id.
+2.  EB validates the course id.
+3.  EB creates the course with indicated course name and course id.
 4.  EB indicates success.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. EB detects invalid data (e.g., name containing digits or missing required parameter) and shows error message.
+* 2a. EB detects invalid data (e.g., course id is used, course id is in an invalid format or missing required parameter) and shows error message.
 
   Use case ends.
 
@@ -342,7 +386,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Teacher commands to view all existing courses.
 2.  EB retrieves the list of all created courses.
-3.  EB displays a formatted list showing each course's ID and name.
+3.  EB displays a formatted list showing each course's id and name.
 
     Use case ends.
 
@@ -350,7 +394,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. EB detects that no courses have been created yet.
 
-    * 2a1. EB Shows empty list and prompts Teacher to create new course
+    * 2a1. EB Shows empty list.
       Use case ends.
 
       Use case ends.
@@ -359,23 +403,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  Teacher chooses to delete a course.
-2.  EB requests for the COURSE_ID to be deleted.
-3.  Teacher enters the valid COURSE_ID.
-4.  EB checks if the course has any enrolled students.
-5.  EB deletes the course and indicates success.
+1.  Teacher commands to delete course with a course id.
+2.  EB checks if the course has any enrolled students.
+3.  EB deletes the course and indicates success.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. EB detects that the COURSE_ID is not found or is in an invalid format and then shows error.
+* 1a. EB detects that the course id is not found or is in an invalid format and then shows error.
 
   Use case ends.
 
-* 4a. EB detects that the course has enrolled students.
+* 2a. EB detects that the course has enrolled students.
 
-    * 4a1. EB prompts Teacher to remove all existing students from the course before deleting the course.
+    * 4a1. EB prompts teacher to remove all existing students from the course before deleting the course.
 
       Use case ends.
 
@@ -385,7 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Teacher commands to register a new student with all the student details.
 2.  EB validates the student details.
-3.  EB assigns a unique STUDENT_ID and adds the student to the address book and indicates success.
+3.  EB assigns a unique student id and adds the student to the address book and indicates success.
 
     Use case ends.
 
@@ -399,7 +441,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  Teacher commands to deregister a student from the address book with a valid student ID.
+1.  Teacher commands to deregister a student from the address book with a valid student id.
 2.  EB checks if the student is currently enrolled in any courses.
 3.  EB removes the student from the address book database.
 4.  EB displays a success message.
@@ -408,7 +450,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. EB detects an invalid format for STUDENT_ID or an ID that does not exist and shows error.
+* 1a. EB detects an invalid format for student id or an ID that does not exist and shows error.
 
   Use case ends.
 
@@ -416,33 +458,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC06 - Enter Course**
+**Use case: UC06 - Find Student by Student Id**
 
 **MSS:**
 
-1.  Teacher commands to enter a specific course with a course id.
-2.  EB checks if the course id is valid.
-3.  EB sets the system context to the specified course and indicates success.
+1.  Teacher commands to enter a find student with student id.
+2.  EB retrieves the list of filtered students.
+3.  EB displays a formatted list showing each student's details.
 
     Use case ends.
 
 **Extensions**
 
-* 2a.  EB detects an invalid format for course ID or an ID that does not exist and shows error.
+* 1a.  EB detects any student id in an invalid format or missing arguments and shows error.
 
   Use case ends.
 
-### Course Level Features
-
-(Requires Teacher to be inside a course context)
-
-**Use case: UC07 - Add Student To Course**
-
-**Precondition**: Teacher is currently inside a course.
+**Use case: UC07 - Edit Course**
 
 **MSS:**
 
-1.  Teacher commands to add a student to the current course with a valid student ID.
+1.  Teacher commands to edit the course with new course name or new course id. Teacher need to select the course by indicating its index used in the full displayed course list.
+2.  EB edits the details of the course selected.
+3.  EB shows a success message and displays the edited course.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a.  EB detects invalid index, no new detail is provided, new course id is in an invalid format or new course id is used by other course and shows error.
+
+  Use case ends.
+
+**Use case: UC08 - Add Student To Course**
+
+**MSS:**
+
+1.  Teacher commands to add a student to the current course with a valid student id.
 2.  EB checks if the student is already in the course.
 3.  EB adds the student to the course roster.
 4.  EB displays a success message.
@@ -451,22 +503,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. EB detects an invalid format for STUDENT_ID or an ID that does not exist in the address book and shows an error message.
+* 2a. EB detects an invalid format for student id, student id does not exist in the address book and shows an error message.
 
   Use case ends.
 
 * 3a. EB detects that the student is already enrolled in the course shows an error stating that the student is in the course
 
-  Use case resumes at step 2.
+  Use case ends.
 
-**Use case: UC08 -  Remove Student From Course**
-
-**Precondition**: Teacher is currently inside a course.
+**Use case: UC09 -  Remove Student From Course**
 
 **MSS:**
 
 1.  Teacher commands to remove student from course command with a student id.
-2.  EB checks the validity of the student ID.
+2.  EB checks the validity of the student id.
 3.  EB checks if the student is currently enrolled in the course.
 4.  EB removes the student from the course roster.
 5.  EB displays a success message confirming the removal.
@@ -483,85 +533,101 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC09 - Create Session**
-
-**Precondition**: Teacher is currently inside a course .
+**Use case: UC10 -  Find Student By Name**
 
 **MSS:**
 
-1.  Teacher commands to create a new session for the current course with session details.
-2.  EB validates the session details.
-3.  EB creates the new session and assigns a unique Session ID.
-4.  EB displays a success message.
+1.  Teacher commands to find students with names.
+2.  EB finds the students whose name contain any names provided.
+3.  EB displays a list of filtered students and show appropriate message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. EB detects an error in the entered session details and displays the appropriate error message.
+* 2a. EB detects no name is provided and show error message.
 
   Use case ends.
 
-* 3a. EB detects that the proposed session time conflicts with an existing session in this course and displays an error message about the time conflict.
-
-  Use case ends.
-
-**Use case: UC10 - Mark/Unmark Attendance**
-
-**Precondition**: Teacher is currently inside a course and sessions exist.
+**Use case: UC11 -  Find Students By Student Id**
 
 **MSS:**
 
-1.  Teacher commands to mark or unmark students attendance with a valid Session ID and Student ID.
-2.  EB validates the Session ID and the Student ID.
-3.  EB updates the attendance status for the specified Student ID in the specified session.
-4.  EB displays a success message confirming the update.
+1.  Teacher commands to find students with student ids.
+2.  EB checks the validity of all the student ids provided.
+3.  EB finds the students with these student ids.
+4.  EB displays a list of filtered students and appropriate message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. EB detects invalid or non-existent Session ID or Student ID and shows an error message on invalid ID.
+* 2a. EB detects that no student id is provided or there exists invalid student ids and shows error message.
 
   Use case ends.
 
-**Use case: UC11 - View Attendance**
-
-**Precondition**: Teacher is currently inside a course.
+**Use case: UC12 -  Find Course By Name**
 
 **MSS:**
 
-1.  Teacher commands to view attendance records.
-2.  Teacher specifies which sessions to view attendance from.
-3.  EB checks for Session ID.
-4.  EB retrieves the requested attendance data.
-5.  EB displays the formatted attendance data.
+1.  Teacher commands to find courses with names.
+2.  EB finds the courses whose name contain any names provided.
+3.  EB displays a list of filtered courses and show appropriate message.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. EB detects that Teacher specifies a non-existent session or student ID, or uses an invalid format.
-
-    * 3a1. EB indicates that the data cannot be found or the input format is invalid.
-
-      Use case ends.
-* 4a. EB detects that attendance records are not found for the specified scope and shows error.
+* 2a. EB detects no name is provided and show error message.
 
   Use case ends.
 
-
-**Use case: UC12 - Exit Course**
-
-**Precondition**: Teacher is currently inside a course.
+**Use case: UC13 -  Edit Course**
 
 **MSS:**
 
-1.  Teacher commands to exit the current course.
-2.  EB changes the system context back to the School Level.
-3.  EB displays a message confirming the exit.
+1.  Teacher commands to find edit course.
+2.  EB changes the detail of the course.
+3.  EB displays the course and show appropriate message.
 
     Use case ends.
+
+**Extensions**
+
+* 1a. EB detects no field value is provided, invalid index is provided or this action will produce duplicate course and show error message.
+
+  Use case ends.
+
+**Use case: UC14 -  Edit Student**
+
+**MSS:**
+
+1.  Teacher commands to find edit student.
+2.  EB changes the detail of the student.
+3.  EB displays the student and show appropriate message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. EB detects no field value is provided, invalid index is provided or this action will produce duplicate student and show error message.
+
+  Use case ends.
+
+**Use case: UC15 -  Clear the storage**
+
+**MSS:**
+
+1.  Teacher commands to clear the storage.
+2.  EB deletes all students and courses and displays empty list of student, course and appropriate success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. EB detects the storage is empty and show appropriate message.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
@@ -583,9 +649,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Student**: Contains details such as student_ID, name, gender and parents contact number.
 * **Course ID**: Unique identifier automatically generated for each course (e.g., `C0001`).
 * **Student ID**: Unique identifier automatically generated for each student (e.g., `S00001`).
-* **Session**: An attendance record created for a course on a given date.
-* **Session ID**: Unique identifier assigned to each session within a course (e.g., `1`).
-* **Attendance Record**: The record of whether a student is present or absent in a given session.
 * **Register Student**: The action of adding a new student to the school database.
 * **Deregister Student**: The action of permanently removing a student from the school database.
 * **Add Student to Course**: The action of enrolling a student (who is already registered) into a specific course.

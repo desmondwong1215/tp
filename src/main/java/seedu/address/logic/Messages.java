@@ -53,9 +53,7 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(course.getName())
                 .append("; Course Id: ")
-                .append(course.getCourseId())
-                .append("; Tags: ");
-        course.getTags().forEach(builder::append);
+                .append(course.getCourseId());
         return builder.toString();
     }
 }

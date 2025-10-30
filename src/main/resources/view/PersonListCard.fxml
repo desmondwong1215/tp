@@ -33,7 +33,11 @@
       </HBox>
 
       <HBox fx:id="phoneContainer" spacing="5" alignment="CENTER_LEFT">
-        <Label fx:id="phoneLabel" styleClass="cell_small_label_bold" />
+        <Label fx:id="phoneLabel" styleClass="cell_small_label_bold" >
+          <minWidth>
+            <Region fx:constant="USE_PREF_SIZE" />
+          </minWidth>
+        </Label>
         <Label fx:id="phoneValue" styleClass="cell_small_value" />
       </HBox>
 
