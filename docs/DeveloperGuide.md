@@ -344,20 +344,20 @@ The following user stories are derived from the project's feature list, grouped 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 ### School Level Stories
-| Priority | As a …​ | I want to …​                                      | So that I can…​                                |
-|----------|---------|---------------------------------------------------|------------------------------------------------|
-| `* * *`  | teacher | create a new course                               | manage a new subject or class offering.        |
-| `* * *`  | user    | view a list of all existing courses               | see the school's full course catalog.          |
-| `* * *`  | teacher | delete an existing course                         | remove outdated or cancelled offerings         |
-| `* * *`  | teacher | register a new student with their name and gender | add them to the school's central address book. |
-| `* * *`  | teacher | deregister an student                             | delete them from the school's address book.    |
-| `* * *`  | teacher | enter a specific course                           | perform course-level management commands.      |
-| `* * *`  | teacher | add an already-created student to a specified course                            | enroll them in my class roster.                                   |
-| `* * *`  | teacher | remove a student from a specific course                                         | update my class roster.                                           |
-| `* * *`  | teacher | create a session for a given date                                               | establish a new attendance record for all students in the course. |
-| `* * *`  | teacher | mark or unmark a student's attendance for a session.                            | accurately record their presence or absence.                      |
-| `* * *`  | teacher | view a student's attendance record or the full class attendance on a given date | check historical records.                                         |
-| `* * *`  | teacher | exit the current course                                                         | return to school-level commands.                                  |
+| Priority | As a …​ | I want to …​                                                                   | So that I can…​                                                  |
+|----------|------------|-----------------------------------------------------------------------------------|---------------------------------------------------------------------|
+| `* * *`  | teacher    | create a new course                                                               | manage a new subject or class offering.                             |
+| `* * *`  | user       | view a list of all existing courses                                               | see the school's full course catalog.                               |
+| `* * *`  | teacher    | delete an existing course                                                         | remove outdated or cancelled offerings                              |
+| `* * *`  | teacher    | register a new student with their name and gender                                 | add them to the school's central address book.                      |
+| `* * *`  | teacher    | deregister an student                                                             | delete them from the school's address book.                         |
+| `* * *`  | teacher    | enter a specific course                                                           | perform course-level management commands.                           |
+| `* * *`  | teacher    | add an already-created student to a specified course                              | enroll them in my class roster.                                     |
+| `* * *`  | teacher    | remove a student from a specific course                                           | update my class roster.                                             |
+| `* * *`  | teacher    | create a session for a given date                                                 | establish a new attendance record for all students in the course.   |
+| `* * *`  | teacher    | mark or unmark a student's attendance for a session.                              | accurately record their presence or absence.                        |
+| `* * *`  | teacher    | view a student's attendance record or the full class attendance on a given date   | check historical records.                                           |
+| `* * *`  | teacher    | exit the current course                                                           | return to school-level commands.                                    |
 
 ### Use cases
 
@@ -427,7 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Teacher commands to register a new student with all the student details.
 2.  EB validates the student details.
-3.  EB assigns a unique STUDENT_ID and adds the student to the address book and indicates success.
+3.  EB assigns a unique student id and adds the student to the address book and indicates success.
 
     Use case ends.
 
@@ -450,7 +450,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. EB detects an invalid format for STUDENT_ID or an ID that does not exist and shows error.
+* 1a. EB detects an invalid format for student id or an ID that does not exist and shows error.
 
   Use case ends.
 
@@ -458,11 +458,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC06 - Find Student by Id**
+**Use case: UC06 - Find Student by Student Id**
 
 **MSS:**
 
-1.  Teacher commands to enter a find student with STUDENT_ID.
+1.  Teacher commands to enter a find student with student id.
 2.  EB retrieves the list of filtered students.
 3.  EB displays a formatted list showing each student's details.
 
@@ -470,7 +470,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a.  EB detects any STUDENT_ID in an invalid format or missing arguments and shows error.
+* 1a.  EB detects any student id in an invalid format or missing arguments and shows error.
 
   Use case ends.
 
@@ -494,7 +494,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  Teacher commands to add a student to the current course with a valid student ID.
+1.  Teacher commands to add a student to the current course with a valid student id.
 2.  EB checks if the student is already in the course.
 3.  EB adds the student to the course roster.
 4.  EB displays a success message.
@@ -503,7 +503,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. EB detects an invalid format for STUDENT_ID, STUDENT_ID does not exist in the address book and shows an error message.
+* 2a. EB detects an invalid format for student id, student id does not exist in the address book and shows an error message.
 
   Use case ends.
 
@@ -515,8 +515,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  Teacher commands to remove student from course command with a STUDENT_ID.
-2.  EB checks the validity of the STUDENT_ID.
+1.  Teacher commands to remove student from course command with a student id.
+2.  EB checks the validity of the student id.
 3.  EB checks if the student is currently enrolled in the course.
 4.  EB removes the student from the course roster.
 5.  EB displays a success message confirming the removal.
@@ -549,20 +549,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC11 -  Find Students By STUDENT_ID**
+**Use case: UC11 -  Find Students By Student Id**
 
 **MSS:**
 
-1.  Teacher commands to find students with STUDENT_IDs.
-2.  EB checks the validity of all the STUDENT_IDs provided.
-3.  EB finds the students with these STUDENT_IDs.
+1.  Teacher commands to find students with student ids.
+2.  EB checks the validity of all the student ids provided.
+3.  EB finds the students with these student ids.
 4.  EB displays a list of filtered students and appropriate message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. EB detects that no STUDENT_ID is provided or there exists invalid STUDENT_IDs and shows error message.
+* 2a. EB detects that no student id is provided or there exists invalid student ids and shows error message.
 
   Use case ends.
 
