@@ -5,7 +5,7 @@
 
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" minWidth="450">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" minWidth="200">
   <HBox alignment="CENTER">
     <Label text="Student: " styleClass="label-secondary"/>
     <Label fx:id="studentTotal" styleClass="label-secondary"/>
