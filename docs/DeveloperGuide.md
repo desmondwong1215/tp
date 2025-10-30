@@ -50,7 +50,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete S00001`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deregister S00001`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -318,8 +318,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the EduBase (EB) and the **Actor** is the Teacher, unless specified otherwise)
 
-### School Level Features
-
 **Use case: UC01 - Create Course**
 
 **MSS:**
@@ -447,13 +445,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Course Level Features
-
-(Requires Teacher to be inside a course context)
-
 **Use case: UC08 - Add Student To Course**
-
-**Precondition**: Teacher is currently inside a course.
 
 **MSS:**
 
@@ -466,22 +458,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. EB detects an invalid format for STUDENT_ID or an ID that does not exist in the address book and shows an error message.
+* 2a. EB detects an invalid format for STUDENT_ID, STUDENT_ID does not exist in the address book and shows an error message.
 
   Use case ends.
 
 * 3a. EB detects that the student is already enrolled in the course shows an error stating that the student is in the course
 
-  Use case resumes at step 2.
+  Use case ends.
 
 **Use case: UC09 -  Remove Student From Course**
 
-**Precondition**: Teacher is currently inside a course.
-
 **MSS:**
 
-1.  Teacher commands to remove student from course command with a student id.
-2.  EB checks the validity of the student ID.
+1.  Teacher commands to remove student from course command with a STUDENT_ID.
+2.  EB checks the validity of the STUDENT_ID.
 3.  EB checks if the student is currently enrolled in the course.
 4.  EB removes the student from the course roster.
 5.  EB displays a success message confirming the removal.
@@ -498,85 +488,101 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC10 - Create Session**
-
-**Precondition**: Teacher is currently inside a course .
+**Use case: UC10 -  Find Student By Name**
 
 **MSS:**
 
-1.  Teacher commands to create a new session for the current course with session details.
-2.  EB validates the session details.
-3.  EB creates the new session and assigns a unique Session ID.
-4.  EB displays a success message.
+1.  Teacher commands to find students with names.
+2.  EB finds the students whose name contain any names provided.
+3.  EB displays a list of filtered students and show appropriate message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. EB detects an error in the entered session details and displays the appropriate error message.
+* 2a. EB detects no name is provided and show error message.
 
   Use case ends.
 
-* 3a. EB detects that the proposed session time conflicts with an existing session in this course and displays an error message about the time conflict.
-
-  Use case ends.
-
-**Use case: UC11 - Mark/Unmark Attendance**
-
-**Precondition**: Teacher is currently inside a course and sessions exist.
+**Use case: UC11 -  Find Students By STUDENT_ID**
 
 **MSS:**
 
-1.  Teacher commands to mark or unmark students attendance with a valid Session ID and Student ID.
-2.  EB validates the Session ID and the Student ID.
-3.  EB updates the attendance status for the specified Student ID in the specified session.
-4.  EB displays a success message confirming the update.
+1.  Teacher commands to find students with STUDENT_IDs.
+2.  EB checks the validity of all the STUDENT_IDs provided.
+3.  EB finds the students with these STUDENT_IDs.
+4.  EB displays a list of filtered students and appropriate message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. EB detects invalid or non-existent Session ID or Student ID and shows an error message on invalid ID.
-
+* 2a. EB detects that no STUDENT_ID is provided or there exists invalid STUDENT_IDs and shows error message.
+  
   Use case ends.
 
-**Use case: UC12 - View Attendance**
-
-**Precondition**: Teacher is currently inside a course.
+**Use case: UC12 -  Find Course By Name**
 
 **MSS:**
 
-1.  Teacher commands to view attendance records.
-2.  Teacher specifies which sessions to view attendance from.
-3.  EB checks for Session ID.
-4.  EB retrieves the requested attendance data.
-5.  EB displays the formatted attendance data.
+1.  Teacher commands to find courses with names.
+2.  EB finds the courses whose name contain any names provided.
+3.  EB displays a list of filtered courses and show appropriate message.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. EB detects that Teacher specifies a non-existent session or student ID, or uses an invalid format.
-
-    * 3a1. EB indicates that the data cannot be found or the input format is invalid.
-
-      Use case ends.
-* 4a. EB detects that attendance records are not found for the specified scope and shows error.
+* 2a. EB detects no name is provided and show error message.
 
   Use case ends.
 
-
-**Use case: UC13 - Exit Course**
-
-**Precondition**: Teacher is currently inside a course.
+**Use case: UC13 -  Edit Course**
 
 **MSS:**
 
-1.  Teacher commands to exit the current course.
-2.  EB changes the system context back to the School Level.
-3.  EB displays a message confirming the exit.
+1.  Teacher commands to find edit course.
+2.  EB changes the detail of the course.
+3.  EB displays the course and show appropriate message.
 
     Use case ends.
+
+**Extensions**
+
+* 1a. EB detects no field value is provided, invalid index is provided or this action will produce duplicate course and show error message.
+
+  Use case ends.
+
+**Use case: UC14 -  Edit Student**
+
+**MSS:**
+
+1.  Teacher commands to find edit student.
+2.  EB changes the detail of the student.
+3.  EB displays the student and show appropriate message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. EB detects no field value is provided, invalid index is provided or this action will produce duplicate student and show error message.
+
+  Use case ends.
+
+**Use case: UC15 -  Clear the storage**
+
+**MSS:**
+
+1.  Teacher commands to clear the storage.
+2.  EB deletes all students and courses and displays empty list of student, course and appropriate success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. EB detects the storage is empty and show appropriate message.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
