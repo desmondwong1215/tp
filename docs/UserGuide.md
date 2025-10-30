@@ -85,30 +85,31 @@ Allows teachers to create a new course. Duplicate course names are allowed, but 
 
 **Format:** `create_course n/<COURSE_NAME> id/<COURSE_ID>`
 
+**Examples:**
+* `create_course n/English 101 id/C0002`
+* `create_course n/Calculus II id/C1231`
+
 **Requirements:**
 * COURSE_ID need to be in valid format, which is `C` followed by 4 digits (e.g., CXXXX).
 * COURSE_ID cannot be used by other courses in the course list.
 
 <box type="tip" seamless>
 
-**Tip:** Course names can only contain letters, spaces, hyphens, and apostrophes.
+**Tip:** Course names can only contain alphanumerical characters and spaces.
 
 </box>
 
-**Examples:**
-* `create_course n/English 101 id/C0002`
-* `create_course n/Calculus II id/C1231`
 
 ---
 
-### Viewing All Courses: `view_course`
+### Viewing All Courses: `view_courses`
 
 Allows users to view a list of all existing courses with their Course IDs.
 
-**Format:** `view_course`
+**Format:** `view_courses`
 
 **Example:**
-* `view_course`
+* `view_courses`
 
 ---
 
@@ -116,16 +117,16 @@ Allows users to view a list of all existing courses with their Course IDs.
 
 Allows users to edit course id and course name by selecting its index in view list.
 
+**Format:** `edit_course INDEX n/<COURSE_NAME> id/<COURSE_ID>`
+
+**Example:**
+* `edit_course 1 n/English 101 id/C0001`
+
 **Requirements:**
 * INDEX need to be the same as the index used in the displayed course list.
 * COURSE_ID need to be in valid format, which is `C` followed by 4 digits (e.g., CXXXX).
 * New COURSE_ID cannot be same with any other courses in the course list.
 * At least one field (course name or course id) needs to be provided.
-
-**Format:** `edit_course INDEX n/<COURSE_NAME> id/<COURSE_ID>`
-
-**Example:**
-* `edit_course 1 n/English 101 id/C0001`
 ---
 
 ### Find Course By Name: `find_course_by_name`
@@ -283,9 +284,12 @@ Allows teachers to enroll an already-registered student into a course using **St
 
 **Format:** `add_student <STUDENT_ID> <COURSE_ID>`
 
+**Examples:**
+* `add_student S00001 C0001`
+
 **Requirements:**
-* `Student ID` must follow the correct format which is ‘S’ followed by 5 numeric digits. (e.g. `S00001`)
-* `Course ID` must follow the correct format which is ‘C’ followed by 4 numeric digits. (e.g. `C0001`)
+* `Student ID` must follow the correct format which is 'S' followed by 5 numeric digits. (e.g. `S00001`)
+* `Course ID` must follow the correct format which is 'C' followed by 4 numeric digits. (e.g. `C0001`)
 * The target student exists in the EB database.
 * The target course exists in the EB database.
 * The target student is not enrolled in the target course.
@@ -296,26 +300,26 @@ Allows teachers to enroll an already-registered student into a course using **St
 
 </box>
 
-**Examples:**
-* `add_student S00001 C0001`
-
 ---
 
 ### Removing Student from Course: `remove_student`
 
-Allows teachers to unenroll a student from the currently entered course using **Student ID** and **Course ID**.
+Unenrolls a student from a course in the EB database.
 
 **Format:** `remove_student <STUDENT_ID> <COURSE_ID>`
 
-**Requirements:**
-* `Student ID` must follow the correct format which is ‘S’ followed by 5 numeric digits. (e.g. `S00001`)
-* `Course ID` must follow the correct format which is ‘C’ followed by 4 numeric digits. (e.g. `C0001`)
-* The target student exists in the EB database.
-* The target course exists in the EB database.
-* The target student is currently enrolled in the target course.
-
-**Examples:**
+**Example:**
 * `remove_student S00001 C0001`
+
+**Requirements:**
+* Student ID must follow the correct format: `S` followed by 5 numeric digits (e.g., S00001).
+* Course ID must follow the correct format: `C` followed by 4 numeric digits (e.g., C0001).
+* The target student must exist in the EB database.
+* The target course must exist in the EB database.
+* The target student must be currently enrolled in the target course.
+
+**Notes:**
+* A student can only be removed from a course if they are currently enrolled in it.
 
 ---
 
@@ -350,7 +354,7 @@ Allows teachers to exit from the system using the command box.
 | **Action**               | **Format,** **Examples**                                                                                    |
 |--------------------------|-------------------------------------------------------------------------------------------------------------|
 | **Create Course**        | `create_course n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `create_course n/Calculus II id/C1231`            |
-| **View Courses**         | `view_course`                                                                                               |
+| **View Courses**         | `view_courses`                                                                                              |
 | **Edit Course**          | `edit_course INDEX n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `edit_course 1 n/Calculus II id/C1231`        |
 | **Find Course By Name**  | `find_course_by_name` <br> e.g., `find_course_by_name English`                                              |
 | **Delete Course**        | `delete_course <COURSE_ID>` <br> e.g., `delete_course C0003`                                                |
