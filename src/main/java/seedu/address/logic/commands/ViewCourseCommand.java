@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ViewCourseCommand extends Command {
 
-    public static final String COMMAND_WORD = "view_course";
+    public static final String COMMAND_WORD = "view_courses";
 
     public static final String MESSAGE_SUCCESS = "Listed all courses";
 
