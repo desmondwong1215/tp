@@ -52,7 +52,6 @@ Person --> Name
 Person --> Phone
 Person --> Gender
 Person --> StudentId
-Person --> "*" Tag
 
 CourseBook --> "1" CourseList
 CourseList --> "       ~* all" Course

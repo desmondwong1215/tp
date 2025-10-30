@@ -132,10 +132,19 @@ Allows users to edit course id and course name by selecting its index in view li
 
 Allows users to find course by entering the course name.
 
-**Requirements:**
-* At least one name need to be provided, and not blank.
-
 **Format:** `find_course_by_name <COURSE_NAME>`
+
+**Requirements:**
+* Names can only include alphanumeric characters and spaces.
+* At least one name needs to be provided, and not blank.
+
+<box type="tip" seamless>
+
+**Tips:**<br>
+* Multiple names are allowed, separated by space.<br>
+* Names are case-insensitive.<br>
+
+</box>
 
 **Example:**
 `find_course_by_name English Math`
@@ -173,7 +182,6 @@ Allows teachers to add a new student to the EB database. A unique **Student ID**
 <box type="tip" seamless>
 
 **Tips:**<br>
-* Student names can only contain alphanumeric characters and spaces.<br>
 * Duplicate names are allowed but will receive a new unique Student ID.<br>
 * Names are case-sensitive.<br>
 * Genders are case-insensitive.
@@ -201,10 +209,19 @@ Allows users to view a list of all existing courses and student.
 
 Allows users to find student by entering the student id.
 
-**Requirements:**
-* At least one id need to be provided, and not blank.
-
 **Format:** `find_student_by_id <STUDENT_ID>`
+
+**Requirements:**
+* STUDENT_ID need to be in valid format, which is `S` followed by 5 digits (e.g., SXXXXX).
+* At least one id needs to be provided, and not blank.
+
+<box type="tip" seamless>
+
+**Tips:**<br>
+* Multiple ids are allowed, separated by space.<br>
+* STUDENT_ID is case-sensitive.<br>
+
+</box>
 
 **Example:**
 `find_student_by_id S00001 S00002`
@@ -215,10 +232,19 @@ Allows users to find student by entering the student id.
 
 Allows users to find student by entering the student name.
 
-**Requirements:**
-* At least one name need to be provided, and not blank.
-
 **Format:** `find_student_by_name <STUDENT_NAME>`
+
+**Requirements:**
+* Names can only include alphanumeric characters and spaces.
+* At least one name needs to be provided, and not blank.
+
+<box type="tip" seamless>
+
+**Tips:**<br>
+* Multiple names are allowed, separated by space.<br>
+* Names are case-sensitive.<br>
+
+</box>
 
 **Example:**
 `find_student_by_name Alice Bob`
@@ -315,6 +341,7 @@ Allows teachers to exit from the system using the command box.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **On macOS devices**, bolded text in the UI may appear slightly cut off. There is currently no known fix, but the text remains largely readable.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -331,6 +358,7 @@ Allows teachers to exit from the system using the command box.
 | **Edit Student**         | `edit_student INDEX n/<NAME> p/<PHONE> g/<GENDER>` <br> e.g., `edit_student 1 n/John Doe p/12345678 g/Male` |
 | **Find Student By ID**   | `find_student_by_id` <br> e.g., `find_student_by_id S00001 S00002`                                          |
 | **Find Student By Name** | `find_student_by_name` <br> e.g., `find_student_by_name Alice Bob`                                          |
+| **Find Course By Name**  | `find_course_by_name` <br> e.g., `find_course_by_name English Science`                                      |
 | **Deregister**           | `deregister <STUDENT_ID>` <br> e.g., `deregister S00005`                                                    |
 | **Add Student**          | `add_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `add_student S00001 C0001`                                |
 | **View Course Details**  | `view_course_details <COURSE_ID>` <br> e.g., `view_course_details C0001`                                    |

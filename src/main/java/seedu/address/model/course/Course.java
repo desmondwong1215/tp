@@ -135,7 +135,6 @@ public class Course {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("courseId", courseId)
-                .add("tags", tags)
                 .toString();
     }
 }
