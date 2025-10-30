@@ -141,7 +141,7 @@ Allows users to find course by entering the course name.
 <box type="tip" seamless>
 
 **Tips:**<br>
-* Multiple names are allowed, separated by space.
+* Multiple names are allowed, separated by space.<br>
 * Names are case-insensitive.<br>
 
 </box>
@@ -218,7 +218,7 @@ Allows users to find student by entering the student id.
 <box type="tip" seamless>
 
 **Tips:**<br>
-* Multiple ids are allowed, separated by space.
+* Multiple ids are allowed, separated by space.<br>
 * STUDENT_ID is case-sensitive.<br>
 
 </box>
@@ -241,7 +241,7 @@ Allows users to find student by entering the student name.
 <box type="tip" seamless>
 
 **Tips:**<br>
-* Multiple names are allowed, separated by space.
+* Multiple names are allowed, separated by space.<br>
 * Names are case-sensitive.<br>
 
 </box>
