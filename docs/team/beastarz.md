@@ -17,13 +17,11 @@ Given below are my contributions to the project.
 
 * **Highlights:** This was a significant structural change that required creating new Course models and modifying the Storage and Model components to handle course data. This work laid the foundation for other features like adding/removing students from courses (e.g., PRs #44, #81).
 
-* **Credits:** {mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}
-
 ### New Feature: Added the remove student command
 
 * (based on add remove student command commit).
 
-* **Code contributed:** [RepoSense link](https://github.com/AY2526S1-CS2103T-T13-4/tp)
+* **Code contributed:** [RepoSense link](https://nus-cs2103-ay2526s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2025-09-19T00%3A00%3A00&filteredFileName=&tabOpen=true&tabType=zoom&zA=Beastarz&zR=AY2526S1-CS2103T-T13-4%2Ftp%5Bmaster%5D&zACS=229.0123885783351&zS=2025-09-19T00%3A00%3A00&zFS=&zU=2025-10-30T23%3A59%3A59&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
 ### Project management
 
@@ -61,9 +59,7 @@ Given below are my contributions to the project.
 
 * PRs reviewed (with non-trivial review comments): [#8](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/8), [#29](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/29), [#31](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/31), [#41](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/41), [#44](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/44), [#62](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/62), [#70](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/70), [#73](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/73), [#81](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/81), [#103](https->://github.com/AY2526S1-CS2103T-T13-4/tp/pull/103), [#104](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/104), [#113](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/113), [#114](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/114), [#136](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/136), [#138](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/138), [#140](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/140), [#141](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/141), [#147](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/147), [#153](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/153), [#164](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/164), [#167](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/167), [#168](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/168), [#170](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/170)
 
-* Reported bugs and suggestions for teams in the class (examples: [1](https://github.com/AY2526S1-CS2103T-T13-4/tp/issues?q=is%3Aissue%20state%3Aclosed%20assignee%3ABeastarz))
-
-* Some parts of the history feature I added was adopted by several other class mates ([1](https://github.com/AY2526S1-CS2103T-T13-4/tp), [2](https://github.com/AY2526S1-CS2103T-T13-4/tp))
+* Reported bugs and suggestions for teams in the class (examples: [PRs](https://github.com/AY2526S1-CS2103T-T13-4/tp/issues?q=is%3Aissue%20state%3Aclosed%20assignee%3ABeastarz))
 
 ### Tools
 
