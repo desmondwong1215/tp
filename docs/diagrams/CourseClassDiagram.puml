@@ -4,8 +4,10 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+Class CourseBook
 Class CourseList
 Class Course
+Class CourseName
 Class CourseId
 
 CourseBook *--> "1" CourseList

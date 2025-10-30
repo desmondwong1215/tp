@@ -4,16 +4,20 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+AddressBook *--> "1" UniquePersonList
+AddressBook *--> "1...*" Tag
+
 CourseBook *-right-> "1" CourseList
 
-CourseList -right-> Course
+UniquePersonList -right-> "*" Person
+Person -up-> Tag
+
+CourseList -right-> "*" Course
 
 Course *--> CourseName
 Course *--> CourseId
 Course *--> UniquePersonList
-Course *--> "*" Tag
-
-UniquePersonList -right-> Person
+Course -up-> Tag
 
 Person *--> Name
 Person *--> Phone

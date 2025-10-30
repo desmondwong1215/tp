@@ -4,10 +4,15 @@ skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
 :User executes command;
-:Parse command;
-:Execute command
-(modify Model);
-:Save AddressBook to file;
-:Save CourseBook to file;
+if () then ([command parsed successfully])
+  :Execute command
+  (modify Model);
+  if () then ([command executed successfully])
+    :Save AddressBook to file;
+    :Save CourseBook to file;
+  else ([exception thrown])
+  endif
+else ([parse error])
+endif
 stop
 @enduml
