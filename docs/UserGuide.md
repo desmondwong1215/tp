@@ -17,7 +17,7 @@ EduBase is a **desktop app for teachers to manage student attendance, optimized 
 1. Ensure you have Java `17` or above installed in your Computer.
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T13-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -30,9 +30,9 @@ EduBase is a **desktop app for teachers to manage student attendance, optimized 
 
 * `list` : Shows all students and courses.
 
-* `create_course n/ English 101 id/ C0001` : Creates a new course named "English 101" with course ID 'C0001'.
+* `create_course n/English 101 id/C0001` : Creates a new course named "English 101" with course ID 'C0001'.
 
-* `register n/ John Doe g/ Male p/98765432` : Registers a new student.
+* `register n/John Doe g/Male p/98765432` : Registers a new student.
 
 * `exit` : Exits the app.
 
@@ -47,7 +47,7 @@ EduBase is a **desktop app for teachers to manage student attendance, optimized 
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `create_course n/ <COURSE_NAME> id/ <COURSE_ID>`, `COURSE_NAME` and `COURSE_ID` are parameters which can be used as `create_course n/ English 101 id/ C0001`.
+  e.g. in `create_course n/<COURSE_NAME> id/<COURSE_ID>`, `COURSE_NAME` and `COURSE_ID` are parameters which can be used as `create_course n/ English 101 id/ C0001`.
 
 * Items in square brackets are optional.<br>
 
@@ -55,9 +55,9 @@ EduBase is a **desktop app for teachers to manage student attendance, optimized 
   *Note: None of the current EduBase commands support multiple repeating parameters.*
 
 * Parameters can be in any order for commands using flags (e.g., `n/`, `g/`, `d/`).<br>
-  e.g. for `register n/ NAME g/ GENDER p/ PHONE`, `register g/ GENDER n/ NAME p/ PHONE` is also acceptable.
+  e.g. for `register n/NAME g/GENDER p/PHONE`, `register g/GENDER n/NAME p/PHONE` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `view_course`, `exit`, and `list`) will be ignored.
+* Extraneous parameters for commands that do not take in parameters (such as `view_courses`, `exit`, and `list`) will be ignored.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -121,14 +121,14 @@ Allows teachers to create a new course. Duplicate course names are allowed, but 
 
 ---
 
-#### Viewing All Courses: `view_course`
+#### Viewing All Courses: `view_courses`
 
 Allows users to view a list of all existing courses with their Course IDs.
 
-**Format:** `view_course`
+**Format:** `view_courses`
 
 **Example:**
-* `view_course`
+* `view_courses`
 
 ---
 
@@ -239,14 +239,14 @@ Allows users to find student by entering the student id.
 **Format:** `find_student_by_id <STUDENT_ID>`
 
 **Requirements:**
-* STUDENT_ID need to be in valid format, which is `S` followed by 5 digits (e.g., SXXXXX).
+* `Student ID` need to be in valid format, which is `S` followed by 5 digits (e.g., SXXXXX).
 * At least one id needs to be provided, and not blank.
 
 <box type="tip" seamless>
 
 **Tips:**<br>
 * Multiple ids are allowed, separated by space.<br>
-* STUDENT_ID is case-sensitive.<br>
+* `Student ID` is case-sensitive.<br>
 
 </box>
 
@@ -289,7 +289,7 @@ Allows users to edit student name, phone and gender by selecting its index in vi
 * Names can only include alphanumeric characters and spaces.
 * Phone numbers can only include numbers from 3 to 20 digits.
 * Genders can only accept values of `Male`, `Female`, and `Other`.
-* At least one field (Name ,Phone or Gender) needs to be provided.
+* At least one field (Name, Phone or Gender) needs to be provided.
 
 
 **Example:**
@@ -304,7 +304,7 @@ Allows teachers to permanently delete a student from the EB database using their
 **Format:** `deregister <STUDENT_ID>`
 
 **Requirements:**
-* `Student Id` must follow the correct format which is ‘S’ followed by 5 numeric digits. (e.g. `S00001`)
+* `Student ID` must follow the correct format which is ‘S’ followed by 5 numeric digits. (e.g. `S00001`)
 * The target student exists in the EB database.
 * The target student is not enrolled in either of the courses.
 
@@ -367,7 +367,7 @@ Allows teachers to unenroll a student from the currently entered course using **
 ## FAQ
 
 **Q**: I am getting an "Invalid name" error when registering a student.<br>
-**A**: **Names can only contain letters, spaces, hyphens, and apostrophes.** Ensure you are not using any numbers or special symbols.
+**A**: **Names can only contain alphanumeric characters and spaces.** Ensure you are not using any special symbols.
 
 **Q**: How do I know the ID of the course I just created?<br>
 **A**: The **Course ID** is displayed immediately upon successful creation (e.g., `Course "English 101" (ID:C0001) is created successfully`). You can also use `view_all_courses` to see a list of all IDs.
