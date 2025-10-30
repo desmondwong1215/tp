@@ -308,7 +308,7 @@ The following sequence diagram illustrates this process:
 `addtag 2 t/Dr Tan teaches this course`
 
 **Expected behavior:**  
-Adds a new tag to the course in position 2. The course now displays: CS2103T Software Engineering [Tags: Dr Tan teaches this course]
+Adds a new tag to the course in position 2. The course now displays: CS2103 Software Engineering [Tags: Dr Tan teaches this course]
 
 --------------------------------------------------------------------------------------------------------------------
 
