@@ -121,7 +121,7 @@ Allows teachers to create a new course. Duplicate course names are allowed, but 
 
 ---
 
-#### Viewing All Courses: `view_course`
+#### Viewing All Courses: `view_courses`
 
 Allows users to view a list of all existing courses with their Course IDs.
 
