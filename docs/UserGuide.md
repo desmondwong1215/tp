@@ -101,14 +101,14 @@ Allows teachers to create a new course. Duplicate course names are allowed, but 
 
 ---
 
-### Viewing All Courses: `view_course`
+### Viewing All Courses: `view_courses`
 
 Allows users to view a list of all existing courses with their Course IDs.
 
-**Format:** `view_course`
+**Format:** `view_courses`
 
 **Example:**
-* `view_course`
+* `view_courses`
 
 ---
 
@@ -323,7 +323,7 @@ Allows teachers to exit from the system using the command box.
 | **Action**               | **Format,** **Examples**                                                                                    |
 |--------------------------|-------------------------------------------------------------------------------------------------------------|
 | **Create Course**        | `create_course n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `create_course n/Calculus II id/C1231`            |
-| **View Courses**         | `view_course`                                                                                               |
+| **View Courses**         | `view_courses`                                                                                              |
 | **Edit Course**          | `edit_course INDEX n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `edit_course 1 n/Calculus II id/C1231`        |
 | **Find Course By Name**  | `find_course_by_name` <br> e.g., `find_course_by_name English`                                              |
 | **Delete Course**        | `delete_course <COURSE_ID>` <br> e.g., `delete_course C0003`                                                |
