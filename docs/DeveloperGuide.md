@@ -653,9 +653,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Student**: Contains details such as student_ID, name, gender and parents contact number.
 * **Course ID**: Unique identifier automatically generated for each course (e.g., `C0001`).
 * **Student ID**: Unique identifier automatically generated for each student (e.g., `S00001`).
-* **Session**: An attendance record created for a course on a given date.
-* **Session ID**: Unique identifier assigned to each session within a course (e.g., `1`).
-* **Attendance Record**: The record of whether a student is present or absent in a given session.
 * **Register Student**: The action of adding a new student to the school database.
 * **Deregister Student**: The action of permanently removing a student from the school database.
 * **Add Student to Course**: The action of enrolling a student (who is already registered) into a specific course.
