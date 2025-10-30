@@ -276,9 +276,9 @@ Each course stores its own independent tag list. Tags can be added or removed th
 
 ##### Class Structure
 
-The following class diagram shows the key relationships among `Course`, `Tag`, and `AddTagCommand`:
+The following class diagram shows the key relationships among `Course` and `Tag`:
 
-![](images/TagClassDiagram.png)
+![](images/CourseClassDiagram.png)
 
 ##### Sequence of Operations
 
@@ -355,11 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | teacher | delete an existing course                         | remove outdated or cancelled offerings         |
 | `* * *`  | teacher | register a new student with their name and gender | add them to the school's central address book. |
 | `* * *`  | teacher | deregister an student                             | delete them from the school's address book.    |
-| `* * *`  | teacher | enter a specifc course                            | perform course-level management commands.      |
-
-### Course Level Stories
-| Priority | As a …​ | I want to …​                                                                    | So that I can…​                                                   |
-|----------|---------|---------------------------------------------------------------------------------|-------------------------------------------------------------------|
+| `* * *`  | teacher | enter a specific course                           | perform course-level management commands.      |
 | `* * *`  | teacher | add an already-created student to a specified course                            | enroll them in my class roster.                                   |
 | `* * *`  | teacher | remove a student from a specific course                                         | update my class roster.                                           |
 | `* * *`  | teacher | create a session for a given date                                               | establish a new attendance record for all students in the course. |
