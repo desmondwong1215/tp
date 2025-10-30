@@ -3,7 +3,7 @@ layout: default.md
 title: "Reine Ong's Project Portfolio Page"
 ---
 
-### Project: Beastarz (Team Project for CS2103T)
+### Project: Edubase 
 
 Beastarz is a course and student management application that helps administrators manage registrations and view relationships between courses and students efficiently. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, with around 10 kLoC of code.
 
