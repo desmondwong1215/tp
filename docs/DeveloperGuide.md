@@ -129,15 +129,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -682,7 +673,6 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -699,12 +689,15 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `deregister`, `degister x`, `...` (where x is a non-valid student ID)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Close the app if it is running.
 
-1. _{ more test cases …​ }_
+    1. Navigate to the data folder (located at data/addressbook.json or data/coursebook.json).
+
+    1. Delete the addressbook.json and/or coursebook.json file.
+
+    1. Relaunch the app.
