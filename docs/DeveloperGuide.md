@@ -295,10 +295,6 @@ the following steps occur:
 5. The `Model` replaces the old course with the new course in its course list.
 6. The UI updates to reflect the change.
 
-The following sequence diagram illustrates this process:
-
-![](images/AddTagSequenceDiagram.png)
-
 ---
 
 #### Example
