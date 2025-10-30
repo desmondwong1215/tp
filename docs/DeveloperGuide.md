@@ -696,8 +696,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Close the app if it is running.
 
-    1. Navigate to the data folder (typically located at data/addressbook.json).
+    1. Navigate to the data folder (located at data/addressbook.json or data/coursebook.json).
 
-    1. Delete the addressbook.json file.
+    1. Delete the addressbook.json and/or coursebook.json file.
 
     1. Relaunch the app.
