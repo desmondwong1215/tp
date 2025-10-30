@@ -29,6 +29,9 @@ Class JsonAdaptedCourse
 }
 
 
+
+}
+
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Storage
 
@@ -48,5 +51,6 @@ JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonCourseBookStorage ..> JsonSerializableCourseBook
 JsonSerializableCourseBook --> "*" JsonAdaptedCourse
+
 
 @enduml
