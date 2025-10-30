@@ -1,5 +1,7 @@
+---
 layout: default.md
 title: "Beastarz's Project Portfolio Page"
+---
 
 ## Project: EduBase
 
