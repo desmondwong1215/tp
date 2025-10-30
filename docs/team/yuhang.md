@@ -11,7 +11,7 @@ Given below are my contributions to the project.
 
 ---
 
-#### **New Features**
+* **New Features**
 
 * **Added the course model functionality**
     * **What it does:** Base model class for Course. 
