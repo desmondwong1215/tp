@@ -4,14 +4,17 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Class UniqueCourseList
+Class CourseBook
+Class CourseList
 Class Course
+Class CourseName
 Class CourseId
 
-CourseBook *--> "1" UniqueCourseList
-UniqueCourseList --> "~* all" Course
+CourseBook *--> "1" CourseList
+CourseList --> "~* all" Course
 Course *--> CourseName
 Course *--> CourseId
 Course *--> UniquePersonList
+Course *--> "*" Tag
 
 @enduml
