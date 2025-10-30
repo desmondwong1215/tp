@@ -132,11 +132,19 @@ Allows users to edit course id and course name by selecting its index in view li
 
 Allows users to find course by entering the course name.
 
-**Requirements:**
-* At least one name need to be provided, and not blank (case-insensitive).
-* Multiple names are allowed. 
-
 **Format:** `find_course_by_name <COURSE_NAME>`
+
+**Requirements:**
+* Names can only include alphanumeric characters and spaces.
+* At least one name needs to be provided, and not blank.
+
+<box type="tip" seamless>
+
+**Tips:**<br>
+* Multiple names are allowed, separated by space.
+* Names are case-insensitive.<br>
+
+</box>
 
 **Example:**
 `find_course_by_name English Math`
@@ -174,7 +182,6 @@ Allows teachers to add a new student to the EB database. A unique **Student ID**
 <box type="tip" seamless>
 
 **Tips:**<br>
-* Student names can only contain alphanumeric characters and spaces.<br>
 * Duplicate names are allowed but will receive a new unique Student ID.<br>
 * Names are case-sensitive.<br>
 * Genders are case-insensitive.
@@ -202,12 +209,19 @@ Allows users to view a list of all existing courses and student.
 
 Allows users to find student by entering the student id.
 
-**Requirements:**
-* At least one id need to be provided, and not blank (case-sensitive).
-* STUDENT_ID need to be in valid format, which is `S` followed by 5 digits (e.g., SXXXXX).
-* Multiple ids are allowed.
-
 **Format:** `find_student_by_id <STUDENT_ID>`
+
+**Requirements:**
+* STUDENT_ID need to be in valid format, which is `S` followed by 5 digits (e.g., SXXXXX).
+* At least one id needs to be provided, and not blank.
+
+<box type="tip" seamless>
+
+**Tips:**<br>
+* Multiple ids are allowed, separated by space.
+* STUDENT_ID is case-sensitive.<br>
+
+</box>
 
 **Example:**
 `find_student_by_id S00001 S00002`
@@ -218,11 +232,19 @@ Allows users to find student by entering the student id.
 
 Allows users to find student by entering the student name.
 
-**Requirements:**
-* At least one name need to be provided, and not blank (case-insensitive).
-* Multiple names are allowed.
-
 **Format:** `find_student_by_name <STUDENT_NAME>`
+
+**Requirements:**
+* Names can only include alphanumeric characters and spaces.
+* At least one name needs to be provided, and not blank.
+
+<box type="tip" seamless>
+
+**Tips:**<br>
+* Multiple names are allowed, separated by space.
+* Names are case-sensitive.<br>
+
+</box>
 
 **Example:**
 `find_student_by_name Alice Bob`
