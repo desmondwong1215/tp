@@ -91,7 +91,7 @@ Allows teachers to create a new course. Duplicate course names are allowed, but 
 
 <box type="tip" seamless>
 
-**Tip:** Course names can only contain letters, spaces, hyphens, and apostrophes.
+**Tip:** Course names can only contain alphanumerical characters and spaces.
 
 </box>
 
