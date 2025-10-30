@@ -17,39 +17,32 @@ Given below are my contributions to the project.
     * **What it does:** Displays list of courses.
     * **Justification:** Allows administrators to easily check all courses.
     * **Highlights:** Required integration between the command layer, model layer, and UI components. Involved linking the course logic to the split-screen UI and updating JavaFX bindings dynamically.
-    * **Pull Requests:** [#64](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/64), [#91](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/91)
-
-* **Added `find_course_by_name` commands**
-    * **What it does:** Enables users to search for courses by name.
-    * **Justification:** Enhances usability and core functionality by allowing both quick lookup and registration directly from the CLI.
-    * **Highlights:** Implemented new predicates and refactored existing logic to support course-specific filters.
-    * **Pull Requests:** [#74](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/74), [#80](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/80)
+    * **Pull Requests:** [#68](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/68), [#91](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/91)
 
 ---
 
 #### **Enhancements to Existing Features**
 
-* Refactored `add` and `delete` commands into `register` and `deregister` for clarity and consistency ([#30fcf5a](https://github.com/AY2526S1-CS2103T-T13-4/tp/commit/30fcf5a))
-* Improved UI responsiveness and updated the color scheme for better readability ([#9fc647d](https://github.com/AY2526S1-CS2103T-T13-4/tp/commit/9fc647d))
-* Updated UI to correctly display linked fields and student/course details ([#5805f92](https://github.com/AY2526S1-CS2103T-T13-4/tp/commit/5805f92))
-* Fixed inconsistent error messages (e.g., “No course found” → user-friendly message) and improved display text for success/failure cases ([#128acf9](https://github.com/AY2526S1-CS2103T-T13-4/tp/commit/128acf9))
-* Enhanced UI split-screen logic and diagram to include course visualization ([#511457d](https://github.com/AY2526S1-CS2103T-T13-4/tp/commit/511457d))
+* Refactored `add` and `delete` commands into `register` and `deregister` for clarity and consistency ([#59](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/59))
+* Improved UI responsiveness and updated the color scheme for better readability ([#132](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/132))
+* Updated UI to correctly display linked fields and student/course details ([#101](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/101))
+* Fixed inconsistent error messages (e.g., “No course found” → user-friendly message) and improved display text for success/failure cases ([#166](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/166))
 
 ---
 
 #### **Testing**
 
-* Added `ViewCourseCommandTest.java` to test the new course viewing feature ([#977git st3902](https://github.com/AY2526S1-CS2103T-T13-4/tp/commit/9773902))
-* Fixed failing tests after refactors and enhanced overall assertion checks ([#b6e11e3](https://github.com/AY2526S1-CS2103T-T13-4/tp/commit/b6e11e3))
+* Added `ViewCourseCommandTest.java` to test the new course viewing feature ([#91](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/91))
+* Fixed failing tests after refactors and enhanced overall assertion checks
 * Updated and extended GUI tests to ensure correct course and student display.
 
 ---
 
 #### **Documentation**
 
-* Updated `UiClassDiagram` and Developer Guide to include new course UI elements ([#511457d](https://github.com/AY2526S1-CS2103T-T13-4/tp/commit/511457d))
-* Contributed to the About Us page and team documentation ([#16](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/16))
-* Reviewed and updated the README ([#40](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/40))
+* Updated `UiClassDiagram` and Developer Guide to include new course UI elements ([#103](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/103))
+* Contributed to the About Us page and team documentation ([#24](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/24))
+* Reviewed and updated the User Guide and Developer Guide ([#168](https://github.com/AY2526S1-CS2103T-T13-4/tp/pull/168))
 
 ---
 
