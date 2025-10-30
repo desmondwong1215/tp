@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+[_AB3_](https://github.com/nus-cs2103-AY2526S1/tp).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -84,7 +84,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2526S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -116,7 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `RegisterCommandParser`, `DeleteCourseCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -140,7 +140,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -177,11 +177,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `deregister S00005` command to delete the 5th person in the address book. The `deregister` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `deregister S00005` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `register n/David …​` to add a new person. The `register` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -247,7 +247,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Pros: Will use less memory (e.g. for `deregister`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 ### \[Proposed\] Add tag to courses
@@ -690,13 +690,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
+    1. Test case: `degister S00001`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `degister S00001`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `deregister`, `degister x`, `...` (where x is a non-valid student ID)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
