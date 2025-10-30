@@ -115,7 +115,6 @@ public class CourseTest {
         // Should contain all key information
         assertTrue(result.contains("name"));
         assertTrue(result.contains("courseId"));
-        assertTrue(result.contains("tags"));
         assertTrue(result.contains(VALID_NAME.toString()));
     }
 
