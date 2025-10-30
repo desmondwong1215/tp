@@ -255,7 +255,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 ### Proposed Feature — Tags for Courses
 
 #### Motivation
-Currently, each course can only store fixed information such as course name, code, and credits. However, users may wish to add **custom remarks** — for example, the **name of the teacher-in-charge**, **difficulty level**, or **semester offered**.  
+Currently, each course can only store fixed information such as course name, code, and number of students enrolled. However, users may wish to add **custom remarks** — for example, the **name of the teacher-in-charge**, **difficulty level**, or **semester offered**.  
 A flexible **tagging system** allows users to attach personalized tags to courses without altering the base data model.
 
 #### User Stories
