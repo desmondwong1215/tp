@@ -10,16 +10,16 @@ AddressBook - Level 3 is a desktop address book application used for teaching So
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to create a course.
-    * **What it does**: allows the teacher to create a course by specifying the COURSE_ID and course name.
+    * **What it does**: allows the teacher to create a course by specifying the course id and course name.
     * **Justification**: This is a core feature of the course, as teacher needs to add students to the course.
 
-* **New Feature**: Find student by STUDENT_ID
-  * **What it does**: allows the teacher to easily find the students by entering their STUDENT_IDs.
+* **New Feature**: Find student by student id.
+  * **What it does**: allows the teacher to easily find the students by entering their student ids.
   * **Justification**: It provides a convenient and efficient ways for teacher to find a student, instead of browsing through the whole list of students.
 
 * **New Feature**: Edit course.
-  * **What it does**: allows the teacher to edit the course details, such as COURSE_ID and course name.
-  * **Justification**: TInstead of deleting the existing course and creating a new course, teachers can easily edit the course details with this command.
+  * **What it does**: allows the teacher to edit the course details, such as course id and course name.
+  * **Justification**: Instead of deleting the existing course and creating a new course, teachers can easily edit the course details with this command.
 
 * **Improved Feature**: Clear the storage.
   * **What it does**: allows the teacher to delete all students and courses with one command.
