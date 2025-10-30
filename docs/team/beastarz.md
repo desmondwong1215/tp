@@ -1,6 +1,6 @@
 ---
 layout: default.md
-title: "Beastarz's Project Portfolio Page"
+title: "Jin Yu's Project Portfolio Page"
 ---
 
 ## Project: EduBase
