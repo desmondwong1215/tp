@@ -147,26 +147,29 @@ Allows teachers to view all courses details and all the students in that class.
 
 #### Find Course By Name: `find_course_by_name`
 
-Allows users to find course by entering the course name.
+Finds and lists all courses whose names contain any of the given keywords.
 
 **Format:** `find_course_by_name <COURSE_NAME>...`
 
 **Requirements:**
 * Names can only include alphanumeric characters and spaces.
 * At least one name needs to be provided, and not blank.
+* Matches are **case-insensitive** and based on **whole words** in the course name.
+* A course will be listed if **any** of the provided keywords match part of its name.
 
 <box type="tip" seamless>
 
 **Tips:**<br>
-* Multiple names are allowed, separated by space.<br>
-* Names are case-insensitive.<br>
+* You can enter multiple keywords, separated by spaces.<br>
+* For example, typing `find_course_by_name science english` will return all courses that contain either “science” or “english” in their names.<br>
 
 </box>
 
-**Example:**
-`find_course_by_name English Math`
-
----
+**Examples:**
+* `find_course_by_name English` → finds `English 101`, `Advanced English`.
+* `find_course_by_name Science English` → finds all courses with either “Science” or “English” in their names.
+* `find_course_by_name Math` → does **not** find `Mathematics` (partial word matches are not supported).
+-
 
 #### Edit Course: `edit_course`
 
