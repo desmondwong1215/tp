@@ -201,7 +201,6 @@ Allows teachers to delete an existing course using its unique **Course ID**.
 * `delete_course C0001`
 
 ---
----
 
 ### Student Management
 
@@ -315,7 +314,6 @@ Allows teachers to permanently delete a student from the EB database using their
 * `deregister S00001`
 
 ---
----
 
 ### Enrollment Management
 
@@ -363,7 +361,6 @@ Allows teachers to unenroll a student from the currently entered course using **
 **Examples:**
 * `remove_student S00001 C0001`
 
----
 
 --------------------------------------------------------------------------------------------------------------------
 
