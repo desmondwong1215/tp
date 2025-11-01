@@ -488,7 +488,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. EB detects that the new course ID is in an invalid format or is already used by another course.
     * 2a1. EB shows an error message.
       Use case ends.
-
+* 3a. EB detects that the other fields (phone, email, gender) is an invalid format.
+    * 2a1. EB shows an error message.
+      Use case ends.
 ---
 
 **Use case: UC08 - Add Student To Course**
