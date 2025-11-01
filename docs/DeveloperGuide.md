@@ -318,14 +318,14 @@ Adds a new tag to the course in position 2. The course now displays: CS2103 Soft
 Target users are **CLI Power Users** (Teachers) who:
 * **Are Proficient Typists**: The application MUST prioritize keyboard speed and command-line efficiency.
 * **Prefer CLI**: Usage must minimize or eliminate the need for mouse interaction, focusing on keyboard navigation and muscle memory.
-* **Handle High Volume**: Require rapid tools for tasks like bulk student management and attendance logging.
+* **Handle High Volume**: Require rapid tools for tasks like bulk student management and information retrival. 
 
 **Value proposition**:
 
 * **EduBase** maximizes administrative workflow speed for expert users by providing a **Typing-Optimized CLI**.
-* **Typing-Optimized Efficiency**: Enables faster task completion (e.g., marking attendance) compared to navigating complex GUI forms.
+* **Typing-Optimized Efficiency**: Enables faster task completion (e.g., adding student details) compared to navigating complex GUI forms.
 * **Keyboard-Driven Workflow**: Full system functionality is achieved solely through commands, eliminating GUI dependency.
-* **Direct Access**: Provides immediate access to all critical educational administration functions.
+* **Direct Access**: Provides immediate access to all critical educational administration functions(adding, editing and deleting of student/course data).
 
 
 ### User Stories
