@@ -18,18 +18,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/Beastarz)]
 [[portfolio](team/beastarz.md)]
 
-* Role: Project Advisor
 
 ### Tan Yu Hang
 
 <img src="images/gnahuy123.png" width="200px">
 
-[[homepage](https://yuhangblog.streamlit.app/)]
 [[github](http://github.com/gnahuy123)]
 [[portfolio](team/yuhang.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
 
 ### Desmond Wong Hui Sheng
 
@@ -37,8 +33,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/desmondwong1215)] [[portfolio](team/desmondwong.md)]
 
-* Role: Developer
-* Responsibilities: Data
 
 ### Reine Ong Eng Qin
 
@@ -47,8 +41,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/reineoeq)]
 [[portfolio](team/reine.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Yeo Wen Han, Marcus
 
@@ -57,5 +49,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/siuuuuuuuuuuuuuuuuuu)]
 [[portfolio](team/marcus.md)]
 
-* Role: Developer
-* Responsibilities: UI
