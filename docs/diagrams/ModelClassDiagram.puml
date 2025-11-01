@@ -20,7 +20,6 @@ Package Model as ModelPackage <<Rectangle>> {
     Class Phone
     Class Gender
     Class StudentId
-    Class Tag
 
     Class CourseList
     Class Course
@@ -58,7 +57,7 @@ CourseList --> "       ~* all" Course
 Course --> CourseName
 Course --> CourseId
 Course --> "1" UniquePersonList : students >
-Course --> "*" Tag
+
 
 ' Layout helpers
 Person -[hidden]up--> I
