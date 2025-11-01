@@ -6,7 +6,7 @@
 
 # EduBase User Guide
 
-EduBase is a **desktop app for teachers to manage student attendance, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduBase can get your student management tasks done faster than traditional GUI apps.
+EduBase is a **desktop app for teachers to manage student and courses, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduBase can get your student management tasks done faster than traditional GUI apps.
 
 <page-nav-print />
 
@@ -21,7 +21,7 @@ EduBase is a **desktop app for teachers to manage student attendance, optimized 
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar edubase.jar` command to run the application.
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
    ![Ui](images/Ui.png)
 
@@ -52,7 +52,6 @@ EduBase is a **desktop app for teachers to manage student attendance, optimized 
 * Items in square brackets are optional.<br>
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  *Note: None of the current EduBase commands support multiple repeating parameters.*
 
 * Parameters can be in any order for commands using flags (e.g., `n/`, `g/`, `d/`).<br>
   e.g. for `register n/NAME g/GENDER p/PHONE`, `register g/GENDER n/NAME p/PHONE` is also acceptable.
@@ -84,8 +83,13 @@ Allows users to view a list of all existing courses and student.
 
 **Format:** `list`
 
-**Example:**
-* `list`
+---
+
+#### Clearing All Students and Courses: `clear`
+
+Allows users to clear all data of existing courses and student.
+
+**Format:** `clear`
 
 --- 
 
@@ -95,7 +99,6 @@ Allows teachers to exit from the system using the command box.
 
 **Format:** `exit`
 
----
 ---
 
 ### Course Management
@@ -134,7 +137,7 @@ Allows users to view a list of all existing courses with their Course IDs.
 
 #### Viewing Course Details: `view_course_details`
 
-Allows teachers to view all courses details and all of the students in that class.
+Allows teachers to view all courses details and all the students in that class.
 
 **Format:** `view_course_details <COURSE_ID>`
 
@@ -146,7 +149,7 @@ Allows teachers to view all courses details and all of the students in that clas
 
 Allows users to find course by entering the course name.
 
-**Format:** `find_course_by_name <COURSE_NAME>`
+**Format:** `find_course_by_name <COURSE_NAME>...`
 
 **Requirements:**
 * Names can only include alphanumeric characters and spaces.
@@ -198,7 +201,6 @@ Allows teachers to delete an existing course using its unique **Course ID**.
 * `delete_course C0001`
 
 ---
----
 
 ### Student Management
 
@@ -236,7 +238,7 @@ Allows teachers to add a new student to the EB database. A unique **Student ID**
 
 Allows users to find student by entering the student id.
 
-**Format:** `find_student_by_id <STUDENT_ID>`
+**Format:** `find_student_by_id <STUDENT_ID>...`
 
 **Requirements:**
 * `Student ID` need to be in valid format, which is `S` followed by 5 digits (e.g., SXXXXX).
@@ -259,7 +261,7 @@ Allows users to find student by entering the student id.
 
 Allows users to find student by entering the student name.
 
-**Format:** `find_student_by_name <STUDENT_NAME>`
+**Format:** `find_student_by_name <STUDENT_NAME>...`
 
 **Requirements:**
 * Names can only include alphanumeric characters and spaces.
@@ -285,7 +287,7 @@ Allows users to edit student name, phone and gender by selecting its index in vi
 **Format:** `edit_student INDEX [n/<NAME>] [p/<PHONE>] [g/<GENDER>]`
 
 **Requirements:**
-* INDEX need to be the same as the index used in the displayed course list.
+* INDEX need to be the same as the index used in the displayed student list.
 * Names can only include alphanumeric characters and spaces.
 * Phone numbers can only include numbers from 3 to 20 digits.
 * Genders can only accept values of `Male`, `Female`, and `Other`.
@@ -311,7 +313,6 @@ Allows teachers to permanently delete a student from the EB database using their
 **Examples:**
 * `deregister S00001`
 
----
 ---
 
 ### Enrollment Management
@@ -360,7 +361,6 @@ Allows teachers to unenroll a student from the currently entered course using **
 **Examples:**
 * `remove_student S00001 C0001`
 
----
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -370,7 +370,7 @@ Allows teachers to unenroll a student from the currently entered course using **
 **A**: **Names can only contain alphanumeric characters and spaces.** Ensure you are not using any special symbols.
 
 **Q**: How do I know the ID of the course I just created?<br>
-**A**: The **Course ID** is displayed immediately upon successful creation (e.g., `Course "English 101" (ID:C0001) is created successfully`). You can also use `view_all_courses` to see a list of all IDs.
+**A**: The **Course ID** is displayed immediately upon successful creation (e.g., `New course created: English; Course Id: C1231`). You can also use `view_courses` to see a list of all IDs.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -383,26 +383,40 @@ Allows teachers to unenroll a student from the currently entered course using **
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+**General Application**  
 
-| **Action**                | **Format,** **Examples**                                                                                    |
-|:--------------------------|:------------------------------------------------------------------------------------------------------------|
-| **General Application**   |                                                                                                             |
-| **Viewing help**          | `help`                                                                                                      |
-| **View All**              | `list`                                                                                                      |
-| **Exit Program**          | `exit`                                                                                                      |
-| **Course Management**     |                                                                                                             |
-| **Create Course**         | `create_course n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `create_course n/Calculus II id/C1231`            |
-| **View Courses**          | `view_courses`                                                                                              |
-| **View Course Details**   | `view_course_details <COURSE_ID>` <br> e.g., `view_course_details C0001`                                    |
-| **Find Course By Name**   | `find_course_by_name <COURSE_NAME>` <br> e.g., `find_course_by_name English`                                |
-| **Edit Course**           | `edit_course INDEX n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `edit_course 1 n/Calculus II id/C1231`        |
-| **Delete Course**         | `delete_course <COURSE_ID>` <br> e.g., `delete_course C0003`                                                |
-| **Student Management**    |                                                                                                             |
-| **Register Student**      | `register n/<NAME> p/<PHONE> g/<GENDER>` <br> e.g., `register n/John Doe p/12345678 g/Male`                 |
-| **Find Student By ID**    | `find_student_by_id <STUDENT_ID>` <br> e.g., `find_student_by_id S00001 S00002`                             |
-| **Find Student By Name**  | `find_student_by_name <STUDENT_NAME>` <br> e.g., `find_student_by_name Alice Bob`                           |
-| **Edit Student**          | `edit_student INDEX n/<NAME> p/<PHONE> g/<GENDER>` <br> e.g., `edit_student 1 n/John Doe p/12345678 g/Male` |
-| **Deregister Student**    | `deregister <STUDENT_ID>` <br> e.g., `deregister S00005`                                                    |
-| **Enrollment Management** |                                                                                                             |
-| **Add Student**           | `add_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `add_student S00001 C0001`                                |
-| **Remove Student**        | `remove_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `remove_student S00001 C0001`                          |
+| **Action**        | **Format,** **Examples** |
+|:------------------|:-------------------------|
+| **Viewing Help**  | `help`                   |
+| **View All**      | `list`                   |
+| **Clea All Data** | `clear`                  | 
+| **Exit Program**  | `exit`                   |
+
+
+**Course Management**
+
+| **Action**                                                                                                                           | **Format,** **Examples**                                                                                    |
+|:-------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------|
+| **Create Course**                                                                                                                    | `create_course n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `create_course n/Calculus II id/C1231`            |
+| **View Courses**                                                                                                                     | `view_courses`                                                                                              |
+| **View Course Details**                                                                                                              | `view_course_details <COURSE_ID>` <br> e.g., `view_course_details C0001`                                    |
+| **Find Course By Name**                                                                                                              | `find_course_by_name <COURSE_NAME>` <br> e.g., `find_course_by_name English`                                |
+| **Edit Course**                                                                                                                      | `edit_course INDEX n/<COURSE_NAME> id/<COURSE_ID>` <br> e.g., `edit_course 1 n/Calculus II id/C1231`        |
+| **Delete Course**                                                                                                                    | `delete_course <COURSE_ID>` <br> e.g., `delete_course C0003`                                                |
+
+**Student Management**
+
+| **Action**                                                                                                                           | **Format,** **Examples**                                                                                    |
+|:-------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------|
+| **Register Student**                                                                                                                 | `register n/<NAME> p/<PHONE> g/<GENDER>` <br> e.g., `register n/John Doe p/12345678 g/Male`                 |
+| **Find Student By ID**                                                                                                               | `find_student_by_id <STUDENT_ID>` <br> e.g., `find_student_by_id S00001 S00002`                             |
+| **Find Student By Name**                                                                                                             | `find_student_by_name <STUDENT_NAME>` <br> e.g., `find_student_by_name Alice Bob`                           |
+| **Edit Student**                                                                                                                     | `edit_student INDEX n/<NAME> p/<PHONE> g/<GENDER>` <br> e.g., `edit_student 1 n/John Doe p/12345678 g/Male` |
+| **Deregister Student**                                                                                                               | `deregister <STUDENT_ID>` <br> e.g., `deregister S00005`                                                    |
+
+**Enrollment Management**
+
+| **Action**                                                                                                                           | **Format,** **Examples**                                                                                    |
+|:-------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------|
+| **Add Student**                                                                                                                      | `add_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `add_student S00001 C0001`                                |
+| **Remove Student**                                                                                                                   | `remove_student <STUDENT_ID> <COURSE_ID>` <br> e.g., `remove_student S00001 C0001`                          |
