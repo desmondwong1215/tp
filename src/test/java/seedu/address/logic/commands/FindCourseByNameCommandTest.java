@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -154,6 +155,11 @@ class FindCourseByNameCommandTest {
 
         @Override
         public boolean checkStudentInAllCourse(Person student) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public List<Course> getCoursesOfStudent(Person student) {
             throw new UnsupportedOperationException();
         }
 
