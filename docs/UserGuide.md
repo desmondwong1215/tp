@@ -154,7 +154,7 @@ Finds and lists all courses whose names contain any of the given keywords.
 **Requirements:**
 * Names can only include alphanumeric characters and spaces.
 * At least one name needs to be provided, and not blank.
-* Matches are **case-insensitive** and based on **whole words** in the course name.
+* Matches are **case-insensitive**.
 * A course will be listed if **any** of the provided keywords match part of its name.
 
 <box type="tip" seamless>
