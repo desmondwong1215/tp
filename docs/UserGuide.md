@@ -291,7 +291,7 @@ Allows users to find student by entering the student name.
 
 **Tips:**<br>
 * You can enter multiple keywords, separated by spaces.<br>
-* For example, typing `find_course_by_name Jane Doe` will return all courses that contain either “Jane” or “Doe” in their names.<br>
+* For example, typing `find_student_by_name Jane Doe` will return all courses that contain either “Jane” or “Doe” in their names.<br>
 
 </box>
 
