@@ -147,26 +147,29 @@ Allows teachers to view all courses details and all the students in that class.
 
 #### Find Course By Name: `find_course_by_name`
 
-Allows users to find course by entering the course name.
+Finds and lists all courses whose names contain any of the given keywords.
 
 **Format:** `find_course_by_name <COURSE_NAME>...`
 
 **Requirements:**
 * Names can only include alphanumeric characters and spaces.
 * At least one name needs to be provided, and not blank.
+* Matches are **case-insensitive** and based on **whole words** in the course name.
+* A course will be listed if **any** of the provided keywords match part of its name.
 
 <box type="tip" seamless>
 
 **Tips:**<br>
-* Multiple names are allowed, separated by space.<br>
-* Names are case-insensitive.<br>
+* You can enter multiple keywords, separated by spaces.<br>
+* For example, typing `find_course_by_name science english` will return all courses that contain either “science” or “english” in their names.<br>
 
 </box>
 
-**Example:**
-`find_course_by_name English Math`
-
----
+**Examples:**
+* `find_course_by_name English` → finds `English 101`, `Advanced English`.
+* `find_course_by_name Science English` → finds all courses with either “Science” or “English” in their names.
+* `find_course_by_name Math` → does **not** find `Mathematics` (partial word matches are not supported).
+-
 
 #### Edit Course: `edit_course`
 
@@ -338,6 +341,8 @@ Allows teachers to enroll an already-registered student into a course using **St
 
 **Caution:** A student cannot be added to a course if they are already inside the course.
 
+**Caution:** You can add up to 10000 students (max number of students allowed in EduBase) into a class.
+
 </box>
 
 **Examples:**
@@ -361,6 +366,9 @@ Allows teachers to unenroll a student from the currently entered course using **
 **Examples:**
 * `remove_student S00001 C0001`
 
+**Note:**
+* If you want to find the `Student ID` or `Course ID`, use [`find_course_by_name`](#find-course-by-name-find_course_by_name) or [`find_student_by_name`](#find-student-by-name-find_student_by_name).
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -370,8 +378,10 @@ Allows teachers to unenroll a student from the currently entered course using **
 **A**: **Names can only contain alphanumeric characters and spaces.** Ensure you are not using any special symbols.
 
 **Q**: How do I know the ID of the course I just created?<br>
-**A**: The **Course ID** is displayed immediately upon successful creation (e.g., `New course created: English; Course Id: C1231`). You can also use `view_courses` to see a list of all IDs.
+**A**: The **Course ID** is displayed immediately upon successful creation (e.g., `New course created: English; Course Id: C1231`). You can also use [`view_courses`](#viewing-all-courses-view_courses) to see a list of all IDs.
 
+**Q**: Why am I unable to add more than 50 characters for a Course Name or Student name?<br>
+**A**: Limiting names to 50 characters ensures a consistent and readable interface across all devices. This design decision keeps the display tidy and prevents layout issues. Since Students and Courses are uniquely identified by their ID, using shorter names will not affect accurate identification.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
