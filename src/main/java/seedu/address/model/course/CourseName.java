@@ -40,6 +40,12 @@ public class CourseName {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if the name contains the given string (case-insensitive).
+     */
+    public boolean containsIgnoreCase(String test) {
+        return fullName.toLowerCase().contains(test.toLowerCase());
+    }
 
     @Override
     public String toString() {

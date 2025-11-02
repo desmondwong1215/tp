@@ -3,8 +3,6 @@ package seedu.address.model.course;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
-
 /**
  * Tests that a {@code Course}'s {@code CourseName} matches any of the keywords given.
  */
@@ -18,7 +16,7 @@ public class CourseNameContainsKeywordsPredicate implements Predicate<Course> {
     @Override
     public boolean test(Course course) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(course.getName().fullName, keyword));
+                .anyMatch(keyword -> course.getName().containsIgnoreCase(keyword));
     }
 
     @Override
