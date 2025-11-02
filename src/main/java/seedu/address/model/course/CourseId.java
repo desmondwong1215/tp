@@ -11,7 +11,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class CourseId {
 
-    public static final String MESSAGE_CONSTRAINTS = "CourseId must start with C followed by 4 digits";
+    public static final String MESSAGE_CONSTRAINTS = "Course Id must start with C followed by 4 digits";
 
     /**
      * The first character of the address must not be a whitespace,

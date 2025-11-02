@@ -19,7 +19,7 @@ EduBase is a **desktop app for teachers to manage student and courses, optimized
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T13-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your application.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar edubase.jar` command to run the application.
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
@@ -231,6 +231,14 @@ Allows teachers to add a new student to the EB database. A unique **Student ID**
 
 </box>
 
+<box type="warning" seamless>
+
+**Caution:** <br>
+* You can register up to 99999 students into a system.
+* Once the latest student id reaches S99999, you cannot add more students. 
+
+</box>
+
 **Examples:**
 * `register n/John Doe p/12345678 g/Male`
 * `register n/Jane Doe p/12345678 g/Female`
@@ -337,11 +345,17 @@ Allows teachers to enroll an already-registered student into a course using **St
 * The target course exists in the EB database.
 * The target student is not enrolled in the target course.
 
+<box type="tip" seamless>
+
+**Tips:** A filter will be applied to view the students enrolled in that course.
+
+</box>
+
 <box type="warning" seamless>
 
-**Caution:** A student cannot be added to a course if they are already inside the course.
-
-**Caution:** You can add up to 10000 students (max number of students allowed in EduBase) into a class.
+**Caution:** <br>
+* A student cannot be added to a course if they are already inside the course.<br>
+* You can add up to 99999 students (max number of students allowed in EduBase) into a class.
 
 </box>
 
@@ -365,6 +379,12 @@ Allows teachers to unenroll a student from the currently entered course using **
 
 **Examples:**
 * `remove_student S00001 C0001`
+
+<box type="tip" seamless>
+
+**Tips:** A filter will be applied to view the students enrolled in that course.
+
+</box>
 
 **Note:**
 * If you want to find the `Student ID` or `Course ID`, use [`find_course_by_name`](#find-course-by-name-find_course_by_name) or [`find_student_by_name`](#find-student-by-name-find_student_by_name).

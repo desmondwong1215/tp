@@ -57,6 +57,9 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .orElse(0);
 
         int nextId = maxExistingId + 1;
+        if (nextId > 99999) {
+            return null;
+        }
 
         String idString = String.format("S%05d", nextId);
         return new StudentId(idString);
