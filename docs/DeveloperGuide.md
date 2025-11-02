@@ -1156,3 +1156,4 @@ testers are expected to do more *exploratory* testing.
     3. Test case: Make several data changes (register students, create courses), then `exit`<br>
         - Relaunch the app<br>
           Expected: All changes are persisted and visible upon relaunch.
+       
