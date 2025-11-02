@@ -62,8 +62,12 @@ public class DeregisterCommandTest {
 
         DeregisterCommand deregisterCommand = new DeregisterCommand(targetId);
 
-        assertCommandFailure(deregisterCommand, model,
-                String.format(DeregisterCommand.MESSAGE_STUDENT_IN_COURSE, targetId));
+        String expectedMessage = String.format(
+                DeregisterCommand.MESSAGE_STUDENT_IN_COURSE,
+                personToDelete.getName(),
+                course.getCourseId());
+
+        assertCommandFailure(deregisterCommand, model, expectedMessage);
     }
 
     @Test

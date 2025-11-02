@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -136,6 +137,12 @@ public interface Model {
      * Returns true if the given student is in one of the course.
      */
     boolean checkStudentInAllCourse(Person student);
+
+    /**
+     * Returns a list of courses that the given student is enrolled in.
+     */
+    List<Course> getCoursesOfStudent(Person student);
+
 
     /** Returns an unmodifiable view of the filtered course list */
     ObservableList<Course> getFilteredCourseList();

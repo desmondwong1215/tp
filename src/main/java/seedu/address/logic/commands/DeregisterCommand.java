@@ -3,10 +3,12 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 
@@ -24,7 +26,8 @@ public class DeregisterCommand extends Command {
 
     public static final String MESSAGE_DEREGISTER_SUCCESS = "Student '%1$s' (%2$s) deregistered successfully.";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "No student found with ID: %1$s";
-    public static final String MESSAGE_STUDENT_IN_COURSE = "Student %1$s is still enrolled in one of the course.";
+    public static final String MESSAGE_STUDENT_IN_COURSE =
+            "Student %1$s is still enrolled in the following course(s): %2$s";
 
     private final StudentId targetId;
 
@@ -53,8 +56,14 @@ public class DeregisterCommand extends Command {
             throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, targetId));
         }
 
-        if (model.checkStudentInAllCourse(toDelete)) {
-            throw new CommandException(String.format(MESSAGE_STUDENT_IN_COURSE, targetId));
+        List<Course> enrolledCourses = model.getCoursesOfStudent(toDelete);
+
+        if (!enrolledCourses.isEmpty()) {
+            String courseNames = enrolledCourses.stream()
+                    .map(course -> course.getCourseId().toString())
+                    .collect(Collectors.joining(", "));
+            throw new CommandException(String.format(
+                    MESSAGE_STUDENT_IN_COURSE, toDelete.getName(), courseNames));
         }
 
         model.deletePerson(toDelete);
