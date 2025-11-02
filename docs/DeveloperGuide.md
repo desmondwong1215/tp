@@ -620,9 +620,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 🚀 Performance
 1. All commands should execute and return results within 1 second on a standard system with at least 8GB RAM and a 2.0 GHz processor.
 
-2. The system should support viewing attendance records for up to **100 students in a course** without exceeding **2 seconds** of response time.
+2. The system should support viewing attendance records for up to **1000 students in a course** without exceeding **2 seconds** of response time.
 
-3. The system shall support up to **50 concurrent courses** and **1000 registered students** without measurable degradation in performance.
+3. The system shall support up to **50 concurrent courses** and **10000 registered students** without measurable degradation in performance.
 
 ⌨️ Usability
 1. The system should be fully operable **using only keyboard input**, with no requirement for mouse or GUI interaction.

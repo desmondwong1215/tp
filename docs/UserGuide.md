@@ -231,6 +231,14 @@ Allows teachers to add a new student to the EB database. A unique **Student ID**
 
 </box>
 
+<box type="warning" seamless>
+
+**Caution:** <br>
+* You can register up to 99999 students into a system.
+* Once the latest student id reaches S99999, you cannot add more students. 
+
+</box>
+
 **Examples:**
 * `register n/John Doe p/12345678 g/Male`
 * `register n/Jane Doe p/12345678 g/Female`
@@ -337,11 +345,17 @@ Allows teachers to enroll an already-registered student into a course using **St
 * The target course exists in the EB database.
 * The target student is not enrolled in the target course.
 
+<box type="tip" seamless>
+
+**Tips:** A filter will be applied to view the students enrolled in that course.
+
+</box>
+
 <box type="warning" seamless>
 
-**Caution:** A student cannot be added to a course if they are already inside the course.
-
-**Caution:** You can add up to 10000 students (max number of students allowed in EduBase) into a class.
+**Caution:** <br>
+* A student cannot be added to a course if they are already inside the course.<br>
+* You can add up to 99999 students (max number of students allowed in EduBase) into a class.
 
 </box>
 
@@ -365,6 +379,12 @@ Allows teachers to unenroll a student from the currently entered course using **
 
 **Examples:**
 * `remove_student S00001 C0001`
+
+<box type="tip" seamless>
+
+**Tips:** A filter will be applied to view the students enrolled in that course.
+
+</box>
 
 **Note:**
 * If you want to find the `Student ID` or `Course ID`, use [`find_course_by_name`](#find-course-by-name-find_course_by_name) or [`find_student_by_name`](#find-student-by-name-find_student_by_name).

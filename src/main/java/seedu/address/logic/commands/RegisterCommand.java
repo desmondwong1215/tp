@@ -35,6 +35,8 @@ public class RegisterCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New student registered: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the system";
+    public static final String MESSAGE_OUT_OF_STUDENT_ID = "Student id reaches the max (S99999),"
+            + "unable to add new student";
 
     private final Name name;
     private final Phone phone;
@@ -62,6 +64,9 @@ public class RegisterCommand extends Command {
 
         AddressBook addressBook = (AddressBook) model.getAddressBook();
         StudentId id = addressBook.getLatestStudentId();
+        if (id == null) {
+            throw new CommandException(MESSAGE_OUT_OF_STUDENT_ID);
+        }
         Person toAdd = new Person(name, phone, gender, id);
 
         if (model.hasPerson(toAdd)) {
