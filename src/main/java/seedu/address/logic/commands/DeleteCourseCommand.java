@@ -40,9 +40,6 @@ public class DeleteCourseCommand extends Command {
         if (course == null) {
             throw new CommandException(String.format(MESSAGE_NOT_FOUND, courseId));
         }
-        if (course.hasEnrolledStudents()) {
-            throw new CommandException(MESSAGE_STUDENTS_ENROLLED);
-        }
         model.deleteCourse(course);
         if (course.getName() == null) {
             return new CommandResult(MESSAGE_SUCCESS);

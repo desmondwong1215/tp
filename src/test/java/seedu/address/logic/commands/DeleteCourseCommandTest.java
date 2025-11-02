@@ -65,7 +65,7 @@ public class DeleteCourseCommandTest {
     }
 
     @Test
-    public void execute_courseWithStudents_returnsStudentsEnrolledMessage() throws CommandException {
+    public void execute_courseWithStudents_success() throws CommandException {
         UniquePersonList students = new UniquePersonList();
         Person p = new PersonBuilder().build();
         students.add(p);
@@ -75,7 +75,14 @@ public class DeleteCourseCommandTest {
         model.addCourse(courseWithStudents);
 
         DeleteCourseCommand command = new DeleteCourseCommand(cid);
-        assertCommandFailure(command, model, DeleteCourseCommand.MESSAGE_STUDENTS_ENROLLED);
+
+        String expectedMessage = String.format(DeleteCourseCommand.MESSAGE_SUCCESS,
+                courseWithStudents.getName());
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getCourseBook(), new UserPrefs());
+        expectedModel.deleteCourse(courseWithStudents);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test

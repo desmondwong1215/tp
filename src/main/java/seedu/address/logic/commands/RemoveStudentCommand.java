@@ -63,11 +63,8 @@ public class RemoveStudentCommand extends Command {
         }
 
         course.removeStudent(student);
-
-        // Update the filtered lists to reflect the removal
         model.updateFilteredStudentListForCourse(course);
         model.updateFilteredCourseListForCourse(course);
-
         return new CommandResult(
                 String.format(
                         MESSAGE_SUCCESS,
