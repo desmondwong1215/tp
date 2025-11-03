@@ -31,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/desmondwong1215.png" width="200px">
 
-[[github](http://github.com/desmondwong1215)] [[portfolio](team/desmondwong.md)]
+[[github](http://github.com/desmondwong1215)] [[portfolio](team/desmondwong1215.md)]
 
 
 ### Reine Ong Eng Qin
