@@ -6,10 +6,17 @@
 
 # EduBase User Guide
 
-EduBase is a **desktop app for teachers to manage student and courses, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduBase can get your student management tasks done faster than traditional GUI apps.
-
+EduBase is a **desktop app for private tuition center owners to manage growing student enrollment and multiple classes, optimized for use via a Command Line Interface** (CLI). If you've recently scaled up from teaching a few students to running a full tuition center with dozens of classes and hundreds of students, EduBase helps you stay organized without expensive management software. If you can type fast, EduBase can get your administrative tasks done faster than traditional GUI apps or spreadsheets.
 <page-nav-print />
 
+**Why EduBase for Tuition Centers?**
+As a tuition center owner managing multiple classes solo, you need fast access to:
+- Which students are enrolled in each class
+- Parent contact numbers for quick communication
+- Course schedules and enrollment numbers
+- Student registration details
+
+EduBase lets you handle all of this through quick keyboard commands—no need to navigate through multiple menus or maintain complex spreadsheets.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -168,7 +175,7 @@ Finds and lists all courses whose names contain any of the given keywords.
 **Examples:**
 * `find_course_by_name English` → finds `English 101`, `Advanced English`.
 * `find_course_by_name Science English` → finds all courses with either “Science” or “English” in their names.
-* `find_course_by_name Math` → does **not** find `Mathematics` (partial word matches are not supported).
+* `find_course_by_name Math` → finds `Mathematics` (partial word matches are supported).
 -
 
 #### Edit Course: `edit_course`
@@ -280,17 +287,21 @@ Allows users to find student by entering the student name.
 **Requirements:**
 * Names can only include alphanumeric characters and spaces.
 * At least one name needs to be provided, and not blank.
+* Matches are **case-insensitive**.
+* A student will be listed if **any** of the provided keywords match part of its name.
 
 <box type="tip" seamless>
 
 **Tips:**<br>
-* Multiple names are allowed, separated by space.<br>
-* Names are case-insensitive.<br>
+* You can enter multiple keywords, separated by spaces.<br>
+* For example, typing `find_student_by_name Jane Doe` will return all courses that contain either “Jane” or “Doe” in their names.<br>
 
 </box>
 
-**Example:**
-`find_student_by_name Alice Bob`
+**Examples:**
+* `find_student_by_name James` → finds `James Lee`, `James English`.
+* `find_student_by_name James Low` → finds all students with either “James” or “Low” in their names.
+* `find_student_by_name Matt` → finds `Matty` (partial word matches are supported).
 
 ---
 
@@ -407,6 +418,18 @@ Allows teachers to unenroll a student from the currently entered course using **
 
 **Q**: Why am I unable to add more than 50 characters for a Course Name or Student name?<br>
 **A**: Limiting names to 50 characters ensures a consistent and readable interface across all devices. This design decision keeps the display tidy and prevents layout issues. Since Students and Courses are uniquely identified by their ID, using shorter names will not affect accurate identification.
+
+**Q**: I'm transitioning from Excel spreadsheets. Can I still manage my tuition center with this?<br>
+**A**: Yes! EduBase is designed for exactly this transition. Instead of managing multiple spreadsheet tabs, you can use simple commands like `view_course_details C0001` to see all students in a class, or `find_student_by_name Alice` to quickly find parent contact information.
+
+**Q**: I need to quickly contact parents before class. How do I find phone numbers fast?<br>
+**A**: Use `find_student_by_name <NAME>` to instantly see student details including parent phone numbers. For example: `find_student_by_name John` will show all students named John with their contact information.
+
+**Q**: Can I see how many students are in each of my tuition classes?<br>
+**A**: Yes! Use `view_courses` to see all your classes with student counts, or `view_course_details <COURSE_ID>` to see the full list of enrolled students in a specific class.
+
+**Q**: I'm running classes alone. How does this save me time compared to my current methods?<br>
+**A**: EduBase eliminates the need to open multiple spreadsheet tabs or scroll through long contact lists. With commands like `add_student S00001 C0001`, you can enroll students in seconds. The `find` commands let you retrieve any information instantly—perfect when parents call with questions or during busy enrollment periods.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
