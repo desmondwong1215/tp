@@ -75,7 +75,7 @@ public class MainParser {
         case ExitCommand.COMMAND_WORD -> new ExitCommand();
         case HelpCommand.COMMAND_WORD -> new HelpCommand();
         case DeleteCourseCommand.COMMAND_WORD -> new DeleteCourseCommandParser().parse(arguments);
-        case ViewCourseCommand.COMMAND_WORD -> new ViewCourseCommand();
+        case ViewCourseCommand.COMMAND_WORD -> new ViewCourseCommandParser().parse(arguments);
         case FindCourseByNameCommand.COMMAND_WORD -> new FindCourseByNameCommandParser().parse(arguments);
         case ViewCourseDetailsCommand.COMMAND_WORD -> new ViewCourseDetailsCommandParser().parse(arguments);
         default -> {
