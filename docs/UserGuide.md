@@ -86,7 +86,7 @@ Shows a message explaining how to access the help page.
 
 #### Viewing All Students and Courses: `list`
 
-Allows users to view a list of all existing courses and student.
+Allows users to view a list of all existing courses and students.
 
 **Format:** `list`
 
@@ -94,7 +94,7 @@ Allows users to view a list of all existing courses and student.
 
 #### Clearing All Students and Courses: `clear`
 
-Allows users to clear all data of existing courses and student.
+Allows users to clear all data of existing courses and students.
 
 **Format:** `clear`
 
@@ -133,7 +133,7 @@ Allows teachers to create a new course. Duplicate course names are allowed, but 
 
 #### Viewing All Courses: `view_courses`
 
-Allows users to view a list of all existing courses with their Course IDs.
+Allows users to view a list of all existing courses with their `Course ID`s.
 
 **Format:** `view_courses`
 
@@ -176,7 +176,8 @@ Finds and lists all courses whose names contain any of the given keywords.
 * `find_course_by_name English` → finds `English 101`, `Advanced English`.
 * `find_course_by_name Science English` → finds all courses with either “Science” or “English” in their names.
 * `find_course_by_name Math` → finds `Mathematics` (partial word matches are supported).
--
+
+---
 
 #### Edit Course: `edit_course`
 
@@ -200,13 +201,13 @@ Allows users to edit course id and course name by selecting its index in view li
 
 #### Deleting a Course: `delete_course`
 
-Allows teachers to delete an existing course using its unique **Course ID**.
+Allows teachers to delete an existing course using its unique `Course ID`.
 
 **Format:** `delete_course <COURSE_ID>`
 
 <box type="warning" seamless>
 
-**Caution:** Ensure the Course ID is correct, as this action cannot be undone.
+**Caution:** Ensure the `Course ID` is correct, as this action cannot be undone.
 
 </box>
 
@@ -223,7 +224,7 @@ These commands are for registering, viewing, and managing students in the main d
 
 #### Registering a New Student: `register`
 
-Allows teachers to add a new student to the EB database. A unique **Student ID** (e.g., S00001) is automatically assigned.
+Allows teachers to add a new student to the EB database. A unique `Student ID` (e.g., S00001) is automatically assigned.
 
 **Format:** `register n/<NAME> p/<PHONE> g/<GENDER>`
 
@@ -235,7 +236,7 @@ Allows teachers to add a new student to the EB database. A unique **Student ID**
 <box type="tip" seamless>
 
 **Tips:**<br>
-* Duplicate names are allowed but will receive a new unique Student ID.<br>
+* Duplicate names are allowed but will receive a new unique `Student ID`.<br>
 * Names are case-sensitive.<br>
 * Genders are case-insensitive.
 
@@ -257,18 +258,18 @@ Allows teachers to add a new student to the EB database. A unique **Student ID**
 
 #### Find Student By ID: `find_student_by_id`
 
-Allows users to find student by entering the student id.
+Allows users to find student by entering the `Student ID`.
 
 **Format:** `find_student_by_id <STUDENT_ID>...`
 
 **Requirements:**
 * `Student ID` need to be in valid format, which is `S` followed by 5 digits (e.g., SXXXXX).
-* At least one id needs to be provided, and not blank.
+* At least one `Student ID` needs to be provided, and not blank.
 
 <box type="tip" seamless>
 
 **Tips:**<br>
-* Multiple ids are allowed, separated by space.<br>
+* Multiple `Student ID`s are allowed, separated by space.<br>
 * `Student ID` is case-sensitive.<br>
 
 </box>
@@ -294,7 +295,7 @@ Allows users to find student by entering the student name.
 
 **Tips:**<br>
 * You can enter multiple keywords, separated by spaces.<br>
-* For example, typing `find_student_by_name Jane Doe` will return all courses that contain either “Jane” or “Doe” in their names.<br>
+* For example, typing `find_student_by_name Jane Doe` will return all students that contain either “Jane” or “Doe” in their names.<br>
 
 </box>
 
@@ -328,7 +329,7 @@ Allows users to edit student name, phone and gender by selecting its index in vi
 
 #### Deregistering a Student: `deregister`
 
-Allows teachers to permanently delete a student from the EB database using their unique **Student ID**.
+Allows teachers to permanently delete a student from the EB database using their unique `Student ID`.
 
 **Format:** `deregister <STUDENT_ID>`
 
@@ -350,7 +351,7 @@ These commands manage the relationship between students and courses.
 
 #### Adding Student to Course: `add_student`
 
-Allows teachers to enroll an already-registered student into a course using **Student ID** and **Course ID**.
+Allows teachers to enroll an already-registered student into a course using `Student ID` and `Course ID`.
 
 **Format:** `add_student <STUDENT_ID> <COURSE_ID>`
 
@@ -382,7 +383,7 @@ Allows teachers to enroll an already-registered student into a course using **St
 
 #### Removing Student from Course: `remove_student`
 
-Allows teachers to unenroll a student from the currently entered course using **Student ID** and **Course ID**.
+Allows teachers to unenroll a student from the currently entered course using `Student ID` and `Course ID`.
 
 **Format:** `remove_student <STUDENT_ID> <COURSE_ID>`
 
@@ -414,10 +415,10 @@ Allows teachers to unenroll a student from the currently entered course using **
 **A**: **Names can only contain alphanumeric characters and spaces.** Ensure you are not using any special symbols.
 
 **Q**: How do I know the ID of the course I just created?<br>
-**A**: The **Course ID** is displayed immediately upon successful creation (e.g., `New course created: English; Course Id: C1231`). You can also use [`view_courses`](#viewing-all-courses-view_courses) to see a list of all IDs.
+**A**: The `Course ID` is displayed immediately upon successful creation (e.g., `New course created: English; Course Id: C1231`). You can also use [`view_courses`](#viewing-all-courses-view_courses) to see a list of all IDs.
 
-**Q**: Why am I unable to add more than 50 characters for a Course Name or Student name?<br>
-**A**: Limiting names to 50 characters ensures a consistent and readable interface across all devices. This design decision keeps the display tidy and prevents layout issues. Since Students and Courses are uniquely identified by their ID, using shorter names will not affect accurate identification.
+**Q**: Why am I unable to add more than 50 characters for a course name or student name?<br>
+**A**: Limiting names to 50 characters ensures a consistent and readable interface across all devices. This design decision keeps the display tidy and prevents layout issues. Since students and courses are uniquely identified by their ID, using shorter names will not affect accurate identification.
 
 **Q**: I'm transitioning from Excel spreadsheets. Can I still manage my tuition center with this?<br>
 **A**: Yes! EduBase is designed for exactly this transition. Instead of managing multiple spreadsheet tabs, you can use simple commands like `view_course_details C0001` to see all students in a class, or `find_student_by_name Alice` to quickly find parent contact information.
@@ -429,7 +430,7 @@ Allows teachers to unenroll a student from the currently entered course using **
 **A**: Yes! Use `view_courses` to see all your classes with student counts, or `view_course_details <COURSE_ID>` to see the full list of enrolled students in a specific class.
 
 **Q**: I'm running classes alone. How does this save me time compared to my current methods?<br>
-**A**: EduBase eliminates the need to open multiple spreadsheet tabs or scroll through long contact lists. With commands like `add_student S00001 C0001`, you can enroll students in seconds. The `find` commands let you retrieve any information instantly—perfect when parents call with questions or during busy enrollment periods.
+**A**: EduBase eliminates the need to open multiple spreadsheet tabs or scroll through long contact lists. With commands like `add_student S00001 C0001`, you can enroll students in seconds. The `find_student_by_name` and `find_student_by_id` commands let you retrieve any information instantly—perfect when parents call with questions or during busy enrollment periods.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
