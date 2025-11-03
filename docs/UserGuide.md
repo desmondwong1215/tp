@@ -12,7 +12,7 @@ EduBase is a **desktop app for private tuition center owners to manage growing s
 **Why EduBase for Tuition Centers?**
 As a tuition center owner managing multiple classes solo, you need fast access to:
 - Which students are enrolled in each class
-- Parent contact numbers for quick communication
+- Contact numbers for quick communication
 - Course schedules and enrollment numbers
 - Student registration details
 
@@ -421,10 +421,10 @@ Allows teachers to unenroll a student from the currently entered course using `S
 **A**: Limiting names to 50 characters ensures a consistent and readable interface across all devices. This design decision keeps the display tidy and prevents layout issues. Since students and courses are uniquely identified by their ID, using shorter names will not affect accurate identification.
 
 **Q**: I'm transitioning from Excel spreadsheets. Can I still manage my tuition center with this?<br>
-**A**: Yes! EduBase is designed for exactly this transition. Instead of managing multiple spreadsheet tabs, you can use simple commands like `view_course_details C0001` to see all students in a class, or `find_student_by_name Alice` to quickly find parent contact information.
+**A**: Yes! EduBase is designed for exactly this transition. Instead of managing multiple spreadsheet tabs, you can use simple commands like `view_course_details C0001` to see all students in a class, or `find_student_by_name Alice` to quickly find contact information.
 
 **Q**: I need to quickly contact parents before class. How do I find phone numbers fast?<br>
-**A**: Use `find_student_by_name <NAME>` to instantly see student details including parent phone numbers. For example: `find_student_by_name John` will show all students named John with their contact information.
+**A**: Use `find_student_by_name <NAME>` to instantly see student details including phone numbers. For example: `find_student_by_name John` will show all students named John with their contact information.
 
 **Q**: Can I see how many students are in each of my tuition classes?<br>
 **A**: Yes! Use `view_courses` to see all your classes with student counts, or `view_course_details <COURSE_ID>` to see the full list of enrolled students in a specific class.
