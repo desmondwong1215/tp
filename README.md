@@ -5,8 +5,8 @@
 
 # This is CS2103T-T13-4's project, EduBase called EB for short.
 
-- It allows for teachers to track students attendance and performance within different classes.
-- It is primarily CLI-based, allowing teachers to track student information at a fast pace.
+- It allows for tutors to track students and class data.
+- It is primarily CLI-based, allowing tutors to track student information at a fast pace.
 - If you would like to use EduBase, here is the [User Guide](docs/UserGuide.md).
 - If you are a developer and would like to contribute to EduBase, here is the [Developer Guide](docs/DeveloperGuide.md).
 
