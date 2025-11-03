@@ -363,11 +363,6 @@ A **use case** describes an interaction between a user (or 'actor') and the syst
 
       Use case ends.
 
-* 2a. EB detects that the course has students enrolled in it.
-    * 2a1. EB shows an error prompting the owner to remove all students from the course before deletion (to prevent accidental data loss).
-
-      Use case ends.
-
 ---
 
 **Use case: UC04 - Register New Student**
@@ -476,7 +471,7 @@ A **use case** describes an interaction between a user (or 'actor') and the syst
 * The target course exists in the center's course list.
 
 **MSS:**
-1. Tuition center owner commands to add a student to a specific course using the student's ID and course ID.
+1. Tuition center owner commands to add a student to a specific course using the student ID and course ID.
 2. EB adds the student to the course roster and increments the class enrollment count.
 3. EB displays a success message and shows the updated course details.
 
@@ -506,7 +501,7 @@ A **use case** describes an interaction between a user (or 'actor') and the syst
 * The target student (identified by student ID) is enrolled in the target course.
 
 **MSS:**
-1. Tuition center owner commands to remove a student from a course using the student's ID and course ID (e.g., when a parent withdraws their child from a specific class).
+1. Tuition center owner commands to remove a student from a course using the student ID and course ID (e.g., when a parent withdraws their child from a specific class).
 2. EB removes the student from the course roster and decrements the class enrollment count.
 3. EB displays a success message confirming the removal.
 
@@ -581,7 +576,7 @@ A **use case** describes an interaction between a user (or 'actor') and the syst
 * The target student (identified by index) exists in the displayed list.
 
 **MSS:**
-1. Tuition center owner commands to edit a student (selected by index in the current view) with new details (e.g., updated parent phone number, corrected name spelling, updated gender).
+1. Tuition center owner commands to edit a student (selected by index in the current view) with new details (e.g., updated phone number, corrected name spelling, updated gender).
 2. EB updates the details of the selected student.
 3. EB displays the edited student information and shows a success message.
 
@@ -923,8 +918,8 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `clear`<br>
        Expected: All students and courses are removed from the system. Success message confirms the database has been cleared. Both student and course lists display as empty.
 
-    3. Test case: `clear` (when database is already empty)<br>
-       Expected: Success message confirms the database has been cleared (even though it was already empty).
+    3. Test case: `clear` (when database is already empty, it does not contain any student and course)<br>
+       Expected: A message which shows both address book and course book are empty will be displayed.
 
 ### Viewing and listing data
 
