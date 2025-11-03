@@ -114,7 +114,7 @@ Allows teachers to create a new course. Duplicate course names are allowed, but 
 **Format:** `create_course n/<COURSE_NAME> id/<COURSE_ID>`
 
 **Requirements:**
-* Course Names can only include alphanumeric characters and spaces.
+* Course Names can only include alphanumeric characters and spaces, and it should not be blank or more than 50 characters.
 * `Course ID` must follow the correct format which is ‘C’ followed by 4 numeric digits. (e.g. `C0001`)
 * `Course ID` cannot be used by other courses in the course list.
 
@@ -186,6 +186,9 @@ Allows users to edit course id and course name by selecting its index in view li
 **Example:**
 * `edit_course 1 n/English 101 id/C0001`
 
+**Tips:**
+* If the new data you enter is identical to the original data, the system will still process the action and display a success message.
+
 ---
 
 #### Deleting a Course: `delete_course`
@@ -218,7 +221,7 @@ Allows teachers to add a new student to the EB database. A unique **Student ID**
 **Format:** `register n/<NAME> p/<PHONE> g/<GENDER>`
 
 **Requirements:**
-* `Name` can only include alphanumeric characters and spaces.
+* `Name` can only include alphanumeric characters and spaces, and it should not be blank or more than 50 characters.
 * `Phone` numbers can only include numbers from 3 to 20 digits.
 * `Gender` can only accept values of `Male`, `Female`, and `Other`.
 
@@ -304,9 +307,11 @@ Allows users to edit student name, phone and gender by selecting its index in vi
 * Genders can only accept values of `Male`, `Female`, and `Other`.
 * At least one field (Name, Phone or Gender) needs to be provided.
 
-
 **Example:**
 * `edit_student 1 n/John Doe p/1230499 g/Male`
+
+**Tips:**
+* If the new data you enter is identical to the original data, the system will still process the action and display a success message.
 
 ---
 
