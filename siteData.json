@@ -50,24 +50,28 @@
         "model-component": "Model component",
         "storage-component": "Storage component",
         "common-classes": "Common classes",
-        "implementation": "Implementation",
-        "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
-        "proposed-data-archiving": "[Proposed] Data archiving",
+        "proposed-enhancements": "Proposed enhancements",
+        "proposed-add-tag-to-courses": "[Proposed] Add tag to courses",
+        "proposed-feature-tags-for-courses": "Proposed Feature — Tags for Courses",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
-        "user-stories": "User Stories",
-        "school-level-stories": "School Level Stories",
-        "course-level-stories": "Course Level Stories",
+        "user-stories-2": "User Stories",
         "use-cases": "Use cases",
-        "school-level-features": "School Level Features",
-        "course-level-features": "Course Level Features",
         "non-functional-requirements": "Non-Functional Requirements",
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "deleting-a-person": "Deleting a person",
-        "saving-data": "Saving data"
+        "registering-and-deregistering-students": "Registering and deregistering students",
+        "creating-and-managing-courses": "Creating and managing courses",
+        "enrolling-and-unenrolling-students-enrollment-management": "Enrolling and unenrolling students (enrollment management)",
+        "searching-for-students-and-courses": "Searching for students and courses",
+        "editing-student-and-course-information": "Editing student and course information",
+        "clearing-all-data": "Clearing all data",
+        "viewing-and-listing-data": "Viewing and listing data",
+        "saving-data": "Saving data",
+        "edge-cases-and-stress-testing": "Edge cases and stress testing",
+        "help-and-exit-commands": "Help and exit commands"
       },
       "headingKeywords": {}
     },
@@ -111,25 +115,15 @@
       "src": "UserGuide.md",
       "headings": {
         "edubase-user-guide": "EduBase User Guide",
+        "edubase-lets-you-handle-all-of-this-through-quick-keyboard-commands-no-need-to-navigate-through-multiple-menus-or-maintain-complex-spreadsheets": "EduBase lets you handle all of this through quick keyboard commands—no need to navigate through multiple menus or maintain complex spreadsheets.",
         "quick-start": "Quick start",
         "features": "Features",
-        "system-wide-commands-school-level": "System-Wide Commands (School Level)",
-        "viewing-help-help": "Viewing help : help",
-        "creating-a-course-create-course": "Creating a Course: create_course",
-        "viewing-all-courses-view-course": "Viewing All Courses: view_course",
-        "edit-course-edit-course": "Edit Course: edit_course",
-        "find-course-by-name-find-course-by-name": "Find Course By Name: find_course_by_name",
-        "deleting-a-course-delete-course": "Deleting a Course: delete_course",
-        "registering-a-new-student-register": "Registering a New Student: register",
-        "viewing-all-students-and-courses-list": "Viewing All Students and Courses: list",
-        "find-student-by-id-find-student-by-id": "Find Student By ID: find_student_by_id",
-        "find-student-by-name-find-student-by-name": "Find Student By Name: find_student_by_name",
-        "deregistering-a-student-deregister": "Deregistering a Student: deregister",
-        "viewing-course-details-view-course-details": "Viewing Course Details: view_course_details",
-        "adding-student-to-course-add-student": "Adding Student to Course: add_student",
-        "removing-student-from-course-remove-student": "Removing Student from Course: remove_student",
-        "exiting-the-system-exit": "Exiting the System: exit",
+        "general-application-commands": "General Application Commands",
+        "course-management": "Course Management",
+        "student-management": "Student Management",
+        "enrollment-management": "Enrollment Management",
         "faq": "FAQ",
+        "q-i-m-running-classes-alone-how-does-this-save-me-time-compared-to-my-current-methods-a-edubase-eliminates-the-need-to-open-multiple-spreadsheet-tabs-or-scroll-through-long-contact-lists-with-commands-like-add-student-s00001-c0001-you-can-enroll-students-in-seconds-the-find-commands-let-you-retrieve-any-information-instantly-perfect-when-parents-call-with-questions-or-during-busy-enrollment-periods": "Q: I'm running classes alone. How does this save me time compared to my current methods?\nA: EduBase eliminates the need to open multiple spreadsheet tabs or scroll through long contact lists. With commands like add_student S00001 C0001, you can enroll students in seconds. The find commands let you retrieve any information instantly—perfect when parents call with questions or during busy enrollment periods.",
         "known-issues": "Known issues",
         "command-summary": "Command summary"
       },
@@ -147,12 +141,19 @@
       "src": "team/beastarz.md",
       "title": "Jin Yu's Project Portfolio Page",
       "headings": {
-        "project-edubase": "Project: EduBase"
+        "project-edubase": "Project: EduBase",
+        "new-feature-added-the-core-course-feature": "New Feature: Added the core Course feature",
+        "new-feature-added-the-remove-student-command": "New Feature: Added the remove student command",
+        "project-management": "Project management",
+        "enhancements-to-existing-features": "Enhancements to existing features",
+        "documentation": "Documentation",
+        "community": "Community",
+        "tools": "Tools"
       },
       "headingKeywords": {}
     },
     {
-      "src": "team/desmondwong.md",
+      "src": "team/desmondwong1215.md",
       "title": "Desmond Wong's Project Portfolio Page",
       "headings": {
         "project-edubase": "Project: EduBase"
@@ -169,15 +170,22 @@
     },
     {
       "src": "team/marcus.md",
-      "title": "John Doe's Project Portfolio Page",
+      "title": "Marcus' Project Portfolio Page",
       "headings": {
-        "project-addressbook-level-3": "Project: AddressBook Level 3"
+        "project-edubase": "Project: EduBase",
+        "new-feature-added-the-delete-course-functionality": "New Feature: Added the delete course functionality",
+        "new-feature-added-the-find-course-by-name-functionality": "New Feature: Added the find course by name functionality",
+        "project-management": "Project management",
+        "enhancements-to-existing-features": "Enhancements to existing features",
+        "documentation": "Documentation",
+        "community": "Community",
+        "bug-fixes": "Bug Fixes"
       },
       "headingKeywords": {}
     },
     {
       "src": "team/reine.md",
-      "title": "Reine's Project Portfolio Page",
+      "title": "Reine Ong's Project Portfolio Page",
       "headings": {
         "project-edubase": "Project: Edubase"
       },
