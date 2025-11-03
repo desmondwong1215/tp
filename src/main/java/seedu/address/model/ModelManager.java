@@ -233,6 +233,7 @@ public class ModelManager implements Model {
         updateFilteredCourseList(isTargetCourse);
     }
 
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
